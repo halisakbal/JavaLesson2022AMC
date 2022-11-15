@@ -1,0 +1,56 @@
+Java Eğitimi
+
+Java Ders programı
+Salı - Perşembe
+Saat: 19:00 - 22:00
+
+
+github'ta ders notları yedeklenecek.
+
+
+1- Java Genel giriş 
+2- Java özellikleri
+3- Genel programlama pradigmaları
+4- Sayı sistemleri
+5- Bir java programı text sayafasına yazıp derleyip çalıştıracaz
+
+
+HW1
+-Assembly nedir neden var neden kullanımda hala?
+-Unity ve Unreal Engine nedir ve diger oyun motorlarına inceleyelim.
+-Interpereted programlama dili nedir?
+-Garbage Collector Nedir nasıl çalışır?
+-Memory leak
+-Functional Programming, Prosedürel Programlama, Object Oriented Programming,
+    Generic Programming, Imperative programming, Reflective programming, Concurrent
+-Java programı derleme ve çalıştırma adımları
+    JVM nedir 
+    JRE nedir 
+    JIT nedir 
+    Byte code nedir 
+
+    Bunlar hangi aşamalardan geçerken kullanılıyor?
+
+
+
+ali olustur 
+..
+..
+
+ali silindi progaramcı silmesin ben silerim G.C devereye giriyor 
+
+C ve C++ da Garbage C. mekanizması yoktur. Programcı kendi siler kendi olsuturdugu nesneyi.
+
+
+Programlama Dillerinin Sınıflandırılması
+
+Programlama dillerini 3(üç) biçimde sınıflandırabiliriz:
+1. Seviyelerine göre sınıflandırma
+
+2. Kullanım alanlarına göre sınıflandırma
+
+3. Programlama modeline göre sınıflandırma
+
+
+
+Java programı derleme ve çalıştırma adımları
