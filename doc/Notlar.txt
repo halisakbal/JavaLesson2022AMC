@@ -54,3 +54,37 @@ Programlama dillerini 3(üç) biçimde sınıflandırabiliriz:
 
 
 Java programı derleme ve çalıştırma adımları
+
+
+
+
+
+--------------------------------------------------------
+
+HW2 
+
+Stack ve Heap Nedir ?
+Donanımsal karsılıkları?
+
+Fonksiyonel programlama ile prosüdürel programlama arasındaki fark?
+Imperative Programing?
+Reflective programing?
+Concurrent programing? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
