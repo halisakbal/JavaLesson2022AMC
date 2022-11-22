@@ -1,3 +1,5 @@
+15.11.2022
+
 Java Eğitimi
 
 Java Ders programı
@@ -72,17 +74,224 @@ Reflective programing?
 Concurrent programing? 
 
 
+--------------------------------------------------------
+22.11.2022
+
+
+HW3 
+Github reopsu olusturmak kendi java norları için
+Github'a kendini anlatan bilgi veren sade bir Overwiev olustur.
+Google documentler den slaytları hazırlayalım
+
+--------------------------------------------------------
+/*******************************************************/
+/*******************************************************/
+
+
+Sayı Sistemleri 
+
+
+2-8-10-16 temelde bu sayı sistemleri var 
+
+
+2 lik sayı sistemi 
+
+Neden kullanırız: tam sayı ve gerçek sayı sistemleri için kullanırız
+
+4 66 76  -- 123,4 555.7
+
+
+0101 1011 0001 1110 
+
+ikilik  sayı sistemi işaretli ve işaretsiz olmak üzer iki gruba ayrılır 
+
+işaretsiz - unsigned --> sayının pozitif oldgunu söyleer
+işaretli -- signed ---> sayıların hem pozitif hem negatif olabiliceğini söyler 
+
+
+Sistemlerin hemen hepsinde 
+
+8 bitlik alana byte denilmektedir.
+
+bit bit bit bit bit bit bit  bit
+1   0   1    0   1   1   0   0  === byte 
+
+bit = binary digit 
+Byte = 8bit
+
+Sistem programlamada daha küöçük birimler var 
+
+4 bit = Nibble = yarım byte
+8 bit = byte 
+2 byte = word
+4 byte = double word
+
+
+Sayı sistemlerinde bazı işlemler
+
+2'ye tümleyeni bulma konusu için pratik kurallar 
+
+	0101  0100
+	1010	 1100
+
+sagdan baslayarak ilk 1 bitini gorene kadar 
+bitlerin aynısını yazıyoruz
+geri kalan kısmı ters ceviriyoruz
+	
+
+	0001  1000
+     1110  1000    
+
+---------------------
+işaretli 2 lik sistem
+
+sign bit --> sayının işaretni belirler
+0 --> pozitif sayı
+1 --> negatif sayı
+
+
+işaretli sayı sistemlerinde 
+Sistemlerin hemen hepsi negatif sayıyı gösterimi için
+Sayının 2'ye tümleyini aritmatigi kullanır
+
+aynı sayıınn pozitif ve negatif degerleri
+sayının 2 ye tümlenyenleri
+
+45
+-45 gibi 
+
+1110 1001 = -23
+2^0 * 1 + 2^1 * 0 + 2^2 * 0 + 2^3 * 1 + 2^4 * 0 + 2^5 * 1 + + 2^6 * 1 + 2^7 * 1
+0001 0111 = 23
+
+
+Soru :  bir byte lık alanda -52 sayısını ifade edermisin
+
+önce 52 degerinin bitlerini buluruz sonrada 2'ye tümelyeni buluruz. Eksili sayının 2 bitlik ifadesini 
+
+0011 0100 = 52
+1100 1100 = -52
+
+
+---------------------------------------------
+temel byte alanlarında yazılabilecek en buyuk ve en kucuk degerler 
+
+unsigned sistemde
+
+0  - 255
+0  - 65535
+0  - .....
+
+
+signed sistemlerde
+
+0111 1111 -- > 127 en buyuk tam sayı degeri 
+1000 0001 ---> -127 - 1 = 128 en kucuk tam sayı degeri elde edilir 
+1000 0000 --> -128
+
+
+-128 127
+-32768 - 32767
+-2147483648  - 2147483647 
+
+--------------------------------------------------------------
+
+Soru: İşaretli 2 lik sayı sisteminde butun bitleri 1 olan sayı nedir
+
+1111 1111 = -128 + 127 = -1
+0000 0001 = 1 
+
+
+--------------------------------------------------------------
+
+16 LIK sayı sistemi 
+
+hexadecimal sistem 
+hex system denir 
+
+16 tane sembol var
+
+0123456789ABCDEF
+
+
+Neden hex sistemi bizi ilgilendirir
+
+aslında 2 lık sayı sisteminde 5 bitlik alanı tekbir yerde gosterebiliriz
+ayrıca 16 lık sistem 2 nın katı olması işimizi kolaylaştırır
 
 
 
+Soru: 2lık sayı sistemini 16 lık sayı sistemine cevirelim
+
+1001  1110 1001 1111
+  9    E    9    F
+
+Soru:  1AC  onluk sayı sistemine donusturelim
+
+1*16^2 + 10 * 16^1 + 12 * 16^0  = 256 + 160 + 12 = .....
 
 
+-----------------------------------------------------------
+
+Önce java gereksinimleri yuklenmeli işletim sistemine göre
+
+Sonra 
+Java ayarlarımızı consol'dan incelemeliyiz aynı versiyon olmalı  
+
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community>java -version
+java version "17.0.1" 2021-10-19 LTS
+Java(TM) SE Runtime Environment (build 17.0.1+12-LTS-39)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.1+12-LTS-39, mixed mode, sharing)
+
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community>javac -version
+javac 17.0.1
+
+-----------------------------------------------------------
 
 
+Dil kavramı nedir?
+
+Dil iletiişmde kullanılan semboller toplulugudur. Bir dilin kurallarına gramer denir.
+Gramerin bir çok alanı vardır. En önemlileri "sentaks (syntax) " ve "semantik (semantic" dir.
+Bir cümlenin olabilmesi için en azından sentaks ve semantiğe sahip olması gerekir.
 
 
+Sentaks doğru yazma ve dogru dizilime ilişkin kurallardır.
+
+		"I going to will fitness."
+
+Java ornegi 
+
+		System.out.println("Hello, World)";
 
 
+Semantik: Dildeki dogru dizilmiş ögelerin ne anlama ifade ettiketlerine ilişkin kurallara da semantik denir.
+
+
+Dipnot:
+Bilgisayar Dilleri ve Programlama Dilleri: Bilgisayar bilimlerinde kullanılmak üzere tasarlanmış
+dillere bilgisayar dilleri (computer langues) denir. Bir bilgisayar dilinde akış da varsa o zaman programalam dili
+(programmin language) denir. Örnek: HTML, XML gibi bilgisayar dilleridir, programlama dili değildir.
+C, C++, Java, C#, Swift..... gibi dillerde akış oldugunda programlama dilleridir. 
+
+
+-----------------------------------------------------------
+
+Hello World Program
+
+
+package orhn;
+
+class App{
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+    }
+}
+
+
+javac orhn/App.java
+
+java orhn.App
 
 
 
