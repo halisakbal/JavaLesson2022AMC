@@ -289,11 +289,408 @@ class App{
 }
 
 
-javac orhn/App.java
+komutlar
 
-java orhn.App
+-> javac orhn/App.java
+
+-> java orhn.App
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+29.11.2022 Salı
+
+Derleyici hata mesajları (diagnostics):
+
+1. Gerçek hatalar (Error): Dilin sentaks ve semantik kurallarına uyulmamasından dolayı verilen mesajlardır.
+	Bu durumda arakod(Byte code) üretilmez.
+
+2. Uyarılar (warning): Byte kodun üretimine engel olmayan, olası programlama ve mantık hatalarının programcıya
+	bildirilmesi içien verilen mesajlardır. Programcı bu uyarıları mutlaka dikkate almalıdır. Özel bir durum yoksa 
+	uyarı mesajlarının oluşumuna yol açan kodlar düzeltilmelidir. Bazı duurmlarda derleyicinin uyarı mesajı verdiği ancak IDE'nin kullanıldıgı
+	bir "static kod analizi araçları" konfigürasyonları gereği uyarı verebilirler. Şüphesiz bunlarda da dikkate alınmalıdır. Ancak bunların
+	hepsi düzeltilmesi gerekmez.
+
+
+3. Ölümcül hatalar (fatal errors): Derleme işleminin bile tamamlanmasını engelleyebilecek hatalardır. Bu durumda
+	programcının yazdıgı kod açısından yapacak bir şeyi yoktur. Çünkü kod henüz derlememiştir. Programcının ölümcül hataya
+	yol açan durumu ortadan kaldırmsı gerekir. Örneğin diskte yer kalmaması, derlenecek dosyanın bulunamaması gibi durumlar ölümcül hatalara örnek gösterilebilir.
+
+
+Programın çalışma zamanı sırasında oluşan hatalara genel olarak "exception" denir. Exception oluştugunda program sonlanır. 
+Bu durum detayları "exception işlemleri(exception handling)" konusunda ele alınacaktır. Excepiton yerine "run time error" da kullanılabilrmektedir. 
+"error" denildiginde "compile time error" anlaşılır.
+  
+
+-----------------------------------------------------------
+
+Java'da yorum satırları (comment lines)
+
+
+Not: Yorum satırları kodun okunabilirliğini/algılanabilirliğini bozacak şekilde koda eklenmemelidir
+	Yorum satırı eklemenin de bir "convetion"'u olmadır.
+
+package orhn;
+
+class App{
+
+    //Burası derleyici tarafından dikkate alınmaz.
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+
+        /*
+            Burası da 
+            derleyici
+            tarafından 
+            dikkate alınmaz 
+         */
+    }
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Atom (Token):
+Bir programlama dilinde kendi başına anlamlı olan en küçük birime atom denir. Atomlar 6 gruba ayrılır.
+
+1. Anahtar Sözcükler(keywords, reserved words): Dil için özel bir anlamı olan yeni dil tarafın bilinen ve 
+	birçoğu doğrudan değişken ismi olarak kullanılamayan atomlardır. Örneğin: package, class, public, int, if, while vs.
+
+2. Değişkenler (identifiers, variables): İsmini programcının belirlediği ve çeşitli kurallara göre isminin berlirlenebildiği atomlardır.
+	Örneğin: App, String, System, orhn vs...
+
+3. Operatörler (Operators): Bir işleme yol açan ve bu işlem sonucunda bir değer üreten atomlardır.
+	Örneğin: a + b ifadesinde + bir operatordür
+
+4. Sabitler (Literals, constants): Program içerisine doğrudan yazılan sayılara denir. Örneğin: a - 5 ifadesinde
+	5 bir sabittir. 
+
+5. String'ler (Strings, String Literals): iki tırnak (double quote) içersinde bulunan yazılar tırnaklarla birlikte string atomudur.
+	Bu atoma string sabiti anlamında "string literal" da denir. Örneğin: "Hello, World"
+
+6. Ayraçlar (delimiters, punctuators): Yukarıdaki gruplar dışında kaln tüm atomlara denir. Örneğin: {}, (), [] vs.
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Programı atomlarına parçalayalım
+
+
+package orhn;
+
+class App{
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+    }
+}
+
+package 		->  anahtar sözcük
+orhn			-> değişken
+class		-> anahtar sözcük
+App			-> değişken
+{}			-> ayraç
+public		-> anahtar sözcük
+static		-> anahtar sözcük
+void 		-> anahtar sözcük
+main			-> metod ismi değişken
+()			-> ayıraç
+String		-> değişken
+[]			-> ayıraç 
+args			-> değişken
+{}			-> ayıraç
+System		-> değişken
+.			-> operator
+out			-> değişken
+println		-> değişken
+()			-> metod çagırma operatoru
+"Hello, World" -> String literals
+;			-> Ayıraç
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Boşluk karakterleri (whitespaces): Klavyeden basılıgında bosluk algısı veren karakterlerdir.
+	Klavyeden basılan bosluk karakterleri tipik olarak sunlardır: space, tab, enter 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+	Java programlama dilinde kod yazım kuralları şunlardır:
+	1. Atomlar arasında istenildiği kadar boşluk (whitespace) bırakılabilir.
+	2. Anahtar sözcükler ve değişkenler dışında kalan atomlar istenildiği kadar bitişik yazılabilir. 
+		Anahtar sözcükler ve değişken atomlar arasında en az bir boşluk (whitespace) karateri olmalıdır.
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Atomlar arasında istenildiği kadar boşluk (whitespace) bırakılabilir.
+
+
+package 
+
+
+
+orhn;
+
+class 
 
 
 
 
 
+
+
+App{
+
+    public static void main(String[
+
+
+    ] 
+    
+    args) 
+    
+    {
+        System.             out.            println("Hello, World");    
+
+    }
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+2. Anahtar sözcükler ve değişkenler dışında kalan atomlar istenildiği kadar bitişik yazılabilir. 
+		
+
+
+package orhn;class App{public static void main(String[]args){System.out.println("Hello, World");}}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Anahtar sözcükler ve değişken atomlar arasında en az bir boşluk (whitespace) karateri olmalıdır.
+
+package orhn;class App{publicstatic void main(String[]args){System.out.println("Hello, World");}}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Not: Java'da derleme zamanı (compile time) ve çalışma zamanı (run time) denilen birbiriyle ilişkili
+	ancak ayrı olan iki kavram vardır. Derleme zamanı derleme sürecinde yapılan işlemlere denir. 
+	Çalışma zamanı programın çalışma sürecinde yapılan işlemlere denir.
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Bildirim (declaration): Bildirim bir ismin derleyiciye tanıtılmasıdır. 
+				    Derleyici bildirim ile o ismin ne anlama deldiğini anlar ve derleme işlemini ona göre yapar.
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Bir java programı genel olarak paketlerden, paketler sınıflardan, sınıflarda metodlardan oluşur.
+
+package <isim>;
+Örnek:
+package orhn;
+
+
+class <isim> {
+
+
+}
+
+Örnek:
+
+class Sample{
+	//...
+}
+
+
+class Mample{
+	//...
+}
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Metod bildirimlerin genel biçimi:
+
+Java'da alt programlara metot (method) denir. Alt programın ne yapacağının yazılmasına "metot bildirimi (metot declaration)" denir.
+Alt programın kodlarının çalıştırılmasına ise "metot çağırma (method call)" denir. Metot bildirimini genel biçimi:
+
+[erişim belirleyici] [static/non-static] <geri dönüş değeri bilgisi> <metot ismi>([parametreler])
+{
+	//...
+	//...
+
+}
+
+Açıklamalar:
+
+-Erişim belirlemeleri şunlardan biri olabilir: public, protected, private, no-modifier(hiçbir şey yazılmaması)
+	Metotların erişim berlirleyicileri konusuna gelene kadar tüm metodları public olarak bildirecez.
+
+- Bir metot static veya non-static olabilir. static anahtar sözcüğü bildirimde yazılmasa metot non-static olur.
+	non-static metotlara ilişkin konuya gelene kadar tüm metotları static olarak bildirecez.
+
+- Metodun geri dönüş değeri bilgisi metot isminden önce yazılmalıdır. Metodun geri dönüş değerinin olmaması durumuda
+	void yazılması demektir. Geri dönüş degerı kavramı da ileride ele alınacaktır.
+- Metodun ismi bir değişken atomdur. Tğm değişken atomlarda oldugu gibi "değişken isimlendirme kuralları"na uygun 
+	olarak isimlendirilmelidir.
+-Metot bildirimlerinde motot isminden sonra parantezler içerisinde ismine "parametre (parameter)" deniken değişkenler bildirilebilir.
+	Metot parametre değişkenleri ileride ele alınacaktır.
+- Metot bildiriminde küme paratezleri arasında (metot gövdesi) metodun kodları yazılır 
+
+
+static bir metodun çağrılmasının genel biçimi:
+
+[paket ismi].[sınıf ismi].<metot ismi>([argümanlar]);
+
+
+Bir program main metodunun çağrılmasıyla çalışmaya başlar. Programcının main metodu içerisinde çağırdığı motolar ve o metotların içerisinde çağrılan motolarla
+akış devam eder. main metodu JVM tarafından çağrılır. Bu anlamda java programına verilen "byte code"'a ilişkin sınıfın main metoduna "giriş noktası (entry point)"
+denir. Özel bazı özel durumlar dışında (bu özel durumlar vardı - extrem konularda karsımıza cıkar) main metodu sonlandıgında program sonlanır.
+Bir metot çağrıldıgında akış metodun kodlarına dallanır (call) ve metodun kodları çalıştırılır. Şüphesiz metot içerisinde başka bir metot çağrılıyor olabilir.
+Yine bu çapırma n0oktasında akıl metodun kodlarına dallanır. Metot çağrısı sonlandıgında akış metodun çağrıldıgı noktaya geri döner ve bir sonraki koddan akış 
+çalışmaya devam eder.
+
+Not: System.out.println("Hello World"); çağrısında System bir sınıf, out bir referans ve println de non-static bir metotdur.
+	Bu kavramları ileride ele alacagız.
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+package orhn;
+
+class App{
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+        orhn.Sample.foo();
+        orhn.Sample.bar();
+        orhn.Mample.tar();
+        System.out.println("Goodbye, World");
+    }
+}
+
+class Sample{
+    public static void foo()
+    {
+        System.out.println("Sample.foo");
+        orhn.Mample.tar();
+    }
+
+    public static void bar()
+    {
+        System.out.println("Sample.bar");
+    }
+}
+
+
+class Mample {
+    public static void tar()
+    {
+        System.out.println("Mample.tar");
+    }
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Çağıran metodun (caller) ait oldugu sınıf ile çağıran metot (callee) ait oldugu sınıf 
+aynı paket içerisindeyse çağırma sırasında paket ismi yazılmayabilir
+
+package orhn;
+
+class App{
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+        Sample.foo();
+        Sample.bar();
+        Mample.tar();
+        System.out.println("Goodbye, World");
+    }
+}
+
+class Sample{
+    public static void foo()
+    {
+        System.out.println("Sample.foo");
+        Mample.tar();
+    }
+
+    public static void bar()
+    {
+        System.out.println("Sample.bar");
+    }
+}
+
+
+class Mample {
+    public static void tar()
+    {
+        System.out.println("Mample.tar");
+    }
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+Çağıran metot ile çağrılan metot aynı sınfta ise bu durumda çağırma sırasında paket ismi yazılmamışsa sınıf 
+ismide yazılmayabilir.
+
+package orhn;
+
+class App{
+    public static void main(String[] args) {
+        System.out.println("Hello, World");    
+        Sample.foo();
+        Sample.bar();
+        Mample.tar();
+        System.out.println("Goodbye, World");
+    }
+}
+
+class Sample{
+    public static void foo()
+    {
+        System.out.println("Sample.foo");
+        Mample.tar();
+    }
+
+    public static void bar()
+    {
+        System.out.println("Sample.bar");
+        foo();
+    }
+}
+
+
+class Mample {
+    public static void tar()
+    {
+        System.out.println("Mample.tar");
+    }
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
