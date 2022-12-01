@@ -688,9 +688,812 @@ class Mample {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+01.12.2022 Perşembe
+
+IDE (Integrated Development Environment): Derleyiciler komut satırından çalıştırlabilen basit bir arayüze sahip
+programlardır. Aslında teorik olarak java ile geliştirilecek bir uygulma içerisinde tüm java dosyları "notepad"
+basit bir editor ile yazılıp, komut satırından derlenebilir. Fakat pratikte bu şekilde program yazman fazlaca 
+zaman kaybettirir. Yazılım geliştirmeyi kolaylaştırmak için IDE debilen programlar kullanılır.
+IDE'ler içerisinde editorler, test araçları, çeşitli kodlar üreten araçlar vs. bulunur. IDE bir derleyici değildir.
+IDE derleme işlemi için derleyiciyi de çalıştırabilir. Uygulamayı çalıştırma işlemi için de yineJRE içerisindeki araçları 
+kullanabilir. Java ile uygulma geliştirirken kullanılabilecek çeşitli IDE'ler bulunmaktadır. Bunlardan en yaygın 
+kullanılanları "Eclipse" ve "IntelliJ IDEA" IDE'leridir. Önceleri Netbeans isminde bir IDE kullanılmaktaydı. 
+Ancak Netbeans kullanımı oldukça azalmıştır.
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Tür (type): Bir değişken için bellekte kaç byte ayrılacağını ve içerisindeki hangi
+yöntemle veri tutulacagını belirten kavramdır.
+
+Java'da türler genel olarak iki gruba ayrılabilir.
+Temel türler (primitive/built*in/predefined types).
+Programcının tanımladığı türler (user defined types).
+
+
+Temel türler
+
+Tür ismi			Uzunluğu(byte)
+short				2
+int					4
+long				8
+byte				1                           0 0 0 0  0 1 0 1  --> 5    ------- -128/127
+
+float				4
+double				8
+
+char				2
+boolean				-
+
+
+-Java da türlerin uzunlukları boolean türü dışında sistemden sisteme değişmez.
+
+-Tüm tam sayı türleri işaretlidir(signed)
+
+-Tamsayı türleri (integer/integral types) için ikiye tümleme yöntemi kullanılır. Java'da işaretsiz tam sayı türleri yoktur.
+Ancak java 8 ile birlikte belirli koşullar altında işaretsiz tamsayı işlemleri yapılabilmektedir.
+
+-long türü en uzun tamsayı türüdür.
+
+-Gerçek sayı(real/floating point types) için "IEEE 754 standardı" kullanılır. float ve double türleri sırasıyla
+tek hassasiyetli (single precision) ve çift hassasiyetli (double precision) değerleri tutmaktadır. Bu türlerde bazı sayılar
+tam olarak ifade edilemezler 0 sayıya yakın bir sayı ile ifade edilebilirler. Bir noktalı sayının ifade edilemeyip en yakın
+sayı olarak ifade edilmesine yuvarlama hatası (rounding error) denir. Yuvarlama hataları değer ilk kez yerleştirilirken
+de oluşabilir, bir işemin sonucunda da oluşabilir.
+
+
+-Gerçek sayı türleri işaretli türlerdir.
+
+-float türünün yuvarlama hatalarına karşı direnci zayıfır. Yanı yuvarlama hatası daha çok olmaktadır.
+
+-Yuvarlama hataları parasal ve finansal uygulamarda hatalı değerlerin oluşmasına sebep olabilir. Sırf parasal
+ve finansal uygulamalar için tasarlanmış özel türler (sınıflar) bulunur. Programcı böylesi uygulamalar için bu sınıfı
+tercih eder. Ancak bu sınıflar yuvarlama hatası yapmamak için yüzlerce makine komutu ile bu işlemleri yapar.
+Bu durumda programcı için parasal ve finansal uygulamalar gibi yuvarlama hatasının olmaması gerekn uygulamalar dışında double
+yada durma göre float türü tercih edilmelidir.
+
+
+-char türü Java'da UNICODE tablo dikkate alınarak belirlenmiştir. Bu nedenle char türü 2 byte'dır. char türünden 
+değişken içerisinde bir karakterin UNICODE tablosu (ya da başka tablodaki) sıra numarası tutulur. UNICODE tablo
+dünyadaki dillerde kullanılan hemen hemen tüm karakterleri ve bazı özel karakterleri ifade edebilme yeteneğine sahiptir.
+
+
+-Yazılar içerisinde her bir karakter aslında bir sayı ile temsil edilir. Hangi karakterin hangi sayı ile ifade edildiği
+karater tablosuna bağlıdır. ASCII tablosu 1 byte'lık yani 256 tane satırdan oluşur. UNICODE tablo 2 byte'lık
+yani 65536 satırdan oluşan bir tablodur. Karakter tablolları bunlarla sınırlı değildir.
+
+
+-boolean türünün alabileceği iki tane değer vardır: true, false. boolean türünün uzunluğu "Java Language Specification"'da
+belirtilememiştir. Sistemden sisteme değişebilir. Ancak bu değişim programcı açısından problem oluşturmaz.
+
+Not: int türüne "integer" demek yanlış bir terim kullanamk demektir. integer terimi tamsayılar için
+kullanılan genel bir terimdir. Ayrıca "Integer" isimli bir sınıf da bulunmaktadır.
+
+Not: Java'da en çok kullanılan tamsayı türü int türüdür. en çok kullanılan gerçek sayı türü de double türüdür.
+Programcı öncelikle bu türleri tercih etmelidir. Eğer geçerli bir nedeni varsa diğer türleri kullanabilir.
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+HW3
+
+IEEE 754 standardı nedir? 
+Gerçek sayılar bu standarda göre nasıl ifade edilir?
+
+1344.3454 ---> bunun sistemde nasıl ifade edildiği 
+		   veya javada nasıl ifade edildiğini ögrenecez
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Aşağıdaki yuvarlama hatası örneği inceleyelim.  
+ * İleride detaylı olarak ele alınacak
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 0.1, b = 0.2;
+		double c;
+		
+		c = a + b;
+		
+		if(c == 0.3)
+			System.out.println("Eşit");
+		else
+			System.out.println("Eşit değil");
+		
+		System.out.printf("a = %.20f\n", a);
+		System.out.printf("b = %.20f\n", b);
+		System.out.printf("c = %.20f\n", c);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Aşağıdaki yuvarlama hatası örneği inceleyelim.  
+ * İleride detaylı olarak ele alınacak
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		float a = 0.1F, b = 0.2F;
+		float c;
+		
+		c = a + b;
+		
+		if(c == 0.3)
+			System.out.println("Eşit");
+		else
+			System.out.println("Eşit değil");
+		
+		System.out.printf("a = %.20f\n", a);
+		System.out.printf("b = %.20f\n", b);
+		System.out.printf("c = %.20f\n", c);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Bir değişken kullanılmadan önce bildirilmelidir:
+Değişken bildiriminin genel biçimi:
+<tür> <değişken ismi>;
+
+örnek:
+
+int a;
+float b;
+boolean c;
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Java'da 3 çeşit değişken vardır:
+1. Yerel değişkenler (local variables)
+2. Parametre değişkenleri (Parameter variables)
+3. Sınıf veri elemanları (class member variables)
+
+
+Değişkenler için temel kavramlar:
+İsim(name): Belli kurallara göre yazılan karakterler topluluğudur.
+
+Tür (type): Değişken için bellekte ne kadar yer ayrılacağı ve içerisinde değerlerin hangi yönteme göre tutulacağını belirtir.
+
+Faaliyet alanı (scope): Bir değişken isminin derleyici tarafından görülebildiği kod aralığıdır. Derleme zamanına işilkindir.
+
+Ömür (storage duration): Bir değişkenin bellekte kalma süresidir. Çalışma zamanına ilişkindir.
+
+Temel bazı kavramlar:
+Blok (block): Bir metot içerisinde { ile } arasında kalan kod bölümüdür. Metodun gövdesi de bir bloktur.
+
+İlkdeğer verme (initialization): Bir değişkene bildirim noktasında verieln değer denir. 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Bir metot içerisinde istenildiği kadar ayrı veya iç içe bloklar olabilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		{
+			//...
+			
+			{
+				//..
+			}
+		}
+		
+		{
+			//...
+		}
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Bir blok içerisinde herhangi bir yerde bildirilen değişkenlere yerel değişkenler (local variables) denir.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		{
+			//...
+			
+			{
+				double b;
+				int c;
+				//..
+			}
+		}
+		
+		{
+			float d;
+			//...
+		}
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		int x;
+		
+		//..
+		{
+			//..
+			boolean f;
+			//..
+		}
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Aynı türden yerel değişkenler aralarında virgül konarak bildirilebilirler
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b, c;
+		double x, y, z;
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		int x, y, z;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Yerel değişkenlere ilkdeğer verme
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10; //ilk deger verme
+		double pi = 3.14; //ilk degerveme sentaksı
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		int x = 10, y = 30, z;
+		
+		z = 33;//initizlization değil.... 
+	}
+}
 
 
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+
+/*
+ * Yerel bir değikenin faaliyet alanı bildirildği yerden bildirilği bloğun sonuna kadardır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		{
+			int x;
+			
+			x = 20;
+			
+			//..
+			
+			{
+				x = 45;
+			}
+		}
+		
+		x = 15; //error
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Aynı faaliyet alanı içerisinde aynı isimde yerel değişken bildirimi geçersizdir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		int a;
+		double a; //error
+		//..
+	}
+	
+	public static void bar() 
+	{
+		int a;
+		
+		{
+			double a; //error
+			//..
+			
+		}
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Farklı faaliyet alanı içerisinde aynı isimde yerel değişken bildirimi geçerlidir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		{
+			int x = 10;
+			//..
+		}
+		
+		{
+			int x = 20;
+			//..
+		}
+		
+		int x = 30;
+		
+		//..
+	}	
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Java'da değer verilmemiş hiçbir değiken kullanılamaz. Yani içerisindeki değer işleme sokulamaz
+ * Yerel değişkenlere değer verilmesi programcının sorumluluğundadır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		int b;
+		
+		b = a * 2; //error
+		
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+	}	
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * print ve println metotları değişkenlerin içerisindeki değerleri ekrana basarlar
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		
+		System.out.print(a); //ekrana yazdırır
+		System.out.println(a); //--> print("") sonrada alt satıra geçiririm 
+		
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+	}	
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Değişken isimleri sayısal bir karakter ile başlamaz
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int 1number; //error
+		
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Değişken isimleri herhangi bir uygun karakter ile başlatılıp istenildği kadar sayısal karater içerebilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a12345 = 10; 
+		
+		System.out.println(a12345);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Değişken isimlendirmede UNICODE alfabetik karakterler kullanabiliir. Örneğin türkçe karakter geçerlidir ,
+ * 
+ * Not: Her ne kadar değişken isimlendirmede UNICODE karakterler kullanılabildse de programlamada yalnızca
+ * İngilizce alfabetik 26 karakterin kullanılması iyi bir tekniktir. Biz de bu "convention"' a uygun kodlar yazacağız.
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int öğrencisayısı = 10; 
+		
+		System.out.println(öğrencisayısı);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Değişken isimlendirmede boşluk (whitespace) karakterleri geçersizdir
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int number Of Students = 10; 
+		
+		System.out.println(number Of Students);
+		
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Değişken isimleri büyük-küçük harf duyarlıdır (case-sensitive)
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int val, Val, VaL, VAL; //geçerli  
+		
+		
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Değişken isimlendirmede  _(underscore/ alttire) karakteri kullamabilir. Hatta değişken ismi _ karateri ile başalatılabilir.
+ *
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int _11 = 20;
+		int _val = 22;
+		int number_of_students = 11;
+		
+		System.out.println(_11);
+		System.out.println(_val);
+		System.out.println(number_of_students);
+		
+		
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Java 9 ile birlikte alttire karaterinin tek başına değişken ismi olarak kullanıması geçersizdir. 
+ * Java 8 ile birlikte "deprecated" olmuştur.
+ * 
+ * 
+ * Not: Programlamda "artık kullanılması tavsiye edilmeyen" durumlar için "deprecated" terimi kullanılır.
+ * Bu durum gerekçeleri farklı farklı olabilir. Programcı açısından genel olarak "deprecated" olan bir durum özel bir takım
+ * nedenler yoksa tercih edilmemelidir.
+ */
+
+package orhn;
+
+import java.nio.file.FileSystem;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int _ = 10; //error
+		
+		System.out.println(_);
+						
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Java'da değişken isimlendirme $ karakteri kullanılabilir. Hatta isimler $ karakteri ile başlayabilir. $ karakteri
+ * tek başına değişken ismi olabilir. Ancak programcı açısından değişken isimlendire $ karakteri kullanılmamalıdır.
+ * Derleyici ismini kendisinin belirlediği durumlarda isimlendirmede bu karateri kullanır. $ karakteri bu anlamada
+ * programcı tarafından kullanılırsa iism çakışması olabilir. Zaten $ karaterinin varlık sabebi de bu
+ * tip kod üretimlerinde kulllanılmasıdır.
+ */
+
+package orhn;
+
+import java.nio.file.FileSystem;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int amountOf$s = 1000;
+		int $ = 35;
+		double $123 = 123;
+		
+		System.out.println(amountOf$s);
+		System.out.println($);
+		System.out.println($123);
+		
+						
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Anahatar sözcükler tek başına değişken ismi olarak kullanılamaz. Ancak Java'ya daha sonra eklenmiş yerine göre
+ * anahtar sözcük biçiminde kullanılan bazı atomlar vardır. Bu tarz eklenen sözcükler tam anlamıyla anahtar sözcük değildir.
+ * Kullanıldığı yere göre değişken ismi olup olmadığı derleyici tarafından tespit edilir (inference, deduction). 
+ * Bu tarz sözcüklere programlamada "bağlamsal anahtar sözcük (contextual keywords") de denir.
+ 
+ 
+ 	Not: Değişken isimlerinin kolay telaffuz edilebilir, anlamlı ve yeterince uzunlukta olması gerekir.
+ 	
+ */
+
+package orhn;
+
+import java.nio.file.FileSystem;
+
+public class App {
+	public static void main(String [] args)
+	{
+		//int double; //error
+		//double package; //error
+		
+		var a = 10;
+		
+		int var = 20;
+		
+		System.out.println(var);
+		System.out.println(a);
+						
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Not: Klavyeden temel türden degerler okuma yöntemlerinin tam anlamı ileride detaylı olarak ele
+ * alınacak. Bu sebeple bunları bir kalıp olarak görüp yalnıca kalyeden okuma kısmı ile ilgilenecez.
+ * 
+ * 
+ * Klavyeden int türden değer okunması kalıbı
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayi giriniz:");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		int result = val * val;
+		
+		System.out.println(result);
+		
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+
+
+
+

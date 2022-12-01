@@ -1,1 +1,5 @@
 /bin/
+/.settigns/
+
+*.project
+*.classpath
