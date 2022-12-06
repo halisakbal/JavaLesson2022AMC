@@ -1385,6 +1385,22 @@ public class App {
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+06.12.2022 Salı
+
+
+/*
+ * Macar notasyonu
+ * Camel case(lower camel case): numberOfCase
+ * Pascal Case(upper camel case): SerialPort
+ * snake case (unix style): number_of_students
+ * 
+ * 
+ * Java coding style 
+ * 
+ */
+-----------------------------------------------------------
+-----------------------------------------------------------
+
 /*
  * Not: Klavyeden temel türden degerler okuma yöntemlerinin tam anlamı ileride detaylı olarak ele
  * alınacak. Bu sebeple bunları bir kalıp olarak görüp yalnıca kalyeden okuma kısmı ile ilgilenecez.
@@ -1416,7 +1432,1443 @@ public class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * 
+ * Klaveyden int türden deger okuma
+ * 
+ */
 
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a * b;
+		
+		System.out.println(result);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * 
+ * Klaveyden double türden deger okuma
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		
+		double result = a * b;
+		
+		System.out.println(result);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * 
+ * Klaveyden long türden deger okuma
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		long a = Long.parseLong(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		long b = Long.parseLong(kb.nextLine());
+		
+		
+		long result = a * b;
+		
+		System.out.println(result);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * 
+ * Klaveyden float türden deger okuma
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		float a = Float.parseFloat(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		float b = Float.parseFloat(kb.nextLine());
+		
+		
+		float result = a * b;
+		
+		System.out.println(result);
+		
+	}
+}
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Metotlar Konusu
+ * 
+ * ifade(expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir dizilime ifade denir.
+ * Değişkenler ve sabitler tek başına ifade belirtebilirken, operatorler tek başına ifade olamazlar. İstisna bir durum dışında
+ * ifadeler hesaplandığında bir değer üretirler.
+ * 
+ *  a + b
+ */
+
+/*
+ * Bir metodun geri dönüş degeri bilgisi yerine bir tür ismi yazılırsa bu metodun "geri dönüşü vardır" denir. 
+ * Tersine bir metodun geri dönüş degeri varsa geri dönüş degeri bilgisi yerine bir tür ismi yazılır. 
+ * Bir metodun geri dönüş deger varsa metot çağrısı bittikten sonra çağrıuldığı noktaya bir değer ile geri döner.
+ * Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. 
+ * Bir metodun geri dönüş değeri metot içerisinde return  deyimi ile oluşturulur. 
+ * 
+ * return deyiminin genel biçimi:
+ *  		return [ifade];
+ *  
+ * return deyimi nasıl kullanılırsa kullanılsın metodu sonlandırır. Yani metot içerisinde akış return deyimine geldiğindemetot sonlanır 
+ * ve akış çağrılan noktaya geri döner. return deyimine ilişkin ifadenin değeri çağıran metoda aktarılır.
+ *  
+ */
+
+
+/*
+ * Aşağıdaki örnekte add metodunun geri dönüş değeri 3 ile çarpılmış ve sonucu result değişkenine atanmıştır.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+		return result;		
+	}
+}
+
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Not: Java derleyicisi genel olarak bir deyime akışın hiçber zaman gelemeyeceğini anlarsa o yazılan
+ * deyim için error oluşturur (unreachable code).
+ */
+
+/*
+ * return deyimi nasıl kullanılırsa kullanılsın metodu sonlandırır. Aşağıdaki örnekte return deyiminden sonra 
+ * akış metot içerisinde kalmayacağından error oluşur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+		return result;		
+		
+		System.out.println("Unreachable Code");
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * akış return deyimine geldiğinde return deyimine ilişkin ifade önce hesaplanır, elde edilen değer döndürülür
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+		return result;		
+	}
+}
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Geri dönüş değeri olan metotolarda (void olmayan metotlarda )return tek başına kullanılamaz
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+		return; //error		
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Geri dönüş değeri olan metotolarda  akışın her noktasında bir değere geri dönemlidir. Aksi durumda error oluşur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Geri dönüş değeri olan metotolarda  akışın her noktasında bir değere geri dönemlidir. Aksi durumda error oluşur.
+ * Aşaığıdaki örnekte result 10 değerinden küçük veya eşitise metot bir değer döndürmeyeceğinden error oluşur.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3;
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		int result = a + b;
+		
+		if(result > 10)
+			return result;
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Derleyici geri dönüş değerinin çağıran metoda aktarımı geçici değişken yaratan bir kod üretir. 
+ * Aşağıdaki ** ile belirtilen kod parçası için derleyicinin ürettiği temsili kod şu şekildedir:
+ * 
+ * 			int temp = a + b;
+ * 
+ * 			returlt = temp * 3;
+ * 
+ * Yani aslında geri dönüş değeri geçici değişkene yapılan bir atama işlemidir. Geçici değişkenin türü metodun
+ * geri dönüş değerinin türü ile aynıdır.
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add() * 3; //**
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		return a + b; // int temp = a + b;
+		
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *Geri dönüş değeri olan metotolar geri dönüş degeri işleme sokulmayacak şekilde çağrılabilirler. 
+ *Şüphesiz metodun da tasarımı bu kullanım açısından anlamlı olmalıdır. Aşağıdaki örnekte add metotdu klavyeden alınan 
+ *değerlerin toplamını ekrana basıp aynı zamanda da değere geri dönmektedir. Programcı kodda metodun sadece ekrana basmasıyla ilgilenmiş
+ *ve geri dönüş değerini kullanmamıştır. Şephesiz başka bir çağrıda kullanaılabilir.
+ *
+ *
+ *Metot ekrana toplam değerini basmasaydı bu şekilde çağırma uygun olurmu? (işimize yararmıydı)?
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NumberUtil.add();
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+		
+		System.out.println(result);
+		
+		return result;
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Bir metodun geri dönüş değeri başka bir motdun geri dönüş değeri olarak verilebilir. 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = Util.getAdd();
+		
+		System.out.println(result);
+	}
+}
+
+class Util{
+	public static int getAdd()
+	{
+		System.out.println("Toplama islemi yapılıyor");
+		
+		return NumberUtil.add();
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+				
+		return result;
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Aşağıdaki örnekte yine add metodunun geri dönüş değeri bir işleme sokulmuştur 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = Util.getResult();
+		
+		System.out.println(result);
+	}
+}
+
+class Util{
+	public static int getResult()
+	{
+		System.out.println("Toplama islemi yapılıyor");
+		
+		return NumberUtil.add() * 2;
+	}
+}
+
+class NumberUtil{
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+				
+		return result;
+		
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	void metotlarda return deyimi zorunlu değildir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NumberUtil.printAdd();
+	}
+}
+
+class NumberUtil{
+	public static void printAdd() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+				
+		System.out.println(result);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	void metotlarda return istenirse metodu sonlandırmak için tek başına kullanılabilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NumberUtil.printAdd();
+	}
+}
+
+class NumberUtil{
+	public static void printAdd() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+		
+		if(result < 0)
+			return;
+				
+		System.out.println(result);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	void metotlarda return deyimi ifade ile kullanılamaz
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NumberUtil.printAdd();
+	}
+}
+
+class NumberUtil{
+	public static void printAdd() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+		
+		if(result < 0)
+			return 10; //error
+				
+		System.out.println(result);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	void metotlarda geri dönüş değeri varmış gibi çağrılamaz. Yani void metot çağrısı geri dönüş varmış gibi işleme sokulamaz
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.printAdd(); //error
+	}
+}
+
+class NumberUtil{
+	public static void printAdd() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayi giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayi giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		int result = a + b;
+				
+		System.out.println(result);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Metot'larda parametre değişkenleri
+ *
+ * Metot bildirimlerinde metot isminden sonra parantezler arasında bildirilen değişkenlere "metot parametre değişkenleri"
+ * ya da "parametre değişkneleri" denir. Bir metodun parametre değişkeni olmayabilir ya da istenildiği sayıda virgül ile 
+ * ayrılarak bildirlebilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a, int b)
+	{
+		//..
+	}
+	
+	public static void printSquare(int a)
+	{
+		//..
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	bir metodun parametre değişkenleri aynı türden olsa bile tür bilgisi yazılmalıdır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  b) //error
+	{
+		//..
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Metodun parametre değişkenleri faaliyet alanı bakımıından metot başında bildirilen yerel değişkenler gibidir.
+ * Dikkat bu cümle sadece faaliyet alanı bakımından aynı oldujlarının söylüyor. Sonuçta yerel değişken ile 
+ * parametre değişlkeni aynı değildir.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  int b) //error
+	{
+		int result;
+		
+		result = a + b;
+		
+		System.out.println(result);
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+	
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Metodun parametre değişkenlerine değerler metot çağrılır iken verilir. Metot çağırlırken bir parametreye verilen
+ * ifadeye "argüman" denir. Bir metot kaç tane parametre sahipse o kadar sayıda arguman ile çağrılmalıdır. 
+ * Argumanlardan parametrelere aktarım da bir atam işlemidir.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		
+		NumberUtil.printAdd(x, y);
+		
+		int result = NumberUtil.square(x);
+		
+		System.out.println(result);		
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  int b) //error
+	{
+		int result;
+		
+		result = a + b;
+		
+		System.out.println(result);
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bir metot parametre saysı kadar argüman ile çağrılmalıdır. Aksi durumda error oluşur.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		
+		NumberUtil.printAdd(x); //error
+			
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  int b)
+	{
+		int result;
+		
+		result = a + b;
+		
+		System.out.println(result);
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+	
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Metot çağrısında bir argüman ilişkin ifade önce hesaplanır, elde edilen değer ile metot çağrılır. Birden fazla
+ *  parametreye sahip bir metot çağrısında tüm argümanlara ilişkin ifadeler hesaplanır, elde edilen değeler ile metot çağrılır.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		
+		NumberUtil.printAdd(x + 3, y * 2);
+			
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  int b)
+	{
+		int result;
+		
+		result = a + b;
+		
+		System.out.println(result);
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bir metotdun parametre değişkeni ya da değişkenleri hem de degeri dönüş degeri olabilir.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		
+		NumberUtil.printAdd(x + 3, y * 2);
+			
+	}
+}
+
+class NumberUtil{
+	public static void printAdd(int a,  int b)
+	{
+		int result;
+		
+		result = a + b;
+		
+		System.out.println(result);
+	}
+	
+	public static int square(int a) 
+	{
+		return a;
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bir metotdun geri dönüş değeri başka bir metoda argüman oalrak geçilebilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		int result = NumberUtil.square(NumberUtil.add(x, y));
+
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bir metotdun geri dönüş değeri başka bir metoda argüman oalrak geçilebilir.
+ *  Bu tip "compact" çözümler kodun okunabilirliğini / algılanabilirliğini etkilememelidir. Gerekirse ayrı ayrı hesaplanacak 
+ *  şekilde yazılmalıdır.
+ *
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		System.out.println(NumberUtil.square(NumberUtil.add(x - 6, y - 5)));
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	bir önceki örnek okunabilirlik/algılanabilirlik açısından aşağıdaki gibi de yazılabilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		int total = NumberUtil.add(x - 6, y - 5);
+		int result = NumberUtil.square(total);
+		
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Aşagıdaki  örnekte iki add çağrısı araında argumanlarda değişiklik olmamasına karşın programcı iki kere çağırmıştır.	
+ * Bu duurumda kod hem iki defa çağırmanın gereksizliği hemde okunabilirlik/algılanabilirlik açısından kötü yazılmıştır.
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		System.out.println(NumberUtil.add(x, y));
+		
+		//.. x ve y ile değişiklik yapmıyorum
+				
+		System.out.println(NumberUtil.add(x, y));
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Aşagıdaki  örnekte iki add çağrısı araında argumanlarda değişiklik olmamasına karşın programcı iki kere çağırmıştır.	
+ * Bu duurumda kod hem iki defa çağırmanın gereksizliği hemde okunabilirlik/algılanabilirlik açısından kötü yazılmıştır.
+ * 
+ * 
+ * kötü kod bu şekilde yazılması daha doğru
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		int result = NumberUtil.add(x, y);
+		
+		System.out.println(result);
+		
+		//.. x ve y ile değişiklik yapmıyorum
+				
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Metotlar ne işe yarar= Ya da başka bir deyişle bir problemin çözümünde neden metotlar yazalım?
+ * 
+ * - Bir işi çok fazla yerde yapmak kod tekrarına yol açar. Yazılım geliştirmede temel prensip "zorunlu olmadıkça
+ * 	 kod tekrarı yapılmamalıdır (do not repeat yourself)" şeklindedir. Bu durumda programcı örneğin bir metot yazar ve ilgili yerlerde bu metodu çağırır.
+ * 
+ * 
+ * - Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde  "implemente" edilmişse, bu durumda programcı
+ *  problemin bir değişiklik yapmak isterse veya bir hata oldgunda anlayıp düzeltmek isterse her yerde bu değişilikleri yapmak zorunda kalacaktır. 
+ *  Bu çoğu zman zor olabilir.
+ * 
+ * 
+ * - Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde "implemente" edilmişse, bu durumda
+ *   kodun okunabilirliği de azalabilir. Yani metot çağırarak kodun okunabilirliği de artmış olur.
+ * 
+ * - Metot yazıldıgında başka projelere taşınarak da kullanılabilir. (code re-usability)
+ * 
+ * - Metodu çağıran programcı metodun nasıl yazışdıgına ilişkin detayları bilmek zorunda değildir. Çünkü metodun
+ *   çağrıldığı noktada metodun nasıl yazıldıgının önemi yoktur.
+ *   
+ *   
+ *   Not: İleride ele alacağımız "nesne yönelimli programalama tekniği"'ne ilişkin kavramlar ile kodun parçalara ayrılması metotlar
+ *   dışında daha yüksek seviyede de yapılabilmektedir. Yani kabaca bu tarz programlamanın temelinde metotlar vardır.
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int x = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int y = Integer.parseInt(kb.nextLine());
+		
+		int result = NumberUtil.add(x, y);
+		
+		System.out.println(result);
+		
+		//.. x ve y ile değişiklik yapmıyorum
+				
+		System.out.println(result);
+	}
+}
+
+class NumberUtil{
+	public static int add(int a,  int b)
+	{	
+		return a + b;	
+	}
+	
+	public static int square(int a) 
+	{
+		return a * a;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * System.out.printf metodunun ilk argümanı String olmalıdır. Metot bu argüman dışında istenilen sayıda ve istenilen türde
+ * argüman ile çağıralabilir. Metodun birinci parametresine ilişkin argümanda % karateri ile birlikte geçerli
+ * bazı karakterler kullanıldıgında "yer tutucu (place holder)" belirtişmiş olur. % ile birlikte kullanıma
+ * "format belirleyici (format specifiers)" da denir. % birlikte kullanılan geçerli karatere ise "format karateri" denir.
+ * Metot yer tutucular yerine diğer geçilen argümanlara ilişkin degerleri yerleştirir ve ekrana bu yazıyı basar. 
+ * Bazı format karaterleri bir argümana ilişkin değere karşılık gelmez. Özel anlamları vardır.
+ * 
+ * 
+ * Not: printf gibi değişkeb sayıda argüman alabilen metotlara "variadic methods" denir. 
+ * Buarada bu tarz metotların nasıl yazıldıgı ele alınmayacaktır.
+ * 
+ */
+
+
+/*
+ * Tamsayı türlerinin (short, int, long, byte) decimal olarak formatlanması  d format karateri kullanılır.
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int degree = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("Bugün hava %d derece", degree);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * printf metodunda imleci bir sonraki starın başına geçirmek için %n kullanılabilir. %n bu anlamda bir argümana karşılık gelmez
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Arasınav notunuzu giriniz : ");
+		int midtermGrade = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("Final notunuzu giriniz : ");
+		int finalGrade = Integer.parseInt(kb.nextLine());
+		
+		
+		System.out.printf("Arasınav : %d%nFinal: %d%n", midtermGrade, finalGrade);
+		System.out.println("Geçme notrunuz hesaplanıyor!....");
+		//...
+		//..
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * printf metodu x, X, h, H format karaterleri ile tamsayi türlerine ilişkin değerler hexadecimal olarak formatlanabilir.
+ * Ayrıca o format karateri ile tamsayı türlerine ilişkin değerler octal olarak formatlanabilir.
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("val = %d%n", val);
+		System.out.printf("val = %x%n", val);
+		System.out.printf("val = %X%n", val);
+		System.out.printf("val = %h%n", val);
+		System.out.printf("val = %H%n", val);
+		System.out.printf("val = %o%n", val);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * printf metodunda tamsayılar için hizalam yapılabilir. Aşağıdaki örnekte 
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("val = %d%n", val);
+		System.out.printf("val = %-8d  %10d%n", val, val);
+
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * printf metodunda tamsayılar için hizalam yapılabilir. Aşağıdaki örnekte  %08X yer tutucu için 
+ * yazıulan karater sayısı 8'den kucukse geri kalanlar için sıfır yazılır 
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("val = %d%n", val);
+		System.out.printf("val = %8d%n", val);
+		System.out.printf("val = %-8d  %8d%n", val, val);
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * printf metodunda tamsayılar için hizalam yapılabilir
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Gün : ");
+		int day = Integer.parseInt(kb.nextLine());
+		System.out.print("Ay : ");
+		int mon = Integer.parseInt(kb.nextLine());
+		System.out.print("Yıl : ");
+		int year = Integer.parseInt(kb.nextLine());
+		
+		
+		System.out.printf("%02d/%02d/%04d%n", day, mon, year);
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * printf metodunda tamsayılar için hizalam yapılabilir
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Gün : ");
+		int day = Integer.parseInt(kb.nextLine());
+		System.out.print("Ay : ");
+		int mon = Integer.parseInt(kb.nextLine());
+		System.out.print("Yıl : ");
+		int year = Integer.parseInt(kb.nextLine());
+		
+		
+		System.out.printf("%2d/%02d/%4d%n", day, mon, year);
+
+	}
+}
 
 
 
@@ -1425,6 +2877,39 @@ public class App {
 
 
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 
 -----------------------------------------------------------
@@ -1436,6 +2921,36 @@ public class App {
 -----------------------------------------------------------
 
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 
 -----------------------------------------------------------
@@ -1447,6 +2962,36 @@ public class App {
 -----------------------------------------------------------
 
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 
 -----------------------------------------------------------
@@ -1454,44 +2999,404 @@ public class App {
 
 
 
-
 -----------------------------------------------------------
 -----------------------------------------------------------
-
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
-
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
 
-
-
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
 
 
 

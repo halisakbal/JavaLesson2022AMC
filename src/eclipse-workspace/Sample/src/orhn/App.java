@@ -1,9 +1,5 @@
 /*
- * Not: Klavyeden temel türden degerler okuma yöntemlerinin tam anlamı ileride detaylı olarak ele
- * alınacak. Bu sebeple bunları bir kalıp olarak görüp yalnıca kalyeden okuma kısmı ile ilgilenecez.
- * 
- * 
- * Klavyeden int türden değer okunması kalıbı
+ * printf metodunda tamsayılar için hizalam yapılabilir
  * 
  */
 
@@ -13,14 +9,16 @@ public class App {
 	public static void main(String [] args)
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Gün : ");
+		int day = Integer.parseInt(kb.nextLine());
+		System.out.print("Ay : ");
+		int mon = Integer.parseInt(kb.nextLine());
+		System.out.print("Yıl : ");
+		int year = Integer.parseInt(kb.nextLine());
 		
-		System.out.print("Bir sayi giriniz:");
-		int val = Integer.parseInt(kb.nextLine());
 		
-		int result = val * val;
-		
-		System.out.println(result);
-		
+		System.out.printf("%2d/%02d/%4d%n", day, mon, year);
+
 	}
 }
 
