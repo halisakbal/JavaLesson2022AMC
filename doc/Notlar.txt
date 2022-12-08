@@ -2874,155 +2874,1039 @@ public class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+08/12/2022
 
+/*
+ * printf metodunda gerçek sayılar (folat ve double) için f format karateri kullanılabilir
+ * 
+ */
 
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("bir gercek sayi giriniz : ");
+		double dval = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("val = %f%n", dval);
 
------------------------------------------------------------
------------------------------------------------------------
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+/*
+ * printf metodunda  f format karateri ile ondalık kısmın kaç basamak olarak formatlanacağı 
+ * aşagıdaki gibi belirtilebilir.
+ * Geri kalan basmaklar bilimsel olarak yuvarlanır
+ * 
+ */
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
-
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("bir gercek sayi giriniz : ");
+		double dval = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("val = %.3f%n", dval);
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
+/*
+ * printf metodunda  char türü için c format karateri kullanilabilir
+ * 
+ */
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		char c = 3333;
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * printf metodunda  boolean türü için b format karateri kullanilabilir
+ * 
+ */
 
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		boolean flag = true;
+		
+		System.out.printf("flag = %b%n", flag);
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * printf metodunda  uygun format karakterlei kullanılmadıgında genel olarak exception oluşur.
+ * 
+ * Bu durumun istisnaları var
+ * 
+ */
 
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		boolean flag = true;
+		
+		System.out.printf("flag = %d%n", flag);
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * printf metodunda s format karateri ile tür ne olursa olsun formatlanabilir. Şüphesiz bu durumda türe özgü
+ * biçimler (hizalama vs) kullanılmaz. Bu format karakterinin ayrıntıları ileri ele alınacak
+ * 
+ */
 
-
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		double b = 3.4;
+		boolean c = true;
+		char d = 67;
+		
+		System.out.printf("a = %s, b = %s, c = %s d= %s%n", a, b, c, d);
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * printf metodunda % karakterinden sonra uygun bir format karateri getirilmelidir
+ * 
+ */
 
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		double ratio;
+		
+		ratio = 18.4;
+		
+		//  % 18.4
+		
+		System.out.printf("Oran : %  %f%n", ratio);
+	}
+}
 
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+/*
+ * printf metodunda % karakteri için iki tane % karateri kullanılmalıdır
+ * 
+ */
 
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		double ratio;
+		
+		ratio = 18.4;
+		
+		//  % 18.4
+		
+		System.out.printf("Oran : %%%f%n", ratio);
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
+Not: printf metodunun format karakterleri ve kullanım biçimleri oldukça geniştir. 
+Burada sadece temel olanlar ele alınmıştır. Diğer format karakterleri ve kullanım biçimleri konular içerisinde ele alınacaktır.
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+Çalışma: Klavyeden girilen iki tane int türden sayının toplamını ve çarpımını aşagıdaki gibi
+ekrana basan programı yazınız:
 
------------------------------------------------------------
------------------------------------------------------------
+Girelen sayılar 10 ve 20 ise
 
-
+	10 + 20 = 30
+	10 * 20 = 200
+	
+	şeklinde çıktılar verecektir.
+	
+	
 -----------------------------------------------------------
 -----------------------------------------------------------
-
 
------------------------------------------------------------
------------------------------------------------------------
+/*
+ * 
+Çalışma: Klavyeden girilen iki tane int türden sayının toplamını ve çarpımını aşagıdaki gibi
+ekrana basan programı yazınız:
 
------------------------------------------------------------
------------------------------------------------------------
+Girelen sayılar 10 ve 20 ise
 
+	10 + 20 = 30
+	10 * 20 = 200
+	
+	şeklinde çıktılar verecektir.
+ * 
+ */
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		FindSumMultiplyApp.run();
+	}
+}
 
+class FindSumMultiplyApp{
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		int a = Integer.parseInt(kb.nextLine());
+		System.out.print("İkiinci sayiyi girin: ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("%d + %d = %d%n", a, b, NumberUtil.add(a, b));
+		System.out.printf("%d * %d = %d%n", a, b, NumberUtil.multiply(a, b));
+		
+	}
+}
+
+class NumberUtil{
+	public static int add(int a, int b)
+	{
+		return a + b;
+	}
+	
+	public static int multiply(int a, int b)
+	{
+		return a * b;
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 
 -----------------------------------------------------------
------------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Bölme işlemi tamsayılar ile yapıldıgında sonuç her zaman tamsayı çıkar. Elde edilen sayının noktadan sonraki kısmı
+ * yuvarlanmadan atılır.
+ * 
+ * Tamsayılar ile bölme işleminde paydanın sıfır olması durumnda exception olusur
+ * 
+ * .Bu durumların detayları ileri ele alınacak
+ * 
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		int a = Integer.parseInt(kb.nextLine());
+		System.out.print("İkiinci sayiyi girin: ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		double result = a / b;
+		
+		System.out.printf("%d  / %d = %f%n", a, b, result);
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * format metot du ile printf tamamen aynı işlemi yapar
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		int a = Integer.parseInt(kb.nextLine());
+		System.out.print("İkiinci sayiyi girin: ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		System.out.format("%d  %d %n", a, b);
+	}
+}
 
 
------------------------------------------------------------
------------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * 	Gerçek sayılar ile bölme işleminde payda sıfır olsa da işlem yapılır. Yani bir exception oluşmaz. Gerçek sayılar
+	içerisinde genel olarak Matematik'teki "belirsizlik" için kullanılan "Not a number (NaN)" değeri vardır. Ayrıca
+	genel olarak sonsuzluk (Matematik'teki tanımsızlık) için kullanılan -Infinity ve +Infinity değerleri de vardır. 
+	Bu özel değerler dışında da başka özel değerler vardır. Bu durumda gerçek sayılar ile bölme işleminde pay sıfırdan
+	farklı, payda sıfır ise payın işaretine göre + veya - Infinity, pay ve paydanın ikisi birden sıfır ise NaN sonucu
+	elde edilir 
+ * 
+ */
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		double a = Double.parseDouble(kb.nextLine());
+		System.out.print("İkiinci sayiyi girin: ");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		double result = a / b;
+		
+		System.out.printf("%f / %f = %f%n", a, b, result);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * 	Neden standart metoları kullanmalıyız? Yani standart olarak var olan metodu programcı yazmalımıdır?
+ * 	Java da standart olarak (JavaSE) bulunan metotların kullnılmasının bazı önemli avantajları varıdr:
+ * 
+ * 	-okunabilir kodlar yazılır
+ *  -Testleri yapılmıştır ve yeterince etkin olarak yazılmıstır
+ *  -Taşınabilir
+ *  -Bazı metotlar (ki bunların sayısı oldukca fazladır) baska detay konularıda bilmeyi gerektirir
+ *  -Programcının projede sadece kendi konusna odaklanmasıı saglar
+ *  
+ *   Bu durumda bir Java programcısı çözmesi gereken bir problem için JavaSE'de problemin çözümüne ilişkin metotlar varsa
+ *	 onları kullanmalıdır. Yoksa yazma işlemine girişmelidir. Ancak bu druum programcının standart kullandığı metotların
+ *	 nasıl yazıldığını gözardı etmesi anlamına gelmez. Programcı programlama yaşamı boyunca hepsini olmasa da hazır olarak
+ *	 kullandıklarının nasıl gerçekleştirilebileceğini öğrenmelidir
+ */
 
------------------------------------------------------------
------------------------------------------------------------
+/*
+ * Math sınıfı abs metotları
+ */
 
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		double a = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("|%f| = %f%n", a, Math.abs(a));
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Math sınıfı sqrt metodu: Metot negatif degerler için NaN degerine geri döner
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		double a = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("sqrt(%f) = %f%n", a, Math.sqrt(a));
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfı pow metodu
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("Birinci sayiyi girin: ");
+		double b = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("pow(%f, %f) = %.12f%n", a, b, Math.pow(a, b));
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Math sınıfı pow metodu
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi girin: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("Birinci sayiyi girin: ");
+		double b = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("pow(%f, %f) = %.12f%n", a, b, Math.pow(a, b));
+		
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Çalışma: Parametresi ile aldıgı double tür x1, y1, x2, y2 koordinat bilgileribe göre
+ * iki nokta arasındaki ((x1, y1) ve (x2, y2) noktaları) uzaklıga geri dönen distance isimli metodu PointUtil isimli
+ * sınıf içerisinde yazınız.
+ *  
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		DistanceTest.run();
+	}
+}
+
+class DistanceTest{
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("x1: ");
+		double x1 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("y1: ");
+		double y1 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("x2: ");
+		double x2 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("y2: ");
+		double y2 = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("Destance: %f%n", PointUtil.distance(x1, y1, x2, y2));
+	}
+}
+
+class PointUtil
+{
+	public static double distance(double x1, double y1, double x2, double y2)
+	{
+		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+	}
+	
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Çalışma: Parametresi ile aldıgı double tür x1, y1, x2, y2 koordinat bilgileribe göre
+ * iki nokta arasındaki ((x1, y1) ve (x2, y2) noktaları) uzaklıga geri dönen distance isimli metodu PointUtil isimli
+ * sınıf içerisinde yazınız.
+ *  
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		DistanceTest.run();
+	}
+}
+
+class DistanceTest{
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("x1: ");
+		double x1 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("y1: ");
+		double y1 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("x2: ");
+		double x2 = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("y2: ");
+		double y2 = Double.parseDouble(kb.nextLine());
+	
+		System.out.printf("Destance: %f%n", PointUtil.distance(x1, y1, x2, y2));
+	}
+}
+
+class PointUtil
+{
+	public static double distance(double x1, double y1, double x2, double y2)
+	{
+		double dx = x1 - x2;
+		double dy = y1 - y2;
+		
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+	
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfın PI ve E elemanları
+ *  
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println(Math.PI);
+		System.out.println(Math.E);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfının trigonometrik işlem yapan metotları radyan ölçü birimi ile çalışır
+ * 
+ * Radyan ve derece arasındaki dönüşümler için toRadians ve toDegrees metotoları kullanılabilir. 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("value: ");
+		double value = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("sin(%f) = %f%n", value, Math.sin(Math.toRadians(value)));
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Math sınıfının min ve max metotları
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("b: ");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("min(%f, %f) = %f%n",a ,b ,Math.min(a, b));
+		System.out.printf("max(%f, %f) = %f%n",a ,b ,Math.max(a, b));
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Math sınıfının min ve max metotları metotları ile 3 tane sayının en kucuk v e en buyuk olanını bulma
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("b: ");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("c: ");
+		double c = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("min(%f, %f, %f) = %f%n",a ,b ,c, Math.min(Math.min(a, b), c));
+		System.out.printf("max(%f, %f, %f) = %f%n",a ,b ,c, Math.max(Math.max(a, b), c));
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfının min ve max metotları metotları ile 3 tane sayının en kucuk v e en buyuk olanını bulma
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("b: ");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		System.out.print("c: ");
+		double c = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("min(%f, %f, %f) = %f%n",a ,b ,c, MathUtil.min(a, b, c));
+		System.out.printf("max(%f, %f, %f) = %f%n",a ,b ,c, MathUtil.max(a, b, c));
+	}
+}
+
+class MathUtil{
+	public static double min(double a, double b, double c)
+	{
+		return Math.min(Math.min(a, b), c);
+	}
+	
+	public static double max(double a, double b, double c)
+	{
+		return Math.max(Math.max(a, b), c);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfının logXXX metotları
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("log(%f) = %f%n", a, Math.log(a));
+		System.out.printf("log10(%f) = %f%n", a, Math.log10(a));
+		System.out.printf("log1p(%f) = %f%n", a, Math.log1p(a));
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfının logXXX metotları
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("log(%f) = %f%n", a, Math.log(a));
+		System.out.printf("log10(%f) = %f%n", a, Math.log10(a));
+		System.out.printf("log1p(%f) = %f%n", a, Math.log1p(a));
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Math sınıfının logXXX metotları
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		
+		System.out.print("b: ");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("log(%f, %f) = %f%n", a, b, MathUtil.log(a, b));
+	}
+}
+
+
+class MathUtil{
+	public static double log(double a, double b) {
+		return Math.log10(b) / Math.log10(a);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Math sınıfının logXXX metotları
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("a: ");
+		double a = Double.parseDouble(kb.nextLine());
+		
+		System.out.printf("round(%f) = %d%n", a, Math.round(a));
+		System.out.printf("ceil(%f) = %.20f%n", a, Math.ceil(a));
+		System.out.printf("floor(%f) = %.20f%n", a, Math.floor(a));
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*----------------------------------------------------------------------------------------------------------------------,
+	Sabitler (literals, constants)
+	Program içerisinde doğrudan yazılan sayılara denir. Sabitlerin de türleri vardır. Derleyici sabitlerin türlerini 
+	tespit ederek işlem yapar.
+	
+	Sabitlerin türlerinin tespitine ilişkin detaylar:
+	- Sayı nokta içermiyorsa, sonuna bir ek almamışsa ve int türü sınırları içerisindeyse int türdendir. Sayı int türü
+	sınırları içerisinde değilse error oluşur. 
+	Örneğin: 100, 2000, 2000000000
+	
+	- Sayı nokta içermiyorsa ve sonuna L (küçük veya büyük) ekini almışsa long türdendir. Sayı long türü sınırları
+	dışındaysa error oluşur. 
+	Örneğin: 10L, 4000000000L
+	
+	Anahtar Notlar: Küçk harf L kullanımı 1(bir) rakamanına benzemesinden dolayı programlamada tercih edilmez. 
+	
+	- Java'da byte ve short türden sabitler yoktur
+	
+	- Sayı nokta içeriyorsa ve sonuna bir ek almamışsa double türdendir. Sayı double olarak ifade edilemiyor ise
+	error oluşur
+	Örneğin: 3.4, 6.7
+	
+	- Sayı nokta içersin ya da içermesin sonunda D (küçük ya da büyük) eki varsa double türdendir.
+	Örneğin: 3D, 10d, 30.56D
+	
+	- Sayı nokta içersin ya da içermesin sonunda F (küçük ya da büyük) eki varsa float türdendir.
+	Örneğin: 3F, 2f, 3.4F
+	
+	- boolean türden iki tane sabit vardır: true, false
+	
+	- char türden sabitler: İki tane tek tırnak karakteri arasında yazılan bir karakter, karakter tablosunda sıra 
+	numarası belirtir. Bu şekilde yazılan sabitlere "karakter sabitleri (character literals)" denir ve bu sabitler char
+	türdendir. İki tane tek tırnak karakteri arasında özel durumlar dışında birden fazla karakter yazımı geçersizdir. 
+	
+	Bazı karakterlerin klavyeden basılması doğrudan derleyici tarafından karakter olarak algılanamaz. Hatta bazı
+	karakteler "non-printable"'dır. Örneğin bir sonraki satıra geçme karkaterinin karakter sabiti doğrudan yazılamaz.
+	Bu tip bazı karakterler klavyeden doğrudan yazılamazlar. Bu tarz karakterlerin karakter sabitleri iki tane tek
+	tırnak içerisinde ters bölü karakteri ile onu takip eden özel bir karakter biçiminde yazılır. Bu şekilde yazılan
+	karakterlere "escape sequence" karakterler denir. Hatta bazı karakterler hem normal hem de ters bölü ile yazılabilirler:
+	Java'da desteklenen escape sequence karakterler şunlardır:
+	
+	'\n' -> line feed (LF) 
+	'\r' -> carriage return (CR)
+	'\t' -> horizontal tab
+	'\b' -> backspace
+	'\f' -> form feed
+	'\0' -> null karakter
+	'\"' -> double quote (optional)
+	'\'' -> single quote
+	'\\' -> back slash  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*
+ * char türden sabitler
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = 'D';
+		
+		System.out.println(c);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * iki tane tek tırnak arasında birden fazla karater yazımı özel durumlar dışında geçersizdir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = 'De'; //error
+		
+		System.out.println(c);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Line feed karater sabiti
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = '\n';
+		
+		System.out.printf("Marhaba");
+		System.out.print(c);
+		System.out.printf("Nasılsın ");
+		System.out.printf("Ali");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Carriage return karater sabiti: 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = '\r';
+		
+		System.out.printf("Marhabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.print(c);
+		System.out.printf("Nasilsin ");
+		System.out.printf("Ali");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Horizontal tab karater sabiti
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = '\t';
+		
+		System.out.printf("Merhaba");
+		System.out.print(c);
+		System.out.print(c);
+		System.out.print(c);
+		System.out.printf("Nasilsin ");
+		System.out.printf("Ali");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Backspace karater sabiti
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = '\b'; 	
+		
+		System.out.printf("Merhaba");
+		System.out.print(c);
+		System.out.printf("Nasilsin ");
+		System.out.printf("Ali");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Escape sequence karaterler "String Literal" içerisinde kendi anlamındadır
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Merhaba,\nNasılsın\nİyi misin?");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Escape sequence karaterler "String Literal" içerisinde kendi anlamındadır
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Merhaba,\rİyi misin?");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Escape sequence karaterler "String Literal" içerisinde kendi anlamındadır
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char ch1 = '"';
+		char ch2 = '\"';
+		
+		System.out.println(ch1);
+		System.out.println(ch2);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * İki tırnak karateri string atomu içerisinde ters bölü ile yazılmalıdır
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("\"Merhaba Ali, nasıl gidiyor\"");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Tek  tırnak karateri string atomu içerisinde dogrudan ya da ters bölü ile kullanılabilir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("'Merhaba Ali, nasıl gidiyor\'");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Tek  tırnak karater sabiti ters bölü ile yazılmalıdır
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char ch = '\'';
+		
+		System.out.println(ch);
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
