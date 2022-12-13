@@ -1,13 +1,16 @@
 /*
- * Tek  tırnak karater sabiti ters bölü ile yazılmalıdır
+ * ++ ve -- operatörlerinin operandlarının değişken olması gerekir. Aksi durumda error oluşur.
+ * 
  */
 package orhn;
 
 public class App {
 	public static void main(String [] args)
 	{
-		char ch = '\'';
+		int a;
 		
-		System.out.println(ch);
+		a = --2;//error
+		
+		
 	}
 }

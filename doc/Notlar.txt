@@ -3893,6 +3893,8 @@ public class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+13.12.2022 Salı
+
 
 /*
  * Tek  tırnak karater sabiti ters bölü ile yazılmalıdır
@@ -3910,188 +3912,1077 @@ public class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ * Escape karakterlerinden dolayı istenilen sonuç elde edilemez
+ */
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("C:\testdata\noname.txt");
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *yukarıdaki problem aşağıdaki gibi çözümlenir
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("C:\\testdata\\noname.txt");
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
-
+/*
+ *ters bölü karakterinden sonra özel karakterler dışında yazılan karakter error olusturur
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("C:\testdata\orhan.txt");
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
------------------------------------------------------------
------------------------------------------------------------
+/*
+ *\\\\192.168.1.21\\testdata\\orhan.txt yol ifadesi "String literal" içerisinde yazılması gerek
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("\\\\192.168.1.21\\testdata\\orhan.txt");
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  tek tırnak karakteri değildir -- backtick
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		char ch = '`';
+				
+		System.out.println(ch);
+		System.out.println("`Orhan OZTURK`");
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  Ters bölü ve u karakteri ile bir karakterin sıra numarası hexadecimal olarak tek tırnak içerisinde yazıldıgında
+ *  o karatere ilişkin karater sabiti yazılmış olur. Burada hexadecimal sayı kesinlikle iki byte olarak yani
+ *  4 tane hex digit olarak yazılmalıdır
+ */
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		char ch = '\u00CB';
+				
+		System.out.println(ch);
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
+/*
+ *  Ters bölü u ile yazılan karakter sabitleri "string literal" atomu içerisinde de kullanılabilir
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Orhan OZTURK : \u1788");
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  Ters bölü u ile yazılan karakter değişken isimlendirmede de kullanılabilir. Şüphesiz pratik değildir.
+ *  
+ */
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		int \u0041\u0042\u00CB = 10;
 
------------------------------------------------------------
------------------------------------------------------------
+		System.out.println(AB\u00CB);
+	}
+}
 
 
-
 -----------------------------------------------------------
 -----------------------------------------------------------
-
+/*
+ *  bir tamsayının ön eki yoksa bu durumda sabit "decimal" olarak ele alınır
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
 
------------------------------------------------------------
------------------------------------------------------------
+		System.out.println(a);
+	}
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  Bir tamsayı sabitinin önüne bitişik ıkarak sıfır ve x (buyuk ve kucuk farketmez) yazıldıgında ekten sonra gelen 
+ *  basamaklar  "hexadecimal" oalarak ele alınır
+ */
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 0xA;
 
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
+		System.out.println(a);
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  Bir tamsayı sabitinin önüne bitişik sıfır yazıldıgında ekten sonra gelen 
+ *  basamaklar  "octal" oalarak ele alınır
+ */
+package orhn;
 
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 012;
 
------------------------------------------------------------
------------------------------------------------------------
+		System.out.println(a);
+	}
+}
 
 
------------------------------------------------------------
------------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+/*
+ *  Bir tamsayı sabitinin önüne bitişik 0b yazıldıgında ekten sonra gelen basamaklar  "binary" oalarak ele alınır.
+ *  ikilik sistemde yazulan sabitler Java 7 ile eklendi.
+ */
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 0b1010;
 
+		System.out.println(a);
+	}
+}
 
------------------------------------------------------------
 -----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *  Bir tamsayı sabitinin önüne bitişik 0b yazıldıgında ekten sonra gelen basamaklar  "binary" oalarak ele alınır.
+ *  ikilik sistemde yazulan sabitler Java 7 ile eklendi.
+ */
+package orhn;
 
-
-
+public class App {
+	public static void main(String [] args)
+	{
+		short value = 0b11101;
+		
+		SensorUtil.out(value);
+		
+		value = 0x1D;
+		
+		SensorUtil.out(value);
+	}
+}
+
+class SensorUtil{
+	public static void out(short value)
+	{
+		System.out.printf("value:%04X%n", value);
+	}
+}
 -----------------------------------------------------------
 -----------------------------------------------------------
-
-
+/*
+ * Aşağıdaki örnekte SensorUtil sınıfının out metodu 16 tane pini olan bir elektronik devre için aldığı argüman 
+	değerine göre değerin bit'lerin karşılık gelen pinleri 1 ya da sıfır için "high" ya da "low" seviyeye çekiyor olsun.
+	Bu durumda böyle bir metodun alacağı sabit argümanın "binary" veya "hexadecimal" olarak yazılması okunabilirliliği
+	artırır. Ayrıca yazım kolaylığı da sağlar. Aşağıdaki demo örneği yukarıdaki senaryoya göre düşününüz   
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short value = 0b11101;
+		
+		SensorUtil.out(value);
+		
+		value = 0x1D;
+		
+		SensorUtil.out(value);
+	}
+}
+
+class SensorUtil{
+	public static void out(short value)
+	{
+		System.out.printf("value:%04X%n", value);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Gercekı sayıların üstel (bilimsel) gosterilişi
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 1.3E10;
+		double b = 1.3e10;
+		double c = 1.3E+10;
+		double d = 1.3e+10;
+		double e = 1.3E-10;
+		double f = 1.3e-10;
+		
+		
+		System.out.printf("a  = %f%n", a);
+		System.out.printf("b  = %f%n", b);
+		System.out.printf("c  = %f%n", c);
+		System.out.printf("d  = %f%n", d);
+		System.out.printf("e  = %.12f%n", e);
+		System.out.printf("f  = %.12f%n", f);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Gercekı sayıların üstel (bilimsel) gosterilişi
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double avogadroConstant = 6.02E23;
+		
+		System.out.println(avogadroConstant);
+		System.out.printf("%f%n", avogadroConstant);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Java 7 ile birlikte tamsayı ve gerçek sayı sabitleri içerisinde alttire karaterleri kullanılabilmektedir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 0xFC_AB_CD;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %X%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Java 7 ile birlikte tamsayı ve gerçek sayı sabitleri içerisinde alttire karaterleri kullanılabilmektedir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a;
+		
+		a = 5_456_123_000L;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %X%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * alttire karateri kullnaıldıgı yerde istenildigi kadar yazılabilir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a;
+		
+		a = 5_______________________________________8L;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %X%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * alttire karateri kullnaıldıgı yerde istenildigi kadar yazılabilir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a;
+		
+		a = 0b10101010_10101011_10101010_0011L;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %X%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * alttire karateri sabitin sonunda ve başında olamaz sentaks hatası
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = _67; //error
+		b = 43_; //error
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * alttire karateri sayı nokta içerisiyorsa noktadan hemen önce veya sonra alttire geçilemez
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 6_.4; //error
+		b = 4._4; //error
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *  alttire karateri sabitin sonunda ve başında olamaz sentaks hatası
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a, b;
+		
+		a = 5000000000L_; //error
+		b = 5000000000_L; //error
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * alttire karateri sabit önündeki eklerdeb önce sonra yada ekler arasına konulamaz
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b, c;
+		
+		a = 0x_AB; //error
+		b = _0xAB; //error
+		c = 0_xAB; //error
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * alttire karateri octal sabitler için önek ile (sıfır ile) ilk basamak arasında geçerlidir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 0_12;
+		
+		System.out.println(a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Gerçek sayı sabitlerinin tamsayı kısmının degeri sıfır ise noktadan nce sıfır yazılmayabilir.
+ * Benze şekilde sayının noktadan sonraki kısmının tamamı sıfır ise yibe sıfır noktadan sonra yazılmayabilir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a, b;
+		
+		a = .3;
+		b= 3.;
+		
+		System.out.printf("a = %f%n", a);
+		System.out.printf("b = %f%n", b);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Yalnızca sabitlerden ve operatörleden oluşan yani içerisinde değişken olmayan ifadelere "sabit ifadesi (constant expression)" denir.
+ * Buy anlamda sabit de tek başına bir sabit ifadesidir.
+ * 
+ * 
+ * Not: İleride aslında sabit ifadesi olark kullanılabilen değişkenler de göreceğiz. Bu tarz değişknler de
+ * bir ifade içersinde sabit olarak ele alınır.
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		b = 20;
+		
+		System.out.println(NumberUtil.add(a - 2, b)); //argümanların hiçbiti sabit ifadesi değil
+		System.out.println(NumberUtil.add(10 + 5, 89 - 8)); //argümanların hepsi sabit ifadesi 
+	}
+}
+
+class NumberUtil{
+	public static int add(int a, int b) {
+		return a + b;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Derleyiciler sabit ifadelerinin değerlini hesaplayarak sonucu "byte code" a yazarlar. Bu optimizasyona
+ * "constant folding optimizasyonu" denir. Bu sebeple aşağıdaki kodda 1000L * 60 * 60 * 24 * 365 ifadesinin
+ * değeri byte code'a 31536000000 şeklinde yazılır. Aşağıdaki örnekte bilgi kaybı olmaması için 1000 sabitini 
+ * long olarka yazılmıstır. Konuya ileride değinecez.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long divider = 1000L * 60 * 60 * 24 * 365; //byte code --> long divider = 31536000000;
+		
+		System.out.println(divider);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+			Operatörler
+			
+	Operatörler: Bir işleme yol açan ve işlem sonucunda bir değer üreten atomlara operatör denir. Operatör ile
+	birlikte işleme giren ifadelere "operand" denir.
+	
+	Operatörleri 3(üç) biçimde sınıflandırılabilir:
+	1. İşlevlerine göre sınıflandırma
+		- Aritmetik (arithmetic) operatörler
+		- Karşılaştırma (comparison) operatörleri
+		- Mantıksal (logical) operatörler
+		- Bitsel (bitwise) operatörler
+		- Özel amaçlı (special purpose) operatörler	
+	2. Operand sayısına göre sınıflandırma
+		- Tek operandlı (unary)
+		- İki operandlı (binary)
+		- Üç operandlı (ternary)	
+	3. Operatörün konumuna göre sınıflandırma
+		- önek (prefix)
+		- araek (infix)
+		- sonek (postfix)
+		
+	Operatörün kısıtı (constraint)
+	Operatörün ürettiği değer (product value)
+	Operatörün yan etkisi (side effect) var mı?
+	Operatörün önceliği (precedence):
+	
+	a = b + c * d ifadesinin derleyici tarafından üretilen kodda yapılma sırası
+	
+	i1: c * d
+	i2: b + i1
+	i3: a = i2
+	
+	a = (b + c) * d ifadesinin derleyici tarafından üretilen kodda yapılma sırası
+	
+	i1: b + c
+	i2: i1 * d
+	i3: a = i2	
+	
+	a = b + c - d ifadesinin derleyici tarafından üretilen kodda yapılma sırası
+	
+	i1: b + c
+	i2: i1 - d
+	i3: a = i2
+		
+	Not: Java programcısı bir operatör için yukarıdaki durumları bilmelidir. Yani bir operatörün öğrenilmesi
+	o operatör için yukarıdaki durumların bilinmesi anlamına gelir.	
+	
+	Not: Bazı operatörler öncelik kuralına doğrudan uymazlar. Bu tarz operatörlerin de uymadıkları durum için
+	nasıl çalıştıklarının bilinmesi gerekir. Şüphesiz bu operatörlerin neden öncelik kurallarına uymadıklarının da 
+	gerekçeleri (rationale) bulunur.
+	
+	
+	Not: Operatör öncelik tablosu gruplandırma olarak düşünülebilir. Yani operatör öncelik tablosundaki öncelik
+	durumlarının yapılış biçimine ilişkin istisnaları olabilir. Şüphesiz bunun da bilinmesi gerekir. Operatör öncelik
+	tablosu algısal bakımdan kolaylaştırmak için vardır ve önemlidir.	
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Artimetik 4 işlem ve mod operatörleri iki operandlı (binary) ve araek (infix) operatörlerdir.
+ * Bu operatörlerin ürettileri değer işlemin sonucunda elde edilen değerdir. 
+ * Bu operatörlerin yan etkisi (side effect) yoktur.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		
+		System.out.printf("%d + %d = %d%n", a, b, a + b);
+		System.out.printf("%d - %d = %d%n", a, b, a - b);
+		System.out.printf("%d * %d = %d%n", a, b, a * b);
+		System.out.printf("%d / %d = %d%n", a, b, a / b);
+		System.out.printf("%d %% %d = %d%n", a, b, a % b);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Mod operatörünün birinci operandı negatif ise sonuç negatif çıkar. İkinci operandının negatif olmasının bir önemi yoktur.
+ * Başka bir deyile mod operatörünün sonucunun işareti birinci operandının işareti ile aynıdıur.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("%d %% %d = %d%n", a, b, a % b);
+		
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Çalışma: Parametresi ile aldığı en fazla 3 basamaklı int türünden bir sayının basamakları toplamına
+ * geri dönen digitsSum isimli metodu NumberUtil sınıfı içerisinde yazınız. Metot aldıgı argümanın en fazla
+ * 3 basamaklı olup olmadıgını kontrol etmeyecektir. Basamaklar toplamı pozitif olarak döndürecektir.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		DigitsSumTest.run();
+	}
+}
+
+class DigitsSumTest{
+	public static void run() {
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		System.out.printf("%d sayısının basamakları toplamı = %d%n", val, NumberUtil.digitsSum(val));
+	}
+}
+
+class NumberUtil{
+	public static int digitsSum(int val) {
+		int a, b, c;
+		
+		a = val / 100;
+		b = val / 10 % 10;
+		c = val % 10;
+		
+		return Math.abs(a + b + c);
+	}
+	
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * işaret - aritmetik operatörü tek operandlı (unary) ve önek (prefix) durumunda bir operatördür. 
+ * Operatörünün yan etkisi yoktur.
+ * Operaötr operandına ilişkin ifadenin degerinin tersini üretir.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		int b;
+		
+		b = -a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * işaret + aritmetik operatörü tek operandlı (unary) ve önek (prefix) durumunda bir operatördür. 
+ * Operatörünün yan etkisi yoktur.
+ * Operaötr operandına ilişkin ifadenin degerini üretir.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		int b;
+		
+		b = +a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * işaret - operaörünün seviyesinde bulunan operaötlerin sagdan sole (right associative)
+ * ele alınmasından dolayı geçerlidir.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		int b;
+		
+		b = a - - - - - - - - - - 2;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * geçerli ifade
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a =  - - - - - - - - - - 10;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * ++ operatörü tek operandlı ve hem prefix hemde postfix olarak kullanılabilen bir operatördür.
+ * 
+ * bu operatör prefix ya da postfix her iksi içinde operandına ilişkin değişkenin degeri 1 artırır.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 10;
+		
+		++a; // a = a + 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * ++ operatörü tek operandlı ve hem prefix hemde postfix olarak kullanılabilen bir operatördür.
+ * 
+ * bu operatör prefix ya da postfix her iksi içinde operandına ilişkin değişkenin degeri 1 artırır.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 10;
+		
+		a++; // a = a + 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * ++ operatörü prefix kullanımında ürettiği deger yani işleme giren deger arttırılmıs degerdir
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = ++a; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * ++ operatörü postfix kullanımında ürettiği deger yani işleme giren deger arttırılMAmıs degerdir
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = a++; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * -- operatörü tek operandlı ve hem prefix hemde postfix olarak kullanılabilen bir operatördür.
+ * 
+ * bu operatör prefix ya da postfix her iksi içinde operandına ilişkin değişkenin degeri 1 azaltma.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		--a; // a = a - 1; 
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * -- operatörü tek operandlı ve hem prefix hemde postfix olarak kullanılabilen bir operatördür.
+ * 
+ * bu operatör prefix ya da postfix her iksi içinde operandına ilişkin değişkenin degeri 1 azaltma.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		a--; // a = a - 1; 
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * -- operatörü prefix kullanılmaktadır degeri o an azaltmıstır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = --a; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * -- operatörü postfix kullanılmaktadır degeri o an azaltMAmıstır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = a--; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * ekrana ne bastırır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = a-- + ++a; 
+		
+		System.out.printf("a = %d%n", a); // 10
+		System.out.printf("b = %d%n", b); //21 //22 //20
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * ekrana ne bastırır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 3;
+		
+		b = a-- + ++a * a; //3 + 3 * 3 = 12
+		
+		System.out.printf("a = %d%n", a); // 3
+		System.out.printf("b = %d%n", b); //12
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * ekrana ne bastırır
+ * Aşağıdaki örnekte ++ ve -- operatörleri ve operandları aynı ifadede kullanılmıştır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b;
+		
+		a = 10;
+		
+		b = a-- + a-- + a; //10 + 9 + 8
+		
+		System.out.printf("a = %d%n", a); // 8
+		System.out.printf("b = %d%n", b); //27
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Derleyici yukarıdan aşağıya ve soldan sağa olmak üzere anlamlı en uzun ifadeyi
+ * alacak şeklilde atomlarına ayırma işlemi yaparak (maximum munch). 
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		int b = 11;
+		int c;
+		
+		c = a+++b; //a++ + b 
+		
+		System.out.printf("a = %d%n", a); 
+		System.out.printf("b = %d%n", b); 
+		System.out.printf("c = %d%n", c); 
+	}
+}
+
+	Not: Okunabilirlik/algılanabilirlik açısından tek operandlı operatörleri genel olarak operandına
+	bitişik biçimde yazacağız. İki operandlı operatörleri de özel ama önemli operatörler dışında operandları ile operatör
+	arasında yalnızca bir tane "space" karakteri olacak şekilde yazacağız
+	
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * ++ ve -- operatörlerinin operandlarının değişken olması gerekir. Aksi durumda error oluşur.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = --2;//error
+		
+		
+	}
+}
 -----------------------------------------------------------
 -----------------------------------------------------------
 
