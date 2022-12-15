@@ -4985,195 +4985,1598 @@ public class App {
 }
 -----------------------------------------------------------
 -----------------------------------------------------------
+15.12.2022 Perşembe
+
+/*
+ * temel karsılastırma operatorleri 6 tanedir: == , != , <, >, <= , >=
+ * bu operatorlerin hepsi iki operandlı ve araek durumundadır.
+ * Bu operatörlerin yan etkisi yoktur.
+ * Bu operatörlerin ürettiği deger boolean türdendir. 
+ * Karşılaştırmanın sonucu dogru ise true, yanlış ise false degerini üretirler.
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+			
+		
+		System.out.printf("%d > %d -> %b%n", a, b, a > b);
+		System.out.printf("%d < %d -> %b%n", a, b, a < b);
+		System.out.printf("%d >= %d -> %b%n", a, b, a >= b);
+		System.out.printf("%d <= %d -> %b%n", a, b, a <= b);
+		System.out.printf("%d == %d -> %b%n", a, b, a == b);
+		System.out.printf("%d != %d -> %b%n", a, b, a != b);
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Metot çağırma operatörü
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int result;
+		
+		result = NumberUtil.add(10, 20) * 3;
+		
+		System.out.printf("result = %d%n", result);
+	}
+}
+
+class NumberUtil{
+	public static int add(int a, int b) 
+	{
+		return a + b;
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Java da void bir metot çağrısı "void bir ifade (expression)" olarak ele alınır
+ * 
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NumberUtil.print(10, 20);
+	}
+}
+
+class NumberUtil{
+	public static void print(int a, int b) 
+	{
+		System.out.printf("%d, %d%n", a, b);
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Mantıksal Operatörler 3 tanedir: &&(AND), || (OR), !(NOT)
+ * 
+ * && ve || operatörleri iki operandlı araek durumunda operatörlerdir. ! operatörü tek operandlı önek
+ * durumunda bir operatördür. Bu üç operatörün de operandları boolean türden olmalıdır. Bu üç operatürünü ürettiği
+ * deger de boolean türdendir. Bu operatörler Matematik'teki mantıksal operatörlere karşılık gelir
+ * 
+ */
+
+/*
+ * && ve || operatörlerinin doğruluk tablosu aşağıdaki gibidir:
+	
+	op1			op2		op1 && op2		op1 || op2
+	T			T			T				T
+	T			F			F				T
+	F			T			F				T
+	F			F			F				F
+ * 
+ * 
+ * 		Yukarıdaki tabloya göre şu cümleler söylenebilir:
+	"Mantıksal AND işlemi için, en az biri yanlışsa sonuç yanlıştır"
+	"Mantıksal OR işlemi için, en az biri doğruysa sonuç doğrudur"
+ */
+
+/*
+ * && operatörü
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() && Sample.bar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return false;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return true;
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Mantıksal Operatörler 3 tanedir: &&(AND), || (OR), !(NOT)
+ * 
+ * && ve || operatörleri iki operandlı araek durumunda operatörlerdir. ! operatörü tek operandlı önek
+ * durumunda bir operatördür. Bu üç operatörün de operandları boolean türden olmalıdır. Bu üç operatürünü ürettiği
+ * deger de boolean türdendir. Bu operatörler Matematik'teki mantıksal operatörlere karşılık gelir
+ * 
+ */
+
+/*
+ * && ve || operatörlerinin doğruluk tablosu aşağıdaki gibidir:
+	
+	op1			op2		op1 && op2		op1 || op2
+	T			T			T				T
+	T			F			F				T
+	F			T			F				T
+	F			F			F				F
+ * 
+ * 
+ * 		Yukarıdaki tabloya göre şu cümleler söylenebilir:
+	"Mantıksal AND işlemi için, en az biri yanlışsa sonuç yanlıştır"
+	"Mantıksal OR işlemi için, en az biri doğruysa sonuç doğrudur"
+ */
+
+/*
+ * || operatörü
+ * 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return true;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return true;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ * Mantıksal Operatörler 3 tanedir: &&(AND), || (OR), !(NOT)
+ * 
+ * && ve || operatörleri iki operandlı araek durumunda operatörlerdir. ! operatörü tek operandlı önek
+ * durumunda bir operatördür. Bu üç operatörün de operandları boolean türden olmalıdır. Bu üç operatürünü ürettiği
+ * deger de boolean türdendir. Bu operatörler Matematik'teki mantıksal operatörlere karşılık gelir
+ * 
+ */
+
+/*
+ * && ve || operatörlerinin doğruluk tablosu aşağıdaki gibidir:
+	
+	op1			op2		op1 && op2		op1 || op2
+	T			T			T				T
+	T			F			F				T
+	F			T			F				T
+	F			F			F				F
+ * 
+ * 
+ * 		Yukarıdaki tabloya göre şu cümleler söylenebilir:
+	"Mantıksal AND işlemi için, en az biri yanlışsa sonuç yanlıştır"
+	"Mantıksal OR işlemi için, en az biri doğruysa sonuç doğrudur"
+ */
+
+/*
+ * || operatörü
+ * || operatörünün kısa devre davranışı (short circuit behavior). Kısa devre davranışı doğru sonuca en çabuk biçimde 
+	ulaşacak şekilde çalışmaktır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return true;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return true;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ * Mantıksal Operatörler 3 tanedir: &&(AND), || (OR), !(NOT)
+ * 
+ * && ve || operatörleri iki operandlı araek durumunda operatörlerdir. ! operatörü tek operandlı önek
+ * durumunda bir operatördür. Bu üç operatörün de operandları boolean türden olmalıdır. Bu üç operatürünü ürettiği
+ * deger de boolean türdendir. Bu operatörler Matematik'teki mantıksal operatörlere karşılık gelir
+ * 
+ */
+
+/*
+ * && ve || operatörlerinin doğruluk tablosu aşağıdaki gibidir:
+	
+	op1			op2		op1 && op2		op1 || op2
+	T			T			T				T
+	T			F			F				T
+	F			T			F				T
+	F			F			F				F
+ * 
+ * 
+ * 		Yukarıdaki tabloya göre şu cümleler söylenebilir:
+	"Mantıksal AND işlemi için, en az biri yanlışsa sonuç yanlıştır"
+	"Mantıksal OR işlemi için, en az biri doğruysa sonuç doğrudur"
+ */
+
+/*
+ * && operatörü
+ * && operatörünün kısa devre davranışı (short circuit behavior). Kısa devre davranışı doğru sonuca en çabuk biçimde 
+	ulaşacak şekilde çalışmaktır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return false;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return true;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	&& ve || operatörlerinde doğru sonuca en kısa yoldan ulaşabilmek için (yani kısa devre davranışı için) ifadenin
+	önce sol tarafı yapılır. Yani bu operatörler işlem sırasında işlem önceliğine uymazlar. Ancak işlem önceliğine
+	uyulursa, yani matematiksel olarak (ya da da kabaca kağıt üzerinde) elde edilen sonucu verirler. Şu cümle unutulmamalıdır:
+	"&& ve || operatörleri doğru sonuca en kısa yoldan erişirler". Yani derleyici bu operatörler için buna yönelik kod
+	üretir. 
+	
+	Aşağıdaki örnekte && operatörü || operatöründen yüksek öncelikli olmasına karşın önce || işlemi yapılır. Ancak && 
+	operatörünün önceliğine göre işlem yapıldığında elde edilen sonuncun aynısı elde edilir 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar() && Sample.tar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return true;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return false;
+	}
+	
+	public static boolean tar() 
+	{
+		System.out.println("tar");
+		return false;
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Aşağıdaki örnekte işlem sırası ile operatörlerin öncelik sırası aynıdır. Yine en soldaki önce yapılır. 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() && Sample.bar() || Sample.tar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return true;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return false;
+	}
+	
+	public static boolean tar() 
+	{
+		System.out.println("tar");
+		return false;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Bitsel AND (&) ve bitsel OR (|) operatörleri tamsayılar ile kullanıldığında karşılıklı bit değerlerini işleme
+	sokarak değer üretirler. Bu operatörler özel olarak boolean türden ifadeler ile kullanıldıklarında kısa devre 
+	davranışı olmayan AND ve OR operatörleri olarak düşünülmelidir. Yine bu operatörler için de en soldaki ifade önce
+	yapılır. 
+	
+	Aşağıdaki örnekte && ve || operatörlerleri kullanıldığında elde edilen sonucun aynısı üretilir. Ancak tüm metotlar
+	çağrılır
+ */
+
+/*
+logic and &&
+bitsel and &
+*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean result;
+		
+		result = Sample.foo() | Sample.bar() & Sample.tar();
+		
+		System.out.printf("reuslt = %b%n", result);
+	}
+}
+
+class Sample{
+	public static boolean foo() 
+	{
+		System.out.println("foo");
+		return true;
+	}
+	
+	public static boolean bar() 
+	{
+		System.out.println("bar");
+		return false;
+	}
+	
+	public static boolean tar() 
+	{
+		System.out.println("tar");
+		return false;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Bitsel AND (&) ve bitsel OR (|) operatörleri tamsayılar ile kullanıldığında karşılıklı bit değerlerini işleme
+	sokarak değer üretirler. Bu operatörler özel olarak boolean türden ifadeler ile kullanıldıklarında kısa devre 
+	davranışı olmayan AND ve OR operatörleri olarak düşünülmelidir. Yine bu operatörler için de en soldaki ifade önce
+	yapılır. 
+	
+	Aşağıdaki örnekte && ve || operatörlerleri kullanıldığında elde edilen sonucun aynısı üretilir. Ancak tüm metotlar
+	çağrılır
+ */
+
+/*
+logic and &&
+bitsel and &
+*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10; //00000000000000000000000000001010
+		int b = 11; //00000000000000000000000000001011
+		int c;
+		
+		c = a & b;  //00000000000000000000000000001010
+		
+		System.out.printf("c = %d%n", c);
+		
+		c = a | b;  //00000000000000000000000000001011
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	& ve | operatörleri tamsayılar ile kullanıldığında karşılıklı bit değerlerinin işleme sokarlar. 
+	Aşağıdaki örnek durumu anlatmak için yazılmıştır. Bitsel operatörlere ilişkin ayrıntılar kullanımları burada
+	ele alınmayacaktır 
+ */
+
+/*
+logic and &&
+bitsel and &
+*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10; //00000000000000000000000000001010
+		int b = 11; //00000000000000000000000000001011
+		int c;
+		
+		c = a & b;  //00000000000000000000000000001010
+		
+		System.out.printf("c = %d%n", c);
+		
+		c = a | b;  //00000000000000000000000000001011
+		
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Mantıksal DEĞİL (logical NOT) operatörünün doğruluk tablosu
+	
+	op			!op
+	T			 F
+	F			 T
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean flag = true;
+		
+		flag = !flag;
+		
+		System.out.printf("flag = %b%n", flag);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Mantıksal DEĞİL (logical NOT) operatörünün doğruluk tablosu
+	
+	op			!op
+	T			 F
+	F			 T
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean flag = true;
+		boolean a = true;		
+		
+		a = !flag;
+		
+		System.out.printf("flag = %b%n", flag);
+		System.out.printf("a = %b%n", a);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Atama (=) operatörü iki operandlı araek durumunda bir operatördür. Bu operatörün birinci operandı değişken olmalıdır.
+	Operatörün şüphesiz yan etkisi vardır. Bu operatör sağdan sola (right associative) öncelikli gruptadır. Atama operatörünün
+	ürettiği değer ikinci operandına ilişkin değerdir
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a, b, c;
+		
+		a = b = c = 10;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Aşağıdaki örnekte atama operatörünün operandının değişken olmamasından dolayı error oluşur
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 2, b = 3, c = 5;
+		
+		(a = b) = c = 10;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Aşağıdaki örnekte atama operatörünün operandının değişken olmamasından dolayı error oluşur
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 2, b = 3, c = 5;
+		
+		a = (b = c) = 10; //error
+		
+
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Aşağıdaki örnekte parantezin konması ve konmaması aynı anlamdadır. Çünkü atama operatörü sağdan sola önceliklidir
+ */
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 2, b = 3, c = 5;
+		
+		a = b = (c = 10);
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	İşlemli atama operatörlerinin genel biçimi:
+	
+	 <ifade1> <op>= <ifade2> ifadesinin yaklaşık karşılığı
+	 
+	 <ifade1> = <ifade1> <op> <ifade2>
+	 
+	 a += b; //a = a + b;
+	 a -= b; //a = a - b;
+	 a *= b; //a = a * b;
+	 a /= b; //a = a / b;
+	 a %= b; //a = a % b;
+	 
+	 İşlemli atama operatörlerinin ürettiği değer yine birinci operandına atanan değerdir
+	 
+	 Not: Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıdaki gibi değildir. Bu konu
+	 ileride ele alınacaktır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10, b = 20;
+		
+		a += b;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	İşlemli atama operatörleri ifadeleri daha basit yazmak için tercih edilebilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10, b = 20, c = 30;
+		
+		a *= b + c; //a = a * (b + c)
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	 örnekte aynı seviyede olan *= ve += operatörleri "right associative" olduğunda işlem sağdan sola doğru
+	yapılır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10, b = 20, c = 30;
+		
+		a *= b += c; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("c = %d%n", c);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Java 'da etkisiz ifadeler genel olarak error olusturur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		
+		a - 2;
+		
+		System.out.println(a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	ornekte error olusturmaz
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		Sample.foo();
+	}
+}
+
+class Sample{
+	public static void foo() {
+		
+	}
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Noktalı virgül (;) sonlandırıcıdır (terminator). Genel olarak ifadeleri ayırmak için kullanılır. Java'da noktalı
+	virgülden başka sonlandırıcı karakter yoktur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		++a;System.out.printf("a = %d%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Aşağıdaki örnekte ++ operatörünün ürettiği değer artırılmamış değer olduğundan a sonuçta 10 olur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		a = a++;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Aşağıdaki örnekte ++ operatörünün ürettiği değer artırılmış değer olduğundan a sonuçta 11 olur. Direk ++ uygulandığındaki
+	değerle aynıdır. Bu anlamda aşağıdaki kodun etkisi yoktur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		a = ++a;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+	Deyimler (Statements):
+	Bir programın çalıştırılan parçalarına denir. Bir program deyimlerin çalıştırılmasıyla çalışır. Java'da deyimler
+	5(beş) gruba ayrılır:
+	1. Basit deyimler (simple statements)
+	2. Bileşik deyimler (compound statements)
+	3. Bildirim deyimleri (declaration statements)
+	4. Kontrol deyimleri (control statments)
+	5. Boş deyim (null/empty statements)
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+ *	Basit deyim
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10; 
+		++a; //basit deyim
+		System.out.printf("a = %d%n", a); //basit deyim
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bileşik deyim
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10; 
+		{//bileşik deyim
+			++a; 
+			//...
+			{
+				//..
+				System.out.printf("a = %d%n", a); //basit deyim
+			}
+		}
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Bildirim deyim
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;  //bildirim deyim 
+		int b; //bildirim deyimi	
+		
+		//..
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+ *	Boş deyim. boş deyimin kullanıs durumları ileride ele alnıacak
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a; ;;;;;;
+		//..
+		
+		;;;;;;;
+		;;
+		;
+		;
+		;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	if deyiminin genel biçimi:
+	if (<boolean türden ifade>)
+		<deyim>
+	[
+	else
+		<deyim>
+	}
+	]
+	
+	if deyimi, varsa else kısmı ile birlikte tek bir deyimdir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if (val % 2 == 0) {
+			System.out.println("Çift sayı girdiniz");	
+		} else {
+			System.out.println("Tek sayı girdiniz");
+		}
+		
+		System.out.println("Ali Tekrar yapiyormusun");
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	if deyiminde bileşik deyimi kullanımı
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if (val % 2 == 0) { 
+			System.out.println("Çift sayı girdiniz");
+			val /= 2;
+	    }else
+			System.out.println("Tek sayı girdiniz");
+			val *= 2;
+		
+		System.out.println("Ali Tekrar yapiyormusun");
+		System.out.printf("val = %d%n", val);
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	else kısmı olmayan if edyimi
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if (val % 2 == 0)
+			System.out.println("Çift sayı girdiniz");
+		
+		System.out.println("Ali Tekrar yapiyormusun");
+		System.out.printf("val = %d%n", val);
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	if deyiminin parantezi sonuna yanlışlıkla noktalı virgül konması durumu
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if (val % 2 == 0);
+			System.out.println("Çift sayı girdiniz");
+			val /= 2;
+			
+		System.out.printf("val = %d%n", val);
+		System.out.println("Ali Tekrar yapiyormusun");
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki örnekte else bir if deyimine ait olmadığından error oluşur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		if (val % 2 == 0)
+			;
+			val /= 2;
+		else
+			val *= 2; 
+			
+		
+		System.out.printf("val = %d%n", val);
+		System.out.println("Ali Tekrar yapiyormusun");
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	Aşağıdaki örnekte else kısmı içteki if deyimine aittir (dangling else)
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		if (val > 0)
+			if(val % 2 == 0)
+				System.out.println("Pozitif ve çift bir sayı girdiniz : ");
+			else
+				System.out.println("Pozitif bir sayi girmelisiniz");
+			
+		System.out.println("Ali Tekrar yapiyormusun");
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	Aşağıdaki örnekte else kısmı içteki if deyimine aittir (dangling else)
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		if (val > 0)
+			if(val % 2 == 0)
+				System.out.println("Pozitif ve çift bir sayı girdiniz : ");
+			else
+				System.out.println("teksayi sayı girdiniz");
+		else
+			System.out.println("Pozitif bir sayi girmelisiniz");
+		
+		System.out.println("Ali Tekrar yapiyormusun");
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	if deyiminin parantezinde boolean türden ifadeler için == ve != operatörleri kullanılması iyi bir teknik değildir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		Util.printEventStatus(val % 2 == 0);
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class Util{
+	public static void printEventStatus(boolean even) 
+	{
+		if(even)//if(even == true)
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	if deyiminin parantezinde boolean türden ifadeler için == ve != operatörleri kullanılması iyi bir teknik değildir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		Util.printEventStatus(val % 2 == 0);
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class Util{
+	public static void printEventStatus(boolean even) 
+	{
+		if(even)//if(even != false)
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki örnekte isEven metodunda if deyiminin else kısmına gerek yoktur. Çünkü akış return deyimine geldiğinde
+	metot sonlanır yani isEven içerisinde bir sonraki deyime geçmez. Bu durumda else yazılması iyi bir teknik değildir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		Util.printEventStatus(NumberUtil.isEven(val));
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class Util{
+	public static void printEventStatus(boolean even) 
+	{
+		if(even)
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		if(a % 2 == 0)
+			return true;
+		else 
+			return false;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	yukarıdaki kodun iyi  teknikte yazılmış hali
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		Util.printEventStatus(NumberUtil.isEven(val));
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class Util{
+	public static void printEventStatus(boolean even) 
+	{
+		if(even)
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		if(a % 2 == 0)
+			return true;
+		 
+		return false;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	yukarıdaki kodun daha iyi  teknikte yazılmış hali
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		
+		Util.printEventStatus(NumberUtil.isEven(val));
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class Util{
+	public static void printEventStatus(boolean even) 
+	{
+		if(even)
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		return a % 2 == 0;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	Aşağıdaki örnekte geri dönüş değeri boolean olan bir metot çağrısı if deyiminde koşul ifadesi olarak kullanılmıştır 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(NumberUtil.isEven(val))
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		return a % 2 == 0;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki örnekte geri dönüş değeri boolean olan bir metot çağrısı if deyiminde koşul ifadesi olarak kullanılmıştır 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(!NumberUtil.isEven(val))
+			System.out.println("Çift sayi");
+		else
+			System.out.println("Tek sayi");
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		return a % 2 == 0;
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki örnekte isOdd metodu için kod tekrarı yapılmadığına yani işi yapan başka bir metodun çağrıldığına dikkat ediniz.
+	Yazılım geliştirmede "ZORUNLU OLMADIKÇA" kod tekrarı yapılmaması gerekir. Bu kavrama "DO NOT REPEAT YOURSELF" de denir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		System.out.println(NumberUtil.isEven(val));
+		System.out.println(NumberUtil.isOdd(val));
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+class NumberUtil{
+	public static boolean isEven(int a) 
+	{
+		return a % 2 == 0;
+	}
+	public static boolean isOdd(int a) 
+	{
+		return !isEven(a);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki *** ile belirtilen if deyimi else kısmı ile birlikte tek bir deyimdir. Bu if deyiminin else kısmında 
+	başka bir if deyimi vardır
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(val > 0)//***
+			System.out.printf("%d sayısı pozitiftir%n", val);
+		else
+			if(val == 0)
+				System.out.println("Sıfır sayısını girdiniz");
+			else
+				System.out.printf("%d sayısı negatiftir%n", val);
+		
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Yukarıdaki örnek daha okunabilir/algılanabilir olarak aşağıdaki gibi yazılabilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(val > 0)//***
+			System.out.printf("%d sayısı pozitiftir%n", val);
+		else if(val == 0)
+			System.out.println("Sıfır sayısını girdiniz");
+		else
+			System.out.printf("%d sayısı negatiftir%n", val);
+		
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*
+	Aşağıdaki koşullar ayrık koşullardır. Bu durumda kod doğu çalışsa bile aşağıdaki gibi yazılmamalıdır. else-if
+	biçiminde yazılması (yukarıdaki gibi) hem okunabilirdir hem de gereksiz yere kontrol edilmesi gibi durumlar oluşmaz.
+	Aşağıdaki örnek şüphesiz kolay anlaşılırdır. Ancak büyük projelerde koşulların ayrık olup olmadığının anlaşılması
+	aşağıdaki gibi bir yazımda zaman alabilir
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(val > 0)//***
+			System.out.printf("%d sayısı pozitiftir%n", val);
+		if(val == 0)
+			System.out.println("Sıfır sayısını girdiniz");
+		if(val < 0)
+			System.out.printf("%d sayısı negatiftir%n", val);
+		
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	yukarıdaki kod böyle yazılmalıydı if lerin birbiri ile ilişkili oldugundan 
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(val > 0)//***
+			System.out.printf("%d sayısı pozitiftir%n", val);
+		else if(val == 0)
+			System.out.println("Sıfır sayısını girdiniz");
+		else if(val < 0)
+			System.out.printf("%d sayısı negatiftir%n", val);
+		
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+/*
+	Aşağıdaki koşullar ayrık oldugunda örnek özelinde else-if biçiminde kullanılması yanlış olur
+ */
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int val = Integer.parseInt(kb.nextLine());
+		
+		if(val > 6)
+			System.out.printf("val > 6%n");
+		if(val > 11)
+			System.out.println("val > 11%n");
+		if(val > 21)
+			System.out.printf("val > 21%n", val);
+		
+		
+		System.out.println("Tekrar yapiyormusun ALiiii");
+
+	}
+}
 
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
-
-
 
