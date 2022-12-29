@@ -7994,77 +7994,1358 @@ public class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*
+ *  for döngüsü ile sonsuz döngü oluşturmak için okunabilirlik/algılanabilirlik açısından 3 kısmın da boş bırakılması 
+	iyi bir tekniktir
+ */
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		for(;;)
+			;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+    Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının basamak sayısını döndüren countDigits isimli metodu 
+	 NumberUtil isimli sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		CountDigitisTest.run();		
+	}
+}
+
+class CountDigitisTest{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+					
+			System.out.printf("%d sayısının basamak sayısı : %d%n", val, NumberUtil.countDigits(val));
+		
+			if(val == 0) {
+				System.out.println("Ali Tekrarlar nasıl gidiyor?");
+				return;
+			}
+		}		
+	}
+}
+
+class NumberUtil{
+	public static int countDigits(int val) 
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			val /= 10;
+			
+		} while (val != 0);
+		
+		return count;
+	}
+}
+
+
+/**********************************************************************************************
+    Sınıf Çalışması: Parametresi ile aldığı int türden a ve b değerleri için a'nın b-inci kuvvetini döndüren pow isimli
+	 metodu NumberUtil sınıfı içerisinde yazınız.
+	 Açıklamalar:
+	 - Math sınıfının pow metodu kullanılmayacaktır
+	 - Metot negatif b değerleri için 1(bir) değerine geri dönecektir
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		PowTest.run();		
+	}
+}
+
+class PowTest{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Taban sayısı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+					
+			System.out.print("Üst sayısı giriniz:");
+			int b = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("pow(%d, %d) = %d%n", a, b, NumberUtil.pow(a, b));
+		
+			if(a == 0) {
+				System.out.println("Ali Tekrarlar nasıl gidiyor?");
+				return;
+			}
+		}		
+	}
+}
+
+class NumberUtil{
+	public static int pow(int a, int b) 
+	{
+		int result = 1;
+		
+		for(int i = 0; i < b; i++)
+			result *= a;
+		
+		return result;
+		
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong 
+	 isimli metodu NumberUtil sınıfı içerisinde yazınız.
+	 
+	 Açıklamalar:
+	 - Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya Armstrong
+	 sayısı denir. Örneğin:
+	 
+	 153 -> 1 * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153
+	 
+	 - Kuvvet alma işlemi için yazılmış olan pow metodunu kullanınız
+	 
+	 - Sayı negatif ise Armstrong sayısı kabul etmeyiniz
+	 
+	 - Metodu, 1 basamaklı, 2 basamaklı, 3 basamaklı, 4 basamaklı, 5 basamaklı ve 6 basamaklı Armstrong sayılarını
+	 ekrana yazdırarak test ediniz	
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		PowTest.run();		
+	}
+}
+
+class PowTest{
+	public static void run() 
+	{
+		for(int a = 1; a <= 999999; ++a)
+			if (NumberUtil.isArmstrong(a)) 	
+					System.out.println(a);
+		
+		System.out.println("Ali tekrarlar nasıl gidiyor!!!!!");
+	}
+}
+
+class NumberUtil{
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && getDigitsPowSum(a) == a;
+	}
+	
+	public static int getDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
+
+		while (a != 0) {
+			total += pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return total;
+	}
+	
+	public static int pow(int a, int b) 
+	{
+		int result = 1;
+		
+		for(int i = 0; i < b; i++)
+			result *= a;
+		
+		return result;
+		
+	}
+	
+	public static int countDigits(int a) {
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+			
+		}while(a != 0);
+			
+		return  count;	
+	}
+	
+	
+}
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli 
+	 metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	 
+	 (Yavaş çözüm)
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		PowTest.run();		
+	}
+}
+
+class PowTest{
+	public static void run() 
+	{
+		for(int a = -10; a <= 1000; ++a)
+			if (NumberUtil.isPrime(a)) 	
+					System.out.printf("%d ", a);
+		
+		System.out.println();
+		
+		System.out.println(NumberUtil.isPrime(1_000_003));
+		
+		System.out.println("Ali tekrarlar nasıl gidiyor!!!!!");
+	}
+}
+
+class NumberUtil{
+	public static boolean isPrime(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		long half = a / 2;
+		
+		for(long i = 2; i <= half; ++i)
+			if(a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli 
+	 metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	 
+	 Kural: Bir sayı karekökünden küçük olan asal sayıların hiçbirisine bölünmüyorsa asaldır
+	 (Hızlı çözüm)
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		PowTest.run();		
+	}
+}
+
+class PowTest{
+	public static void run() 
+	{
+		for(int a = -10; a <= 1000; ++a)
+			if (NumberUtil.isPrime(a)) 	
+					System.out.printf("%d ", a);
+		
+		System.out.println();
+		
+		System.out.println(NumberUtil.isPrime(1_000_003));
+		
+		System.out.println("Ali tekrarlar nasıl gidiyor!!!!!");
+	}
+}
+
+class NumberUtil{
+	public static boolean isPrime(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		if(a % 2 == 0)
+			return a == 2;
+		
+		if(a % 3 == 0)
+			return a == 3;
+		
+		if(a % 5 == 0)
+			return a == 5;
+		
+		if(a % 7 == 0)
+			return a == 7;
+
+		for(long i = 11; i * i <= a; i += 2)
+			if(a % i == 0)
+				return false;
+		
+		return true;
+		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli 
+	 metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	 
+	 Kural: Bir sayı karekökünden küçük olan asal sayıların hiçbirisine bölünmüyorsa asaldır
+	 (Hızlı çözüm)
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		PowTest.run();		
+	}
+}
+
+class PowTest{
+	public static void run() 
+	{
+				
+		System.out.println(NumberUtil.isPrime(1_000_003));
+		System.out.println(NumberUtil.isPrimeSlow(1_000_003));
+		
+		System.out.println("Ali tekrarlar nasıl gidiyor!!!!!");
+	}
+}
+
+class NumberUtil{
+	public static boolean isPrime(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		if(a % 2 == 0)
+			return a == 2;
+		
+		if(a % 3 == 0)
+			return a == 3;
+		
+		if(a % 5 == 0)
+			return a == 5;
+		
+		if(a % 7 == 0)
+			return a == 7;
+
+		int count = 0;
+		for(long i = 11; i * i <= a; i += 2) {
+			count++;
+			if(a % i == 0)
+				return false;
+			
+		}
+		
+		System.out.printf("isPrime:count = %d%n", count);
+		return true;
+		
+	}
+	
+	public static boolean isPrimeSlow(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		long half = a / 2;
+		int count = 0;
+		
+		for(long i = 2; i <= half; ++i) {
+			count++;
+			if(a % i == 0)
+				return false;
+		}
+		
+		System.out.printf("isPrime:count = %d%n", count);
+		return true;
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	 metodu yazınız ve aşağıdaki kod ile test ediniz.
+	 
+	 Açıklamalar: 
+	 	- isPrime metodunun hızlı versiyonunu hızlı olduğu bilinciyle getPrime metodunu yazınız
+	 	- n değerinin pozitif olmaması durumu metot içerisinde kontrol edilmeyecektir
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		GetPrimeTest.run();		
+	}
+}
+
+class GetPrimeTest{
+	public static void run() 
+	{
+				
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			System.out.print("Bir sayi giriniz : ");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0) {
+				return;
+			}
+			
+			System.out.printf("%d. asal sayi: %d%n", n, NumberUtil.getPrime(n));
+		}
+	}
+}
+
+class NumberUtil{
+	public static int getPrime(int n) 
+	{
+		int val = 2;
+		
+		for(int i = 2, count = 0; count < n; ++i)
+			if(isPrime(i)) {
+				++count;
+				val = i;
+			}
+		
+		return val;
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		if(a % 2 == 0)
+			return a == 2;
+		
+		if(a % 3 == 0)
+			return a == 3;
+		
+		if(a % 5 == 0)
+			return a == 5;
+		
+		if(a % 7 == 0)
+			return a == 7;
+
+
+		for(long i = 11; i * i <= a; i += 2) {
+			if(a % i == 0)
+				return false;	
+		}
+		
+		return true;
+		
+	}
+	
+	public static boolean isPrimeSlow(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		long half = a / 2;
+		
+		for(long i = 2; i <= half; ++i) {
+			if(a % i == 0)
+				return false;
+		}
+		
+		return true;
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	 metodu yazınız ve aşağıdaki kod ile test ediniz.
+	 
+	 Açıklamalar: 
+	 	- isPrime metodunun hızlı versiyonunu hızlı olduğu bilinciyle getPrime metodunu yazınız
+	 	- n değerinin pozitif olmaması durumu metot içerisinde kontrol edilmeyecektir
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		GetPrimeTest.run();		
+	}
+}
+
+class GetPrimeTest{
+	public static void run() 
+	{
+				
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			System.out.print("Bir sayi giriniz : ");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0) {
+				return;
+			}
+			
+			System.out.printf("%d. asal sayi: %d%n", n, NumberUtil.getPrime(n));
+		}
+	}
+}
+
+class NumberUtil{
+	public static int getPrime(int n) 
+	{
+		int count = 0;
+		int val = 2;
+		
+		for(;;) {
+			if(isPrime(val))
+				++count;
+			
+			if(count == n)
+				return val;
+			
+			++val;
+		}
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		if(a % 2 == 0)
+			return a == 2;
+		
+		if(a % 3 == 0)
+			return a == 3;
+		
+		if(a % 5 == 0)
+			return a == 5;
+		
+		if(a % 7 == 0)
+			return a == 7;
+
+
+		for(long i = 11; i * i <= a; i += 2) {
+			if(a % i == 0)
+				return false;	
+		}
+		
+		return true;
+		
+	}
+	
+	public static boolean isPrimeSlow(long a)
+	{
+		if(a <= 1)
+			return false;
+		
+		long half = a / 2;
+		
+		for(long i = 2; i <= half; ++i) {
+			if(a % i == 0)
+				return false;
+		}
+		
+		return true;
+	}
+}
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının faktoriyel değerini döndüren factorial isimli metodu
+	 NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	 Açıklamalar:
+	 - Faktoriyel işlemi aşağıdaki gibidir: 
+		 0! = 1
+		 1!= 1
+		 2! = 1 * 2
+		 3! = 1 * 2 * 3
+		 
+		 ...
+		 
+		 n! = 1 * 2 * 3 * ... * (n - 1) * n
+	 
+	 - Negatif sayılar için faktoriyel değeri 1 olarak döndürelecektir	
+	 
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		FactorialTest.run();		
+	}
+}
+
+class FactorialTest {
+	public static void run()
+	{		
+		for (int n = -1; n <= 25; ++n)
+			System.out.printf("%d! = %30d%n", n, NumberUtil.factorial(n));
+	}
+}
+
+class NumberUtil{
+	public static int factorial(int n) 
+	{
+		int result = 1;
+		
+		for(int i = 2; i <= n; ++i)
+			result *= i;
+		
+		return result;
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     içiçe döngüler
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		for(int i = 0; i < 5; ++i)
+			for(int k = 10; k >= 0; --k)
+				System.out.printf("(%d, %d)%n",i ,k);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     	Programcılar bazen tek bir döngü varsa da döngü içerisinde çağrılan metot veya metotlar içerisinde döngü kullanılmışsa
+	içiçe döngü olacak şekilde bir kod yazmış olurlar
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		for(int i = 0; i < 5; ++i)
+			Util.print(i);
+	}
+}
+
+class Util{
+	public static void print(int i) {
+		for(int k = 10; k >= 0; --k)
+			System.out.printf("(%d, %d)%n",i ,k);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/**********************************************************************************************
+     	3 basamaklı Armstrong sayılarının iç içe döngü ile bulunması
+     	
+     	abc -- 1-9  0-9 0-9
+     	
+ **********************************************************************************************/
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		for(int a = 1; a <= 9; ++a)
+			for(int b = 0; b <= 9; ++b)
+				for(int c = 0; c <= 9; ++c)
+					if(a * a * a + b * b * b + c * c * c == 100 * a + 10 * b + c)
+						System.out.printf("%d%d%d%n", a, b, c);
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyimi döngüyü, döngünün koşul ifadesinden bağımsız olarak sonlandırmak (kırmak) için kullanılır. break deyimi
+	döngü deyimleri ile kullanılır ve ileride göreceğimiz "switch" deyiminde de kullanılır. Bunlar dışında kullanımı error
+	oluşturur.
+	
+	break deyiminin genel biçimi:
+	break [etiket ismi];
+     	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	break deyiminin etiketsiz kullanımında akış break deyimine geldiğinde döngü sonlandırılır. Döngüden sonraki koddan
+	devam edilir. break hangi döngü içerisinde etiketsiz kullanılmışsa o döngü sonlandırılır. 
+	Aşağıdkai örnekte klavyden sıfır girilene kadar alınan sayıların toplamı bulunmuştur. Sıfır girildiğinde break
+	deyimi ile döngü sonlandırılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Sayiları girmeye başlayınız : ");
+		
+		int sum = 0;
+		
+		for(;;) {
+			System.out.print("Bir sayi giriniz : ");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			if(a == 0)
+				break;
+			
+			sum += a;
+		}
+		System.out.printf("Toplam: %d%n", sum);
+	}
+}
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n-inci asal sayıyı döndüren getPrime isimli
+	 metodu yazınız ve aşağıdaki kod ile test ediniz.
+	 
+	 Açıklamalar: 
+	 	- isPrime metodunun hızlı versiyonunu hızlı olduğu bilinciyle getPrime metodunu yazınız
+	 	- n değerinin pozitif olmaması durumu metot içerisinde kontrol edilmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		GetPrimeTest.run();
+	}
+}
+
+class GetPrimeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());			
+			
+			if (n <= 0)				
+				break;
+			
+			System.out.printf("%d. asal sayı:%d%n", n, NumberUtil.getPrime(n));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");	
+	}
+}
+
+class NumberUtil {
+	public static int getPrime(int n)
+	{
+		int count = 0;
+		int val = 2;
+		
+		for (;;) {
+			if (isPrime(val))
+				++count;
+			
+			if (count == n)
+				return val;
+			
+			++val;
+		}
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;		
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;		
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	break deyimi yalnızca kendi döngüsünü sonlandırır. Aşağıdaki örnekte içteki döngüde bir koşul gerçekleştiğinde 
+	 dıştaki döngünün de sonlandırılması flag değişken kullanılarak yapılmıştır. Örnek durumu göstermek için yazılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean breakAllFlag = false;
+		
+		for(int i = 5; i < 10; ++i) {
+			for(int k = 20; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				
+				if((i + k) % 6 == 0) {
+					breakAllFlag = true;
+					break;
+				}
+			}
+			
+			if(breakAllFlag)
+				break;
+		}
+		
+		System.out.println("Tekrar yapalım güzel olur Ali...");
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
------------------------------------------------------------
------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Etiketli break (labeled break) deyiminde gerektiğinde sonlandırılacak döngü deyiminin başında bir etiket bildirimi
+	yapılır. Etiket bildiriminin genel biçimi:
+		<etiket ismi>:
+	Etiket ismi değişken isimlendirme kurallarına uygun herhangi bir isim olabilir. Genellikle programcılar etiket isminin
+	tamamını büyük harfle, birden fazla kelimeden oluşuyorsa da araya alttire karakterini koyarak isimlendirirler.
+	Yukarıdaki program aşağıdaki gibi yazılabilir
+----------------------------------------------------------------------------------------------------------------------*/
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
 
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
-
------------------------------------------------------------
------------------------------------------------------------
+public class App {
+	public static void main(String [] args)
+	{
+	
+		EXIT_LOOP:
+		for(int i = 5; i < 10; ++i) {
+			for(int k = 20; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				
+				if((i + k) % 6 == 0)
+					break EXIT_LOOP;
+			}
+		}
+		
+		System.out.println("Tekrar yapalım güzel olur Ali...");
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Etiketli break (labeled break) deyiminde gerektiğinde sonlandırılacak döngü deyiminin başında bir etiket bildirimi
+	yapılır. Etiket bildiriminin genel biçimi:
+		<etiket ismi>:
+	Etiket ismi değişken isimlendirme kurallarına uygun herhangi bir isim olabilir. Genellikle programcılar etiket isminin
+	tamamını büyük harfle, birden fazla kelimeden oluşuyorsa da araya alttire karakterini koyarak isimlendirirler.
+	Yukarıdaki program aşağıdaki gibi yazılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+	
+		EXIT_LOOP:
+		for(int i = 5; i < 100; ++i) 
+			EXIT_INNER_LOOP:
+			for(int j = 0; j < 100; ++j)
+				for(int k = 20; k >= 0; --k) {
+					System.out.printf("(%d, %d, %d)%n", i, j, k);
+					
+					if((i + j + k) % 10 == 0)
+						break;
+					
+					if((i + j + k) % 6 == 0)
+						break EXIT_INNER_LOOP;
+					
+					if((i + j + k) % 11 == 0)
+						break EXIT_LOOP;
+					
+				}
+		
+		System.out.println("Tekrar yapalım güzel olur Ali...");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	continue deyimi döngüyü değil döngünün o anki adımını sonlandırmak için kullanılır. continue deyiminin de etiketli
+	biçimi vardır. Ancak yapısal programlama ve nesne yönelimli programlama tekniği açısından kullanımı tavsiye edilmez.
+	continue deyiminin etiketsiz biçimi break deyimi kadar sık kullanılmasa da bazı durumlarda okunabilirlik/algılanabilirlik
+	açısından tercih edilebilir. continue yalnızca döngü deyimlerinde kullanılabilir.
+	
+	Aşağıdaki örnekte 1 ile klavyeden girilen sayı arasındaki çift sayılar continue deyimi kullanılarak ekrana bastırılmıştır. 
+	Şüphesiz daha kolay yazılabilir. Sadece continue deyiminin çalışma prensibinin anlaşılabilmesi için bu şekilde 
+	yazılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		int n = Integer.parseInt(kb.nextLine());
+		
+		for(int i = 1; i <= n; ++i) {
+			if(i % 2 != 0)
+				continue;
+			
+			System.out.printf("%d ", i);
+		}
+		
+		System.out.println("\nÇok çalışalım Erken uyuyalım Ali");
+	}
+}
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Basit bir menü uygulması iskeleti yazıldı
+	(ileri daha iyisi yazılacak)
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		MenuApp.run();
+	}
+}
+
+class MenuApp{
+	public static void run() 
+	{
+		Menu.run();
+	}
+}
+
+class Menu{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			printMenu();
+			int option = Integer.parseInt(kb.nextLine());
+			
+			if(option < 1 || option > 5) {
+				System.out.println("\"Geçersiz seçenek\"");
+				continue;
+			}
+			
+			if(option == 5)
+				break;
+			
+			doWorkFor(option);
+		}
+	}
+	
+	public static void printMenu() 
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Güncelle");
+		System.out.println("3.Sil");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doWorkFor(int option) 
+	{
+		if(option == 1)
+			doWorkForInsert();
+		else if(option == 2)
+			doWorkForUpdate();
+		else if(option == 3)
+			doWorkForDelete();
+		else
+			doWorkForList();
+		
+	}
+	
+	public static void doWorkForInsert() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Ekle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForUpdate() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Güncelle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForDelete() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Sil\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForList() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Listele\" seçildi");
+		System.out.println("---------------------------------");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Basit bir menü uygulması iskeleti yazıldı
+	(ileri daha iyisi yazılacak)
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		MenuApp.run();
+	}
+}
+
+class MenuApp{
+	public static void run() 
+	{
+		Menu.run();
+	}
+}
+
+class Menu{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			printMenu();
+			int option = Integer.parseInt(kb.nextLine());
+			
+			if(1 <= option && option <= 5) {
+				if(option == 5)
+					break;
+				
+				doWorkFor(option);
+			} 
+			else
+				System.out.println("\"Geçersiz seçenek\"");
+		}
+		System.out.println("Teşekkürler");
+	}
+	
+	public static void printMenu() 
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Güncelle");
+		System.out.println("3.Sil");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doWorkFor(int option) 
+	{
+		if(option == 1)
+			doWorkForInsert();
+		else if(option == 2)
+			doWorkForUpdate();
+		else if(option == 3)
+			doWorkForDelete();
+		else
+			doWorkForList();
+		
+	}
+	
+	public static void doWorkForInsert() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Ekle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForUpdate() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Güncelle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForDelete() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Sil\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForList() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Listele\" seçildi");
+		System.out.println("---------------------------------");
+	}
+}
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı n sayısı için n-inci Fibonacci sayısını döndüren fibonacciNumber isimli 
+	metodu NumberUtil sınıfı içerisinde ve aşağıdaki kod ile test ediniz
+	Açıklama:
+		- Fibonnaci sayıları
+			0 1 1 2 3 5 8 13 21 34 ...
+		- Metot pozitif olmayan n değerleri için kontrol yapmayacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		FibonacciNumberTest.run();
+	}
+}
+
+class FibonacciNumberTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n < 1)
+				break;
+			
+			System.out.printf("%d. Fibonacci sayısı:%d%n", n, NumberUtil.fibonacciNumber(n));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil{
+	public static int fibonacciNumber(int n) 
+	{
+		if(n <= 2)
+			return n - 1;
+		
+		int prev1 = 1, prev2 = 0, val = 0;
+		
+		for(int i = 2; i < n; ++i) {
+			val = prev1 + prev2;
+			prev2 = prev1;
+			prev1 = val;
+		}
+		
+		return val;
+	}
+}
+
+
 
 -----------------------------------------------------------
 -----------------------------------------------------------
 
------------------------------------------------------------
------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayıdan büyük ilk Fibonacci sayısına geri dönen nextFibonacciNumber
+	isimli metodu yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		NextFibonacciNumberTest.run();
+	}
+}
+
+class NextFibonacciNumberTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			if (val < -999)
+				break;
+			
+			System.out.printf("%d. sayısından büyük ilk Fibonacci sayısı:%d%n", val, NumberUtil.nextFibonacciNumber(val));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static int nextFibonacciNumber(int val) 
+	{
+		if (val < 0)
+			return 0;
+		
+		int prev1 = 1, prev2 = 0, next;
+		
+		for (;;) {
+			next = prev1 + prev2;
+			
+			if (next > val)
+				return next;
+			
+			prev2 = prev1;
+			prev1 = next;
+		}
+	}	
+}
+
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	switch deyiminin genel biçimi:
+	switch (<ifade>) {
+		case <sabit ifadesi>:
+			<deyim>
+		case <sabit ifadesi>:
+			<deyim>
+			
+		...
+		
+		[
+		default:
+			<deyim>
+		]			
+	}
+	
+	Bu deyimde parantez içerisindeki ifade temel türler için tamsayı türlerinden biri veya char türünden olabilir.
+	Temel türler dışında String veya enum türlerinden de olabilir. Bu türler ileride ele alınacaktır. switch 
+	deyiminin default kısmı zorunlu değildir.
+	
+	
+	Anahrtat Notlar: switch deyimi Java 12'den itibaren ifade (expression) olarak da kullanılabilmektedir. Bu tarz 
+	deyimlere/ifadelere "ifadesel deyim (expression statement)". switch'in ifade olarak kullanılmasına yönelik sentaks
+	ve semantik eklentiler yapılmıştır. İleride ele alınacaktır.  
+----------------------------------------------------------------------------------------------------------------------*/
 
------------------------------------------------------------
------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki switch deyiminin if deyimi karşılığı:
+	
+	if (postalCode == 34387)
+		System.out.println("Mecidiyeköy");
+	else if (postalCode ==  67100)
+		System.out.println("Zonguldak Bahçelievler");
+	else
+		System.out.println("Geçersiz posta kodu");
+----------------------------------------------------------------------------------------------------------------------*/
 
------------------------------------------------------------
------------------------------------------------------------
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Posta kodunu giriniz:");
+		
+		int postalCode = Integer.parseInt(kb.nextLine());
+		
+		switch (postalCode) {
+		case 414100:
+			System.out.println("Gebze");
+			break;
+		case 37100:
+			System.out.println("Kastamonu Merkez");
+			break;
+		default:
+			System.out.println("Geçersiz posta kodu");
+		}
+		
+		System.out.println("Tekrar yapıyor muyuz ALİ?");	
+	}
+}
 
 
------------------------------------------------------------
------------------------------------------------------------
 
 
 -----------------------------------------------------------
