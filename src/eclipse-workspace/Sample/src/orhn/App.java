@@ -1,38 +1,6 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	switch deyiminin genel biçimi:
-	switch (<ifade>) {
-		case <sabit ifadesi>:
-			<deyim>
-		case <sabit ifadesi>:
-			<deyim>
-			
-		...
-		
-		[
-		default:
-			<deyim>
-		]			
-	}
+	Farklı Türlerin Birbirine Atanması (Tür dönüşümleri-Type Conversions)
 	
-	Bu deyimde parantez içerisindeki ifade temel türler için tamsayı türlerinden biri veya char türünden olabilir.
-	Temel türler dışında String veya enum türlerinden de olabilir. Bu türler ileride ele alınacaktır. switch 
-	deyiminin default kısmı zorunlu değildir.
-	
-	
-	Anahrtat Notlar: switch deyimi Java 12'den itibaren ifade (expression) olarak da kullanılabilmektedir. Bu tarz 
-	deyimlere/ifadelere "ifadesel deyim (expression statement)". switch'in ifade olarak kullanılmasına yönelik sentaks
-	ve semantik eklentiler yapılmıştır. İleride ele alınacaktır.  
-----------------------------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------------------------	 
-	Aşağıdaki switch deyiminin if deyimi karşılığı:
-	
-	if (postalCode == 34387)
-		System.out.println("Mecidiyeköy");
-	else if (postalCode ==  67100)
-		System.out.println("Zonguldak Bahçelievler");
-	else
-		System.out.println("Geçersiz posta kodu");
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
@@ -40,24 +8,86 @@ package orhn;
 public class App {
 	public static void main(String [] args)
 	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-		System.out.print("Posta kodunu giriniz:");
-		
-		int postalCode = Integer.parseInt(kb.nextLine());
-		
-		switch (postalCode) {
-		case 414100:
-			System.out.println("Gebze");
-			break;
-		case 37100:
-			System.out.println("Kastamonu Merkez");
-			break;
-		default:
-			System.out.println("Geçersiz posta kodu");
-		}
-		
-		System.out.println("Tekrar yapıyor muyuz ALİ?");	
+		MenuApp.run();
 	}
 }
 
+class MenuApp{
+	public static void run() 
+	{
+		Menu.run();
+	}
+}
+
+class Menu{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			printMenu();	
+			doWorkFor(Integer.parseInt(kb.nextLine()));
+		}
+	}
+	
+	public static void printMenu() 
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Güncelle");
+		System.out.println("3.Sil");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void doWorkFor(int option) 
+	{		
+	
+		switch (option) {
+		case 1 -> doWorkForInsert();
+		case 2 -> doWorkForUpdate();
+		case 3 -> doWorkForDelete();
+		case 4 -> doWorkForList();
+		case 5 -> doWorkForQuit();
+		default ->System.out.println("\"Geçersiz seçenek\"");
+		}
+	}
+	
+	public static void doWorkForInsert() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Ekle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForUpdate() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Güncelle\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForDelete() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Sil\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForList() 
+	{
+		System.out.println("---------------------------------");
+		System.out.println("\"Listele\" seçildi");
+		System.out.println("---------------------------------");
+	}
+	
+	public static void doWorkForQuit()
+	{
+		System.out.println("---------------------------------");
+		System.out.println("Teşekkürler");
+		System.out.println("\"Tekrar Sizleri Mekanımızda Görmek İsteriz\"");
+		System.out.println("---------------------------------");
+		System.exit(0);
+	}
+}
 
