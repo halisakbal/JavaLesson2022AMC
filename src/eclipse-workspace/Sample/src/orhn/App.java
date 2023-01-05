@@ -1,93 +1,49 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	Farklı Türlerin Birbirine Atanması (Tür dönüşümleri-Type Conversions)
-	
+	 Koşul Operatörü (conditional operator):	 
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
 
-public class App {
+class App {	
 	public static void main(String [] args)
 	{
-		MenuApp.run();
+		IsArmstrongTest.run();
 	}
 }
 
-class MenuApp{
-	public static void run() 
+class IsArmstrongTest {
+	public static void run()
 	{
-		Menu.run();
+		for (int a = -10; a <= 999999; ++a)
+			if (NumberUtil.isArmstrong(a))
+				System.out.println(a);	
 	}
 }
 
-class Menu{
-	public static void run() 
+class NumberUtil {
+	public static boolean isArmstrong(int a)
 	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
+		return a >= 0 && getDigitsPowSum(a) == a;				
+	}
+	
+	public static int getDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
 		
-		for(;;) {
-			printMenu();	
-			doWorkFor(Integer.parseInt(kb.nextLine()));
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+			a /= 10;					
 		}
-	}
+		
+		return total;
+	}	
 	
-	public static void printMenu() 
+	public static int countDigits(int a)
 	{
-		System.out.println("1.Ekle");
-		System.out.println("2.Güncelle");
-		System.out.println("3.Sil");
-		System.out.println("4.Listele");
-		System.out.println("5.Çıkış");
-		System.out.print("Seçenek:");
-	}
-	
-	public static void doWorkFor(int option) 
-	{		
-	
-		switch (option) {
-		case 1 -> doWorkForInsert();
-		case 2 -> doWorkForUpdate();
-		case 3 -> doWorkForDelete();
-		case 4 -> doWorkForList();
-		case 5 -> doWorkForQuit();
-		default ->System.out.println("\"Geçersiz seçenek\"");
-		}
-	}
-	
-	public static void doWorkForInsert() 
-	{
-		System.out.println("---------------------------------");
-		System.out.println("\"Ekle\" seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doWorkForUpdate() 
-	{
-		System.out.println("---------------------------------");
-		System.out.println("\"Güncelle\" seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doWorkForDelete() 
-	{
-		System.out.println("---------------------------------");
-		System.out.println("\"Sil\" seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doWorkForList() 
-	{
-		System.out.println("---------------------------------");
-		System.out.println("\"Listele\" seçildi");
-		System.out.println("---------------------------------");
-	}
-	
-	public static void doWorkForQuit()
-	{
-		System.out.println("---------------------------------");
-		System.out.println("Teşekkürler");
-		System.out.println("\"Tekrar Sizleri Mekanımızda Görmek İsteriz\"");
-		System.out.println("---------------------------------");
-		System.exit(0);
+		if (a == 0)
+			return 1;
+		
+		return (int)Math.log10(Math.abs(a)) + 1;
 	}
 }
-

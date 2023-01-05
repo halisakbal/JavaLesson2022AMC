@@ -11011,17 +11011,1589 @@ class Menu{
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-
+05.01.2023 Perşembe - 14.Ders
 
 /*----------------------------------------------------------------------------------------------------------------------	 
 	Farklı Türlerin Birbirine Atanması (Tür dönüşümleri-Type Conversions)
 	
+	
+	T1 ve T2 birer tür ismi olmak üzere T1 türünden, T2 türüne yapılan doğrudan atama işlemine T1 türünden T2 türüne
+	"doğrudan dönüşüm (implicit conversion)" denir. Atama işlemi de aynı zamanda bir dönüşümdür. Örneğin bu işlem
+	
+		T1 a;
+		T2 b;
+		
+		b = a;
+	
+	şeklinde belirtilebilir. Konu içerisinde anlatılcak olan istisna durumlar dışında tüm atama işlemleri için bu tanım
+	geçerlidir. İstisna durumlar ayrıca ele alınacaktır
+	
+	Yukarıdaki atama işleminde T1 türüne "kaynak tür (source type)", T2 türüne de "hedef tür (target type)" denir. Java'da
+	kaynak türden hedef türe implicit dönüşümün (atamanın) yapılıp yapılamayacağı derleme zamanında belirlenir. Kaynak türe
+	ilişkin değere çalışma zamanında bakılarak karar verilemez. Zaten çoğu zaman da bu değer derleme zamanında bilinemez. 
+	Yani hangi türlerin hangi türlere atanıp atanamayacağı bellidir. 
+	
+	Java'da genel olarak bilgi kaybına yol açmayacak doğrudan dönüşümler geçerlidir
+	
+	Anahtar Notlar: Java Language Specification'da temel türler arasında, uzunluk (size) olarak büyük olan türden, uzunluk
+	olarak küçük olan türe yapılan dönüşüme "daraltma dönüşümü (narrowing conversion)", uzunluk olarak küçük olan türden 
+	büyük olan türe	yapılan dönüşüme "genişletme dönüşümü (widening conversion)" denir.
+	
+	Doğrudan dönüşüme ilişkin ayrıntılar aşağıda anlatılacaktır
+	
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Farklı Türlerin Birbirine Atanması (Tür dönüşümleri-Type Conversions)
+	
+	
+	Aşağıdaki örnekte long türüne ilişkin değer çalışma zamanında belirlenir. Dolayısıyla derleyici istese de bu değeri
+	bilemez. Derleyici açısından kural "long türünden int türüne doğrudan dönüşüm geçersizdir" biçimindedir. Dolayısıyla
+	error oluşur
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayigiriniz : ");
+		long a = Long.parseLong(kb.nextLine());
+		
+		int b;
+		
+		b = a; //error
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte long türüne ilişkin değer belli olsa da derleyici açısından bu bir değişkendir ve "long türünden
+	int türüne doğrudan atama geçersizdir" kuralı uygulanır
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 10;
+		
+		int b;
+		
+		b = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Küçük tamsayı türünden büyük tamsayı türüne doğrudan atama geçerlidir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		
+		long b;
+		
+		b = a; 
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Küçük tamsayı türünden büyük tamsayı türüne doğrudan dönüşümde küçük tamsayı türüne ilişkin değer pozitif veya sıfır
+	ise sayının yüksek anlamlı yeni bit değerleri 0(sıfır) ile beslenir. Eğer sayı negatif ise sayının işaretinin korunması
+	için yüksek anlamlı bit değerleri 1(bir) ile beslenir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		short a = Short.parseShort(kb.nextLine());
+		
+		int b;
+		
+		b = a; 
+		
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = 0x%04X%n", a);
+
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = 0x%08X%n", b);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Hiçbir türden char türüne doğrudan dönüşüm yapılamaz
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 67;
+		char ch;
+		
+		ch = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Hiçbir türden char türüne doğrudan dönüşüm yapılamaz
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		byte a = 67;
+		char ch;
+		
+		ch = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki kurala istisna olarak "char türü sınırları içerisinde kalan VE int türden olan bir sabit char türüne
+	doğrudan atanabilir"
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char ch = 67;
+
+		System.out.printf("ch = %c%n", ch);
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki kurala istisna olarak "char türü sınırları içerisinde kalan VE int türden olan bir sabit char türüne
+	doğrudan atanabilir"
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 67;
+		char c1, c2, c3;
+		c1 = -67; //error
+		c2 = a; //error
+		c3 = 67L; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	short türünden char türüne doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short a;
+		char c;
+		
+		a = 10;
+		
+		c = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	char türünden short türüne doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char a;
+		short c;
+		
+		a = 10000;
+		
+		c = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Anımsanacağı gibi Java'da byte ve short türden sabit yoktur. Ancak "sınırlar içerisinde olması koşuluyla int türden
+	bir sabit byte/short türüne atanabilir"
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short a;
+		byte b;
+		byte c;
+		 
+		a = 10;
+		b = 24;
+		c = -129; //error
+		c = 45L; //error
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıda anlatılan byte, short ve char türlerine ilişkin istisna kurallar geri dönüş değerinin geçici değişkene
+	yapılan atama işlemi için de geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		
+	}
+}
+
+
+class Sample{
+	public static short foo() 
+	{
+		return 10;
+	}
+	
+	public static char bar() 
+	{
+		return 22;
+	}
+	
+	public static byte tar() 
+	{
+		return 102;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıda anlatılan byte, short ve char türlerine ilişkin istisna kurallar metot çağrısında argümanlardan 
+	parametrelere yapılan atama işleminde geçersizdir. Bu durumun detayları ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		Sample.foo(10);  
+		Sample.bar(2);
+		Sample.tar(23);
+	}
+}
+
+
+class Sample{
+	public static void foo(short a) 
+	{
+		//
+	}
+	
+	public static void bar(char a) 
+	{
+		//
+	}
+	
+	public static void tar(byte a) 
+	{
+		///
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	char türünden kendisinden uzunluk olarak büyük tüm türlere doğrudan atama geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char c = 'D';
+		double b;
+		
+		b = c;
+		
+		System.out.printf("b = %f%n", b);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bütün tamsayı türlerinden gerçek sayı türlerine doğrudan atama geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 3_000_000_000L;
+		float b;
+		
+		b = a;
+		
+		System.out.printf("b = %f%n", b);
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Gerçek sayı türlerinden tamsayı türlerine doğrudan atama geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		float a = 55.656;
+		long b;
+		
+		b = a; //error
+		
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	float türünden double türüne doğrudan atama geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		float a = 55;
+		double b;
+		
+		b = a; 		
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	double türünden float türüne doğrudan atama geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 55;
+		float b;
+		
+		b = a; //error		
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte sabitin sonuna F konmazsa sabit double türden olduğundan atama geçersiz olur. Aşağıdaki örneği
+	çalıştırarak yuvarlama hatasını gözlemleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		float a = 55.2F;
+		
+		System.out.printf("a = %.12f%n", a);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	boolean türünden herhangi bir türe doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean a = false;
+		int b;
+		
+		b = a;
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Herhangi bir türden boolean türüne doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 123;
+		boolean b;
+		
+		b = a; //error
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Temel türler için doğrudan dönüşüm (implicit conversion) tablosu:
+    byte	-> short, int, long, float, double
+    short	-> int, long, float, double
+    int		-> long, float, double
+    long	-> float, double
+    float	-> double
+    char	-> int, long, float, double
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	İşlem öncesi otomatik tür dönüşümü:
+	İki operandlı bir operatör için derleyici önce operandların türüne bakar. Operandlar farklı türdense ve işlem
+	geçerliyse, ortak bir türe dönüştürülerek işlem yapılır. Hatta bazı durumlarda iki tür aynı olsa bile ikisini de farklı
+	türe dönüştürür. Yani derleyici buna yönelik kodlar üretir. Bu dönüştürmeye "işlem öncesi otomatik tür dönüşümü" denir.
+	
+	Bu kuralın özeti "genel olarak küçük türe ilişkin değer büyük türe dönüştürülür. Sonuç büyük türden çıkar
 ----------------------------------------------------------------------------------------------------------------------*/
 
 
 
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a;
+		long b;
+		long c;
+		
+		a = 10;
+		b = 22;
+		c = a + b;
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Her iki operand da byte, short veya char türlerindense ikisi birden işlem öncesinde int türüne dönüştürülür ve sonuç
+	int türden çıkar. Buna "integral/integer promotion" denir
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short a;
+		short b;
+		short c;
+		
+		a = 10;
+		b = 22;
+		
+		c = a + b; //error
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Her iki operand da byte, short veya char türlerindense ikisi birden işlem öncesinde int türüne dönüştürülür ve sonuç
+	int türden çıkar. Buna "integral/integer promotion" denir
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short a;
+		byte b;
+		short c;
+		
+		a = 10;
+		b = 22;
+		
+		c = a + b; //error
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bölme işleminde her iki operand da tamsayı türlerine ilişkinse sonuç tamsayı türünden çıkar. Bölme işlemi yapılır, 
+	elde edilen değerin noktadan sonraki kısmı atılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		int b = 4;
+		double c;
+		
+		c = a / b;
+		
+		System.out.printf("c = %f%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir gerçek sayı türü ile bir tamsayı türü işleme sokulduğunda dönüşüm gerçek sayı türüne doğrudur. Yani tamsayı türüne
+	ilişkin değer gerçek sayı türüne dönüştürülür. Sonuç o gerçek sayı türünden çıkar
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		float a = 10.4F;
+		long b = 4;
+		float c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %f%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Küçük tamsayı türü ile büyük tamsayı türü işleme sokulduğunda dönüşüm büyük tamsayı türüne doğrudur. Sonuç büyük
+	tamsayı türünden çıkar. 
+	Dikkat: Integral promotion bu kuralın dışındadır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		long b = 4;
+		long c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	boolean türü hiçbir tür ile işleme sokulamaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean a = false;
+		long b = 4;
+		long c;
+		
+		c = a + b; //error
+		
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	char türü herhangi bir tür ile işleme sokulabilir. Bu durumda char türüne ilişkin değer diğer türe dönüştürülür.
+	Dikkat: Yine integral promotion bu durumun dışındadır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 21;
+		char c = 'D';
+		int result;
+		
+		result = a + c; 
+		
+		System.out.println(result);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	İşlem öncesinde otomatik tür dönüşümü geçici değişken yaratılarak yapılır. Yani derleyici geçici değişken yaratan
+	kodu üretir. Örnekte derleyici ** ile belirtilen işlem için aşağıdakine benzer bir kod üretecektir:
+		long temp = b;
+		c = a + temp;
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 21;
+		int b = 12;
+		long c;
+		
+		c = a + b; //**
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	İşlem öncesinde otomatik tür dönüşümü geçici değişken yaratılarak yapılır. Yani derleyici geçici değişken yaratan
+	kodu üretir. Örnekte derleyici ** ile belirtilen işlem için aşağıdakine benzer bir kod üretecektir:
+		int temp1 = a;
+		int temp2 = b;
+		c = temp1 + temp2;
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		short a = 21;
+		byte b = 12;
+		int c;
+		
+		c = a + b; //**
+		
+		System.out.printf("c = %d%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Tür dönüştürme (type cast) operatörü:
+	Tür dönüştürme operatörü özel amaçlı, tek operandlı (unary) ve önek (prefix) durumunda bir operatördür. Tür dönüştürme
+	operatörünün genel biçimi:	
+		(<hedef tür ismi>)<ifade>
+		
+	Bu operatör operandına ilişkin ifadenin hedef türe dönüştürüldükten sonra elde edilen değeri üretir. Tür dönüştürme
+	operatörü ile yapılan dönüşüme "explicit conversion" denir. Genel olarak implicit olarak geçersiz olan dönüşümler 
+	tür dönüştürme operatörü ile yapılabilir. Şüphesiz bu durumda bilgi kaybı oluşabilir. Bu bilgi kaybının nasıl olacağı da
+	bellidir ve ileride ele alınacaktır
+	
+	implicit olarak geçerli olan dönüşümler için de tür dönüştürme operatörü kullanılabilir. Gerekli olduğu durumlar 
+	vardır. 
+	
+	Anahtar Notlar: Tür dönüştürme operatörünün sentaks ve semantik olarak zorunlu olması durumu genel olarak 
+	"işlem doğrudan yapılsaydı problem olabilirdi. Bu sebeple derleyici bunu doğrudan yapmamazı istemiyor. Biz yapmak
+	istersek tür dönüştürme operatörü kullanarak derleyiciye durumun farkındayım bana izin ver" anlaşılmalıdır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 21;
+		int b = 12;
+		double c;
+		
+		c = (double)a / b;
+		
+		System.out.printf("c = %f%n", c);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Tür dönüştürme operatörü
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 10;
+		int b;
+
+		b = (int)a;
+		
+		System.out.printf("b = %d%n", b);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	implicit olarak geçerli olan dönüşümler için de tür dönüştürme operatörü kullanılabilir. Aşağıdaki örnekte bunun
+	bir anlamı yoktur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 10;
+		long b;
+
+		b = (long)a;
+		
+		System.out.printf("b = %d%n", b);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Büyük tamsayı türünden küçük tamsayı türüne yapılan explicit dönüşümde kaynak türe ilişkin değer hedef türün
+	sınırları içerisinde kalıyorsa bilgi kaybı oluşmaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 10;
+		int b;
+
+		b = (int)a;
+		
+		System.out.printf("b = %d%n", b);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Büyük tamsayı türünden küçük tamsayı türüne yapılan explicit dönüşümde kaynak türe ilişkin değer hedef türün
+	sınırları içerisinde kalmıyorsa bilgi kaybı oluşur. Çünkü bu işlem yüksek anlamlı byte değerlerinin atılması
+	biçiminde yapılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		long a = 1_000_000_000_000L;  // 010101010010101010100101010100101
+		int b;     
+
+		b = (int)a;               //101010100101010100101
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %X%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %X%n", b);
+	
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte bilgi kaybı oluşabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		long a = Long.parseLong(kb.nextLine());
+		int b;     
+
+		b = (int)a;        
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %016X%n", a);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %08X%n", b);
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	short türünden char türüne yapılan explicit dönüşümde sayının bit kalıbı değişmez. Sayının yorumlanışı değişir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz : ");
+		short a = Short.parseShort(kb.nextLine());
+		char b;     
+
+		b = (char)a;        
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("a = %04X%n", a);
+		System.out.printf("(int)b = %04X%n", (int)b);
+		System.out.printf("b = %c%n", b);
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	char türünden short türüne yapılan explicit dönüşümde sayının bit kalıbı değişmez. Sayının yorumlanışı değişir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		char a = '\uF0AC';
+		short b;     
+
+		b = (short)a;        
+		
+		System.out.printf("(int)a = %X%n", (int)a);
+		System.out.printf("(int)a = %d%n", (int)a);
+		System.out.printf("a = %c%n", a);
+		System.out.printf("b = %X%n", b);
+		System.out.printf("b = %d%n", b);
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	boolean türünden herhangi bir türe explicit dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		boolean a = true;
+		int b;
+		
+		b = (int)a; //error
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Herhangi bir türden boolean türüne explicit dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		int a = 1;
+		boolean b;
+		
+		b = (boolean)a; //error
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	byte türünden char türüne explicit dönüşüm iki aşamada gerçekleşir. Birinci aşamada değer int türüne dönüştürülür. İkinci
+	aşamada yüksek anlamlı 2 byte atılarak char türüne dönüştürülür (widening and narrowing conversion). 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		byte a = 99;//1 byte  derleyici int 4 byte  0000000000000000000000101010101
+		char c; //char 2 byte
+		
+		c = (char)a; // 000000101010101
+		
+		System.out.printf("a = %X%n", a);
+		System.out.printf("(int)a = %08X%n", (int)a);
+		System.out.printf("(int)c = %04X%n", (int)c);
+		System.out.printf("c = %c%n", c);
+	
+	}
+	
+	
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	byte türünden char türüne explicit dönüşüm iki aşamada gerçekleşir. Birinci aşamada değer int türüne dönüştürülür. İkinci
+	aşamada yüksek anlamlı 2 byte atılarak char türüne dönüştürülür (widening and narrowing conversion). 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		//1001 1110   ---->  1111 1111 1111 1111 1111 1111 1001 1110
+		
+		//1111 1111 1001 1110
+		
+		byte a = -62;//1 byte 
+		char c; //char 2 byte
+		
+		c = (char)a; 
+		
+		System.out.printf("a = %X%n", a);
+		System.out.printf("(int)a = %08X%n", (int)a);
+		System.out.printf("(int)c = %04X%n", (int)c);
+		System.out.printf("c = %c%n", c);
+	
+	}
+	
+	
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	double türünden float türüne explicit dönüşümde bilgi kaybı olabilir. Bu durumda IEEE 754 standardına göre yuvarlama
+	hataları oluşur ve değer float türünde temsil edilebilecek değer olarak elde edilir. Ayrıca sayı float sınırları dışında
+	ise de aynı şekilde yapılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 5.34; 
+		float b;
+		
+		b = (float)a; 
+		
+		System.out.printf("a = %.20f%n", a);
+		System.out.printf("b = %.20f%n", b);
+	
+	}
+	
+	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Gerçek sayı türünde tamsayı türüne (veya char türüne) yapılan explicit dönüşüm şu şekilde gerçekkeşir:
+	- Sayının noktadan sonraki kısmı atılır
+		- Elde edilen sayı hedef türün sınırları içerisinde kalıyorsa hedef türe atanır 
+		- Elde edilen sayı hedef türün sınırları içerisinde kalmıyorsa
+			- Hedef tür byte, short, int ve char türlerinden biriyse
+				- Elde edilen değer int türü sınırları içerisindeyse int türüne dönüştürülür. Buradan elde edilen değer
+				tamsayılar arasındaki dönüşüm kurallarına göre hedef türe atanır
+				- Elde edilen değer int türü sınırları içerisinde değilse değerin pozitif ya da negatif olması durumuna
+				göre int türünün en büyük veya en küçük değeri alınır ve hedef türe dönüştürülür
+			- Hedef tür long ise
+				- Elde edilen değer long türü sınırları içerisindeyse doğrudan atanaır				
+				- Elde edilen değer long türü sınırları içerisinde değilse sayının pozitif veya negatif olması durumuna
+				göre long türünün en büyük veya en küçük değeri alınır ve atanır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 348.34; 
+		int b;
+		
+		b = (int)a; 
+		
+		System.out.printf("b = %d%n", b);
+	
+	}
+	
+	
+}
+
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 100.34; 
+		byte b;
+		
+		b = (byte)a; 
+		
+		System.out.printf("b = %d%n", b);
+	
+	}	
+}
+
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 2345.34; 
+		byte b;
+		
+		b = (byte)a; 
+		
+		System.out.printf("2345 = %08X%n", 2345);
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("b = %d%n", b);
+	
+	}	
+}
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = -2345.34; 
+		byte b;
+		
+		b = (byte)a; 
+		
+		System.out.printf("-2345 = %08X%n", -2345);
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("b = %d%n", b);
+	
+	}	
+}
+
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = -1234.34; 
+		short b;
+		
+		b = (short)a; 
+		
+		System.out.printf("-1234 = %08X%n", -1234);
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("b = %d%n", b);
+	
+	}	
+}
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.34; 
+		int b;
+		
+		b = (int)a; 
+		
+		System.out.printf("5_000_000_000 = %08X%n", (int)5_000_000_000L);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %X%n", b);
+	
+	}	
+}
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = -5_000_000_000.34; 
+		int b;
+		
+		b = (int)a; 
+		
+		System.out.printf("-5_000_000_000 = %08X%n", (int)-5_000_000_000L);
+		System.out.printf("b = %d%n", b);
+		System.out.printf("b = %X%n", b);
+	
+	}	
+}
+
+
+
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		double a = 5_000_000_000.34; 
+		byte b;
+		
+		b = (byte)a; 
+		
+		System.out.printf("-5_000_000_000 = %08X%n", (int)5_000_000_000L);
+		System.out.printf("2147483647 = %d, %08X%n", 2147483647, 2147483647);		
+		System.out.printf("b = %d, %X%n", b, b);	
+	
+	}	
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan int türden sayıların ortalamasını bulan programı yazınız.
+	Açıklamalar: Toplam değeri ve toplam girilen değerlerin sayısı int olarak tutulacaktır 
+	
+	Aşağıdaki örnekte tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		FindAverageApp.run();	
+	
+	}	
+}
+
+class FindAverageApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Sayileri girmeye baslayınız : ");
+		int sum = 0, count = 0;
+		int val;
+		
+		while ((val = Integer.parseInt(kb.nextLine())) != 0) {
+			sum += val;
+			++count;
+		}
+		
+		double average = (double)sum / count;
+		System.out.printf("Ortalama : %f%n", average);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan int türden sayıların ortalamasını bulan programı yazınız.
+	Açıklamalar: Toplam değeri ve toplam girilen değerlerin sayısı int olarak tutulacaktır 
+	
+	Aşağıdaki örnekte tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+public class App {
+	public static void main(String [] args)
+	{
+		FindAverageApp.run();	
+	
+	}	
+}
+
+class FindAverageApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Sayileri girmeye baslayınız : ");
+		int sum = 0, count = 0;
+				
+		for(int a = 0; (a = Integer.parseInt(kb.nextLine())) != 0; ++count, sum += a)
+			;
+		
+		double average = (double)sum / count;
+		System.out.printf("Ortalama : %f%n", average);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayıyı giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayıyı giriniz:");
+		int b = Integer.parseInt(kb.nextLine());		
+		long c;
+		
+		c = (long)a + b;
+		
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte double türden sabit kullanıldığından işlem double olarak yapılır
+----------------------------------------------------------------------------------------------------------------------*/
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int sum = 0;
+		
+		for (int i = 0; i < 4; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			sum += a;
+		}
+		
+		double avg = sum / 4.;
+		
+		System.out.printf("Ortalama:%f%n", avg);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte double türden sabit kullanıldığından işlem double olarak yapılır
+----------------------------------------------------------------------------------------------------------------------*/
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int sum = 0;
+		
+		for (int i = 0; i < 4; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			sum += a;
+		}
+		
+		double avg = sum / 4D;
+		
+		System.out.printf("Ortalama:%f%n", avg);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	İşlemli atama operatörlerinin esas çalışma biçimi:
+	
+	T1 a;
+	T2 b;
+	
+	a op= b => a = (T1)(a op b)
+----------------------------------------------------------------------------------------------------------------------*/
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		int a = 10;
+		int b = 20;
+		
+		a += Math.sqrt(b); //a = (int)(a + Math.sqrt(b));
+		
+		
+		//...
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir sayının basamak sayısının log10  ile bulunması 
+----------------------------------------------------------------------------------------------------------------------*/
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		int count = 1;
+		
+		if (a != 0)
+			count = (int)Math.log10(Math.abs(a)) + 1;
+	
+		System.out.printf("%d sayısının basamak sayısı:%d%n", a, count);	
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong 
+	 isimli metodu NumberUtil sınıfı içerisinde yazınız.
+	 
+	 Açıklamalar:
+	 - Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya Armstrong
+	 sayısı denir. Örneğin:
+	 
+	 153 -> 1 * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153	 
+	 
+	 - Sayı negatif ise Armstrong sayısı kabul etmeyiniz
+	 
+	 - Metodu, 1 basamaklı, 2 basamaklı, 3 basamaklı, 4 basamaklı, 5 basamaklı ve 6 basamaklı Armstrong sayılarını
+	 ekrana yazdırarak test ediniz	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsArmstrongTest.run();
+	}
+}
+
+class IsArmstrongTest {
+	public static void run()
+	{
+		for (int a = -10; a <= 999999; ++a)
+			if (NumberUtil.isArmstrong(a))
+				System.out.println(a);	
+	}
+}
+
+class NumberUtil {
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && getDigitsPowSum(a) == a;				
+	}
+	
+	public static int getDigitsPowSum(int a)
+	{
+		int n = countDigits(a);
+		int total = 0;
+		
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+			a /= 10;					
+		}
+		
+		return total;
+	}	
+	
+	public static int countDigits(int a)
+	{
+		if (a == 0)
+			return 1;
+		
+		return (int)Math.log10(Math.abs(a)) + 1;
+	}
+}
+
+
 -----------------------------------------------------------
 -----------------------------------------------------------
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Koşul Operatörü (conditional operator):	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
 
 -----------------------------------------------------------
 -----------------------------------------------------------
