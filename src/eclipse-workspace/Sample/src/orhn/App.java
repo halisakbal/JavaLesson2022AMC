@@ -1,5 +1,11 @@
+
 /*----------------------------------------------------------------------------------------------------------------------	 
-	 Koşul Operatörü (conditional operator):	 
+ 	1.Aday metotlar : 1, 2, 3, 4
+ 	2. Uygun metotlar: 1, 2, 3, 4
+ 	3. En uygun metot: 1
+ 	
+ 	
+ 	T1 ->T2 T1-> T3------  T2 -> T3 ve T2 ye donusmuyor T2
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
@@ -7,43 +13,40 @@ package orhn;
 class App {	
 	public static void main(String [] args)
 	{
-		IsArmstrongTest.run();
+		short a = 10;
+		
+		MyMath.abs(a); 
+
 	}
 }
 
-class IsArmstrongTest {
-	public static void run()
+class MyMath{
+	public static int abs(int a)  //#1
 	{
-		for (int a = -10; a <= 999999; ++a)
-			if (NumberUtil.isArmstrong(a))
-				System.out.println(a);	
+		System.out.println("MyMath.abs int");
+		return a < 0 ? -a : a;
+	}
+	
+	public static double abs(double a)  //#2
+	{
+		System.out.println("MyMath.abs double");
+		
+		return a < 0 ? -a : a;
+	}
+		
+	public static float abs(float a)  //#3
+	{
+		System.out.println("MyMath.abs float");
+		
+		return a < 0 ? -a : a;
+	}
+	
+	public static long abs(long a)  //#4
+	{
+		System.out.println("MyMath.abs long");
+		
+		return a < 0 ? -a : a;
 	}
 }
 
-class NumberUtil {
-	public static boolean isArmstrong(int a)
-	{
-		return a >= 0 && getDigitsPowSum(a) == a;				
-	}
-	
-	public static int getDigitsPowSum(int a)
-	{
-		int n = countDigits(a);
-		int total = 0;
-		
-		while (a != 0) {
-			total += Math.pow(a % 10, n);
-			a /= 10;					
-		}
-		
-		return total;
-	}	
-	
-	public static int countDigits(int a)
-	{
-		if (a == 0)
-			return 1;
-		
-		return (int)Math.log10(Math.abs(a)) + 1;
-	}
-}
+

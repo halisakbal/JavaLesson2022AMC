@@ -12586,20 +12586,1439 @@ class NumberUtil {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+10.01.2023 Salı - 15.Ders
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Koşul Operatörü (conditional operator): Koşul operatörü özel amaçlı, üç operandlı (ternary) ve araek durumunda
+	 bir operatördür. Operatörün genel biçimi:
+	 
+	 <operand1> ? <operand2> : <operand3>
+	 
+	 
+	 operand1: boolean türden bir ifade olamalıdır. 
+	 
+	 
+	 if(a < b)
+	 	min = a;
+	 else
+	 	min = b
+	 	
+	 	
+	 	bu ilişkiyi koşul operatörü ile yapabilirmiyim?
+	 
+	  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 if(a < b)
+	 	min = a;
+	 else
+	 	min = b;
+	 	
+	 	bu ilişkiyi koşul operatörü ile yapabilirmiyim?
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+	
+		int min;
+		
+		 min = a < b ? a: b;
+		 
+		 System.out.printf("min(%d, %d) = %d%n", a, b, min);
+	
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------	 
-	 Koşul Operatörü (conditional operator):	 
+	
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+	
+		int result;
+		
+		 result = a < b ? a: b - 100;
+		 
+		 System.out.printf("result = %d%n", result);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Aşağıdaki örnekte koşul operatörünün ürettiği değerden 100 çıkartılacaktır. Parantaz ile bu sağlanmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+	
+		int result;
+		
+		 result = (a < b ? a: b) - 100;
+		 
+		 System.out.printf("result = %d%n", result);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Aşağıdaki örneği inceleyelim
+	 	kısa devre davranısını unutmyalım
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+	
+		int result;
+		
+		result = a > 0 && a < b ? a: b;
+		 
+		System.out.printf("result = %d%n", result);
+	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Aşağıdaki örneği inceleyelim
+	 	kısa devre davranısını unutmyalım
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+	
+		int min;
+		
+		min = a < b ? a: b;
+		 
+		System.out.printf("result = %d%n", min);
+	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Aşağıdaki örneği inceleyelim
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		 
+		System.out.printf("result = %d%n", Util.min(a, b));
+	
+	}
+}
+
+class Util{
+	public static int min(int a, int b) 
+	{
+		return a < b ? a : b;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Aşağıdaki örneği inceleyelim
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		 
+		System.out.printf("result = %d%n", a < b ? a : b);
+	
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong 
+	 isimli metodu NumberUtil sınıfı içerisinde yazınız.
+	 
+	 Açıklamalar:
+	 - Bir sayının her basamağının basamak sayıncı kuvvetleri toplandığında sayının kendisine eşitse bu sayıya Armstrong
+	 sayısı denir. Örneğin:
+	 
+	 153 -> 1 * 1 * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153	 
+	 
+	 - Sayı negatif ise Armstrong sayısı kabul etmeyiniz
+	 
+	 - Metodu, 1 basamaklı, 2 basamaklı, 3 basamaklı, 4 basamaklı, 5 basamaklı ve 6 basamaklı Armstrong sayılarını
+	 ekrana yazdırarak test ediniz
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsAmrstrongTest.run();
+	
+	}
+}
+
+class IsAmrstrongTest{
+	public static void run() 
+	{
+		for(int a = -10; a <= 999999; ++a)
+			if(NumberUtil.isArmstrong(a))
+				System.out.println(a);
+	}
+}
+
+class NumberUtil{
+	public static boolean isArmstrong(int a) 
+	{
+		return a >= 0 && getDigitsPowSum(a) == a;
+	}
+	
+	public static int getDigitsPowSum(int a) 
+	{
+		int n = countDigits(a);
+		int total = 0;
+		while (a != 0) {
+			total += Math.pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return total;
+	}
+	
+	public static int countDigits(int a) 
+	{
+		return a == 0 ? 1 : (int)Math.log10(Math.abs(a)) + 1;
+	}
+	
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+	 	Sınıf Çalışması: Parametresi ile aldığı int türden gün, ay ve yıl bilgilerine ilişkin tarihin aşağıdaki açıklamalara
+	göre haftanın hangi gününe geldiğini döndüren getDayOfWeek isimli metodu yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot geçersiz bir tarih durumunda -1 değerine geri dönecektir
+		- Haftanın günü 1.1.1900 ile verilen tarih arasındaki (verilen tarih dahil) gün sayısının 7(yedi) ile bölümünden 
+		elde edilen kalan ile belirlenebilir. Buna göre değer sıfır ise "pazar", 1 ise "pazartesi", ..., 6 ise "cumartesi"
+		günlerine karşılık gelir
+		
+		- 1.1.1900 öncesindeki tarihler geçersiz sayılacaktır
+		- getDayOfWeek metodu ile birlikte 
+				
+		- İleride daha iyisi yazılacaktır parametresi ile aldığı int türden gün, ay ve yıl bilgilerine ilişkin tarihin
+		hafta sonu olup olmadığınıu test eden isWeekend ve hafta içi olup olmadığını test eden isWeekday metotlarını yazınız.
+		Bu iki metot tarih geçerlilik kontrolü yapmayacaktır
+		
+		- İleride daha yazılacaktır
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		GetDayOfWeekTest.run();		
+	}
+}
+
+class GetDayOfWeekTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Gün ay ve yıl bilgilerini giriniz?");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (day == 0)
+				break;
+			
+			DateUtil.printDateTR(day, month, year);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		int dayOfWeek = getDayOfWeek(day, month, year);
+		
+		if (dayOfWeek == -1) {
+			System.out.println("Geçersiz tarih");
+			return;
+		}
+		
+		switch (dayOfWeek) {
+		case 0 -> System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);
+		case 1 -> System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);
+		case 2 -> System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);			
+		case 3 -> System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);			
+		case 4 -> System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);
+		case 5 -> System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);		
+		case 6 -> System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);			
+		}
+		
+		System.out.println(isWeekend(day, month, year) ? "Bugün kurs var. Tekrar yaptınız mı?" : "Kurs günü yaklaşıyor. Tekrar yapmayı unutmayınız"); // ifade daha kısaltılabilir. İleride göreceğiz
+		
+	}
+
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays;
+		
+		if (year < 1900 || (totalDays = getDayOfYear(day, month, year)) == -1)
+			return -1;
+		
+		for (int y = 1900; y < year; ++y) 
+			totalDays += isLeapYear(y) ? 366 : 365;
+		
+		return totalDays % 7;
+	}
+
+	public static boolean isWeekend(int day, int month, int year)
+	{
+		int dayOfWeek = getDayOfWeek(day, month, year);
+		
+		return dayOfWeek == 0 || dayOfWeek == 6;
+	}
+	
+	public static boolean isWeekday(int day, int month, int year)
+	{
+		return !isWeekend(day, month, year);
+	}
+	
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year))
+			return -1;
+		
+		int totalDays = day;
+		
+		switch (month - 1) {
+		case 11:
+			totalDays += 30;
+		case 10:
+			totalDays += 31;
+		case 9:
+			totalDays += 30;
+		case 8:
+			totalDays += 31;
+		case 7:
+			totalDays += 31;
+		case 6:
+			totalDays += 30;
+		case 5:
+			totalDays += 31;
+		case 4:
+			totalDays += 30;
+		case 3:
+			totalDays += 31;
+		case 2:
+			totalDays += isLeapYear(year) ? 29 : 28;
+		case 1:
+			totalDays += 31;			
+		}
+		
+		return totalDays;
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{		
+		return  1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);		
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days;
+		
+		days = switch (month) {
+			case 4, 6, 9, 11 -> 30;		
+			case 2 -> isLeapYear(year) ? 29 : 28;			
+			default -> 31;			
+		};
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+		 	
+	 Koşul operatörünün ikinci ve üçüncü operandı void bir ifade olamaz
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		a < b ? Sample.foo() : Sample.bar(); //errror
+		
+	}
+}
+
+
+
+class Sample{
+	public static void foo() 
+	{
+		System.out.println("foo");
+	}
+	
+	public static void bar() 
+	{
+		System.out.println("bar");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+		 	
+	 Yukarıdaki örnekte çözğmleme bu sekilde yapılır
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		if(a < b)
+			Sample.foo();
+		else
+			Sample.bar();
+		
+	}
+}
+
+
+
+class Sample{
+	public static void foo() 
+	{
+		System.out.println("foo");
+	}
+	
+	public static void bar() 
+	{
+		System.out.println("bar");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+		 	
+	Koşul operatörünün bir kullanımı. Örnekte parantez kullanımına sentaks açısından gerek yoktur
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+
+		System.out.print("Üçüncü sayiyi giriniz : ");
+		int c = Integer.parseInt(kb.nextLine());
+		
+		int min;
+				
+		min = a < b ? a < c ? a : c : b < c ? b : c;
+		
+		System.out.printf("min = %d%n", min);
+		
+	}
+}
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+		 	
+	Yukarıdaki örnekte koşul operatörünün operandlarını parantez içerisine almak okunabilirliği artırır
+	
+	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Birinci sayiyi giriniz : ");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("İkinci sayiyi giriniz : ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+
+		System.out.print("Üçüncü sayiyi giriniz : ");
+		int c = Integer.parseInt(kb.nextLine());
+		
+		int min;
+				
+		min = (a < b) ? (a < c ? a : c) : (b < c ? b : c);
+		
+		System.out.printf("min = %d%n", min);
+		
+	}
+}
+
+
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+Method Overloading: 
+
+	Bir sınıf içerisinde aynı isimde metot yazılması durumuna "method overloading" denir.
+	Bu kavram aynı isimde fakat farklı sınıflarda olan metotlar için geçerli değildir.
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki durum "method overloading" değildir. Çünkü aynı isimde olan metotlar farklı sınıflardadır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		Sample.foo();
+		Mample.foo();
+		
+	}
+}
+
+class Sample{
+	public static void foo() 
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+class Mample{
+	public static void foo() 
+	{
+		System.out.println("Mample.foo");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Anahtar Notlar: Bir sınıf içerisinde AYNI metottan birden fazla olamaz. Bu durumda bir metodun "overload" edilebilmesi
+	için kendisiyle aynı isimde olanlardan FARKLI olması gerekir. Aşağıdaki maddelerde metodun AYNI ya da FARKLI olmasına
+	ilişkin detaylar anlatılmaktadır 
 ----------------------------------------------------------------------------------------------------------------------*/
 
 
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun erişim belirleyicisinin "overload" işlemine etkisi yoktur. Yani errişim belirleyicilerin farklı olması
+	metodu farklı yapmaz 
+	
+	 Bir sınıf içerisinde AYNI metottan birden fazla olamaz. Bu durumda bir metodun "overload" edilebilmesi
+	için kendisiyle aynı isimde olanlardan FARKLI olması gerekir.
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+
+		
+	}
+}
+
+class Sample{
+	public static void foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun static olup olmamasının da overload işlemine etkisi yoktur 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+
+		
+	}
+}
+
+class Sample{
+	public static void foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public void foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun geri dönüş değeri bilgisinin de overload işlemine etkisi yoktur 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+
+		
+	}
+}
+
+class Sample{
+	public static void foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static int foo() //ERROR 
+	{
+		System.out.println("Sample.foo");
+		
+		return 10;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun parametre isimlerinin de overload işlemine etkisi yoktur 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+
+		
+	}
+}
+
+class Sample{
+	public static void foo(int a, int b) //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void foo(int a, int b) //ERROR 
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun "overload" edilebilmesi için metodun parametre tür bilgisi ve parametrelerin diziliminin farklı olması 
+	gerekir.  Buna genel olarak "parametrik yapı" diyebiliriz 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+	}
+}
+
+class Sample{
+	public static void foo() 
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void foo(int a) 
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo(double a) 
+	{
+		System.out.println("Sample.foo double");
+	}
+	
+	public static void foo(int a, double b) 
+	{
+		System.out.println("Sample.foo int double");
+	}
+	
+	public static void foo(double a, int b) 
+	{
+		System.out.println("Sample.foo double int");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir sınıf içerisinde metodun ismi ve parametrik yapısının ikisine birden o metodun "imzası (signature)" diyelim.
+	 
+	Kural: Bir sınıf içerisinde aynı imzaya sahip 1(bir)'den fazla metot bildirimi geçersizdir  	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+	}
+}
+
+class Sample{
+	public static void foo()  //foo
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void foo(int a)  //foo, int
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo(double a)  //foo, double
+	{
+		System.out.println("Sample.foo double");
+	}
+		
+	public static void foo(int a, double b) //foo , int , double
+	{
+		System.out.println("Sample.foo int double");
+	}
+	
+	public static void foo(double a, int b) //foo, double, int
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void bar() //bar 
+	{
+		System.out.println("Sample.bar ");
+	}
+	
+	public static void bar(int a) //bar, int
+	{
+		System.out.println("Sample.bar int");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metot çağrısında derleyicinin hangi metodun çağrılacağına karar vermesi sürecine "method overload resolution"
+	ya da kısaca "overload resolution" denir  	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Metot çağrısında argümanlar ile karşılık geldikleri parametrelerin türlerinin aynı olduğu o isimde bir metot sınıf
+	 içerisinde varsa o çağrılır (best match)  	 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10, b = 20;
+		double c = 30;
+		
+		Sample.foo(c, b);
+	}
+}
+
+class Sample{
+	public static void foo()  //foo
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void foo(int a, int b)  //foo,int,int
+	{
+		System.out.println("Sample.foo int int");
+	}
+	
+	public static void foo(int a)  //foo, int
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo(double a)  //foo, double
+	{
+		System.out.println("Sample.foo double");
+	}
+		
+	public static void foo(int a, double b) //foo , int , double
+	{
+		System.out.println("Sample.foo int double");
+	}
+	
+	public static void foo(double a, int b) //foo, double, int
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void bar() //bar 
+	{
+		System.out.println("Sample.bar ");
+	}
+	
+	public static void bar(int a) //bar, int
+	{
+		System.out.println("Sample.bar int");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	 Tam uyum (best match) yoksa overload resolution işlemi aşağıdaki gibi yapılır:
+	 1. Aday metotlar (candidate methods) belirlenir: Çağrılan metot ile aynı isimde olan tüm metotlardır.
+	 
+	 2. Uygun metotlar (applicable methods) belirlenir: Aday metotlar içerisindeki, parametre sayısı çağrıdaki argüman
+	 sayısı ile aynı olan ve argümanlardan karşılık geldikleri parmetrelere otomatik (implicit) tür dönüşümünün geçerli
+	 olduğu metotlardır.
+	 
+	 3. En uygun metot (the most applicable method) belirlenir: Uygun metotlar içerisinde daha kaliteli, ya da daha kalitesiz
+	 olmayan dönüşümü sunan metottur. Ya da başka bir deyişle "en uygun metot öyle bir metottur ki, argümanlardan parametrelere
+	 yapılan dönüşümler kalite olarak yarışa sokulduğunda daha iyi ya da daha kötü olmayan dönüşümü sunar"
+	 
+	 Dönüşümün kalitesi aşağıdaki kurallara göre belirlenir:
+	 T1 argümanın türü, T2 ve T3 yarıştırılan uygun metotların T1'e ilişkin argümana karşılık geldiği parametresinin 
+	 türleri olsun:
+	 
+	 1. T1 -> T2 ve T1 -> T3 otomatik dönüşümlerinde T2 veya T3'den biri T1 ile aynı ise aynı olan dönüşüm daha kalitelidir.
+	 Örneğin:
+	 int -> int *
+	 int -> double
+	 
+	 2. T1 -> T2 ve T1 -> T3 otomatik dönüşümlerinde T2'den T3'e otomatik dönüşüm var, T3'den T2'ye otomatik dönüşüm yok ise
+	 T2 kalitelidir
+	 Örneğin:
+	 int -> long *
+	 int -> float
+	 
+	 ya da örneğin
+	 
+	 short -> int *
+	 short -> double
+	 
+	 
+	 Burada aday metotlar bulunamazsa VEYA aday metotlar var ancak uygun metotlar bulunamazsa VEYA uygun metotlar var ancak
+	 en uygun metot yoksa error oluşur. 	 
+	 
+	 Yukarıdaki anlatım "overload resolutiıon" kavramının basitleştirilmiş bir anlatımıdır 
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1. Aday Metotlar: 1, 2, 3, 4, 5
+ 	2. Uygun metotla: 1, 2, 3
+ 	3. En uygun metot: 1
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10;
+		short b = 20;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample{
+	public static void foo(int a, int b)  //#1
+	{
+		System.out.println("Sample.foo int int");
+	}
+	
+	public static void foo(double a, int b)  //#2
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void foo(int a, long b)  //#3
+	{
+		System.out.println("Sample.foo int long");
+	}
+		
+	public static void foo(int a) //#4
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#5
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#6
+	{
+		System.out.println("Sample.bar int");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	 Tam uyum (best match) yoksa overload resolution işlemi aşağıdaki gibi yapılır:
+	 1. Aday metotlar (candidate methods) belirlenir: Çağrılan metot ile aynı isimde olan tüm metotlardır.
+	 
+	 2. Uygun metotlar (applicable methods) belirlenir: Aday metotlar içerisindeki, parametre sayısı çağrıdaki argüman
+	 sayısı ile aynı olan ve argümanlardan karşılık geldikleri parmetrelere otomatik (implicit) tür dönüşümünün geçerli
+	 olduğu metotlardır.
+	 
+	 3. En uygun metot (the most applicable method) belirlenir: Uygun metotlar içerisinde daha kaliteli, ya da daha kalitesiz
+	 olmayan dönüşümü sunan metottur. Ya da başka bir deyişle "en uygun metot öyle bir metottur ki, argümanlardan parametrelere
+	 yapılan dönüşümler kalite olarak yarışa sokulduğunda daha iyi ya da daha kötü olmayan dönüşümü sunar"
+	 
+	 Dönüşümün kalitesi aşağıdaki kurallara göre belirlenir:
+	 T1 argümanın türü, T2 ve T3 yarıştırılan uygun metotların T1'e ilişkin argümana karşılık geldiği parametresinin 
+	 türleri olsun:
+	 
+	 1. T1 -> T2 ve T1 -> T3 otomatik dönüşümlerinde T2 veya T3'den biri T1 ile aynı ise aynı olan dönüşüm daha kalitelidir.
+	 Örneğin:
+	 int -> int *
+	 int -> double
+	 
+	 2. T1 -> T2 ve T1 -> T3 otomatik dönüşümlerinde T2'den T3'e otomatik dönüşüm var, T3'den T2'ye otomatik dönüşüm yok ise
+	 T2 kalitelidir
+	 Örneğin:
+	 int -> long *
+	 int -> float
+	 
+	 ya da örneğin
+	 
+	 short -> int *
+	 short -> double
+	 
+	 
+	 Burada aday metotlar bulunamazsa VEYA aday metotlar var ancak uygun metotlar bulunamazsa VEYA uygun metotlar var ancak
+	 en uygun metot yoksa error oluşur. 	 
+	 
+	 Yukarıdaki anlatım "overload resolutiıon" kavramının basitleştirilmiş bir anlatımıdır 
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1. Aday Metotlar: 1, 2, 3, 4, 5
+ 	2. Uygun metotlar: 3
+ 	3. En uygun metot: 3
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		short a = 10;
+		double b = 20;
+		
+		Sample.foo(a, b);
+
+	}
+}
+
+class Sample{
+	public static void foo(double a, int b)  //#1
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void foo(int a, float b)  //#2
+	{
+		System.out.println("Sample.foo int float");
+	}
+	
+	public static void foo(int a, double b)  //#3
+	{
+		System.out.println("Sample.foo int double");
+	}
+		
+	public static void foo(int a) //#4
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#5
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#6
+	{
+		System.out.println("Sample.bar int");
+	}
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1. Aday Metotlar: yok
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10;
+		float b = 20;
+		
+		Sample.fo(a, b);
+
+	}
+}
+
+class Sample{
+	public static void foo(int a, int b)  //#1
+	{
+		System.out.println("Sample.foo int int");
+	}
+	
+	public static void foo(double a, int b)  //#2
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void foo(int a, double b)  //#3
+	{
+		System.out.println("Sample.foo int double");
+	}
+		
+	public static void foo(int a) //#4
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#5
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#6
+	{
+		System.out.println("Sample.bar int");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1. Aday Metotlar: 1, 2, 3, 4, 5
+ 	2. Uygun Metotlar: yok
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10;
+		float b = 20;
+		
+		Sample.foo(a, b); //error
+
+	}
+}
+
+class Sample{
+	public static void foo(int a, int b)  //#1
+	{
+		System.out.println("Sample.foo int int");
+	}
+	
+	public static void foo(double a, int b)  //#2
+	{
+		System.out.println("Sample.foo double int");
+	}
+	
+	public static void foo(int a, long b)  //#3
+	{
+		System.out.println("Sample.foo int long");
+	}
+		
+	public static void foo(int a) //#4
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#5
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#6
+	{
+		System.out.println("Sample.bar int double");
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1. Aday Metotlar: 1, 2, 3, 4
+ 	2. Uygun Metotlar: 1, 2
+ 	3. En uygun metot: yok
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		short a = 10;
+		short b = 20;
+		
+		Sample.foo(a, b); //error, ambiguity
+
+	}
+}
+
+class Sample{
+	public static void foo(long a, int b)  //#1
+	{
+		System.out.println("Sample.foo long int");
+	}
+	
+	public static void foo(int a, long b)  //#2
+	{
+		System.out.println("Sample.foo int long");
+	}
+		
+	public static void foo(int a) //#3
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#4
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#5
+	{
+		System.out.println("Sample.bar int double");
+	}
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	tam uyum var best macth
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		short a = 10;
+		short b = 20;
+		
+		Sample.foo((long)a, (int)b); 
+
+	}
+}
+
+class Sample{
+	public static void foo(long a, int b)  //#1
+	{
+		System.out.println("Sample.foo long int");
+	}
+	
+	public static void foo(int a, long b)  //#2
+	{
+		System.out.println("Sample.foo int long");
+	}
+		
+	public static void foo(int a) //#3
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#4
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#5
+	{
+		System.out.println("Sample.bar int double");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1.Aday metotlar : 1, 2, 3, 4
+ 	2. Uygun metotlar: 1
+ 	3. En uygun metot: 1
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		short a = 10;
+		short b = 20;
+		
+		Sample.foo((long)a, b); 
+
+	}
+}
+
+class Sample{
+	public static void foo(long a, int b)  //#1
+	{
+		System.out.println("Sample.foo long int");
+	}
+	
+	public static void foo(int a, long b)  //#2
+	{
+		System.out.println("Sample.foo int long");
+	}
+		
+	public static void foo(int a) //#3
+	{
+		System.out.println("Sample.foo int");
+	}
+	
+	public static void foo() //#4
+	{
+		System.out.println("Sample.foo");
+	}
+	
+	public static void bar(int a, double b) //#5
+	{
+		System.out.println("Sample.bar int double");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	1.Aday metotlar : 1, 2, 3, 4
+ 	2. Uygun metotlar: 1, 2, 3, 4
+ 	3. En uygun metot: 1
+ 	
+ 	
+ 	T1 ->T2 T1-> T3------  T2 -> T3 ve T2 ye donusmuyor T2
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		short a = 10;
+		
+		MyMath.abs(a); 
+
+	}
+}
+
+class MyMath{
+	public static int abs(int a)  //#1
+	{
+		System.out.println("MyMath.abs int");
+		return a < 0 ? -a : a;
+	}
+	
+	public static double abs(double a)  //#2
+	{
+		System.out.println("MyMath.abs double");
+		
+		return a < 0 ? -a : a;
+	}
+		
+	public static float abs(float a)  //#3
+	{
+		System.out.println("MyMath.abs float");
+		
+		return a < 0 ? -a : a;
+	}
+	
+	public static long abs(long a)  //#4
+	{
+		System.out.println("MyMath.abs long");
+		
+		return a < 0 ? -a : a;
+	}
+}
 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+    
 
------------------------------------------------------------
------------------------------------------------------------
+	Nesne Yönelimli Programalama Tekniği (NYPT): Bu tekniği tek bir cümle ile anlatmak pek mümkün değildir. Ancak bu 
+	tekniğin detaylarını bilen bir kişiye "sınıflar kullanarak program yazma tekniğidir" şeklinde bir cümle söylenebilir.
+	Aslında NYPT anahtar kavramların birleşiminden oluşur. Bu anahtar kavramlar birbirlerinden tamamen ayrık değildir. 
+	Bu kavramlar içiçe geçmiş daireler gibi düşünülebilir. Tüm anahtar kavramların temelinde kodu daha iyi algılanabilir 
+	olması ve daha iyi yönetilmesi vardır. Örneğin benzer işi yapan metotlara aynı ismi vermek iyi bir tekniktir. Çünkü 
+	bu durumda bu metotları kullanan kişiler "çok şey var" duygusundan uzaklaşıp "az şey var" gibi bir algı oluştururlar.
+	Bu da hatırlamayı kolaylaştırır.
+	
+	NYPT insanın doğayı algılayış biçimini model almıştır. İnsanlar herşeyi nesne biçiminde ele alıp onu kullanırlar. 
+	Örneğin, elimizdeki bilgisayarlar farklı bile olsa konuşurken bizim için hepsi bilgisayardır. Gerekirse onların 
+	başka özellikler ayrıca söylenebilir.
+	
+	NYPT'de artık ağırlıklı olarak fonksiyonlarla (Java'da metot) değil, sınıflarla konuşulur. Böylece yine "çok şey var"
+	algısından uzaklaştırılıp "az şey var" algısı oluşturulur. Bu anlamda aslında kullanan programcı açısından detaylar
+	metotların detayları gizlemesinden daha fazla gizlenebilir. Böylelikle kullanım kolaylaşır. Bunların detayları ileride
+	daha iyi anlaşılacaktır 
 
 -----------------------------------------------------------
 -----------------------------------------------------------
