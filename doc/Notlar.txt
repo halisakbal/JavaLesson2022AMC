@@ -14001,7 +14001,7 @@ class MyMath{
 
 -----------------------------------------------------------
 -----------------------------------------------------------
-    
+    12.01.2023 - Perşembe - 16.Ders
 
 	Nesne Yönelimli Programalama Tekniği (NYPT): Bu tekniği tek bir cümle ile anlatmak pek mümkün değildir. Ancak bu 
 	tekniğin detaylarını bilen bir kişiye "sınıflar kullanarak program yazma tekniğidir" şeklinde bir cümle söylenebilir.
@@ -14019,6 +14019,1011 @@ class MyMath{
 	algısından uzaklaştırılıp "az şey var" algısı oluşturulur. Bu anlamda aslında kullanan programcı açısından detaylar
 	metotların detayları gizlemesinden daha fazla gizlenebilir. Böylelikle kullanım kolaylaşır. Bunların detayları ileride
 	daha iyi anlaşılacaktır 
+
+
+
+
+	Değişkenlerin Ömürleri (storage duration):
+	Bir değişkenin ömrü onun bellekte yer kapladığı zaman aralığıdır. Yani bir değişkenin ömrü o değişkenin bellekte
+	yaratılmasıyla (yer ayrılmasıyla) yok edilmesi arasında geçen zaman aralığıdır.
+	Anımsanacağı gibi bir değişkenin faaliyet alanı (scope) derleme zamanına ilişkindir. Ömür ise çalışma zamanına 
+	ilişkindir. 
+		
+	
+	Bir Java programı için çalışma zamanında "stack" ve "heap" denilern iki ayrı belek alanı yaratılır. Her uygulama 
+	için bu alanlar ayrı olarak yaratılırlar. Aşağı seviyede başka alanlar da bulunur. Stack ve heap RAM'de organize
+	organize edilir. Stack ve heap'in yeri (yani hangi adresten başladığı) ve uzunluğu sistemden sisteme değişebilmektedir.
+	Program çalıştırılırken bu alanların uzunlukları belirlenebilirç. Belirlenmezse default değerler kullanılır. İşte bu
+	default değerler sistemden sisteme farklı olabilir. 
+	
+	Stack'te yaratma ve yok etme işlemi birer makine komutuyla çok hızlı bir biçimde yapılır. Stack alanınde değişken
+	yaratılması ve yok edilmesi stack veri yapısı ile gerçekleştirilir
+	
+
+	Veri yapısı (Data structure): Verileri belirli bir algoritmaya göre tutan ve verilere istenildiği zaman erişebilen
+	yapılara denir.
+
+	Stack veri yapısında eleman ekleme işlemine "push", eleman silme işlemine de "pop" denilmektedir.
+	
+	Anahtar Notlar: Stack veri yapısı "LIFO (Last In First Out)" kuyruk sistemine göre çalışan veri yapısıdır. LIFO'da
+	ekleme sona yapılır. Eleman elde etme (ve silme) sondan yapılır. Yani son eklenen eleman elde edilir. Örneğin bir 
+	pişti oyununda ortada biriken kağıtlar için bu veri yapısı kullanılabilir. Ya da örneğin editör programların 
+	"undo-redo" işlemleri de stack veri yapısı ile gerçekleştirilebilir
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+ 	Yerel değişkenler ve parametre değişkenleri stack alanında yaratılırlar. Yerel bir değişken, akış bakımından bildirim
+	noktasına gelindiğinde yaratılır, bildirildiği bloğun sonuna gelindiğinde yok edilir. Zaten değişkenlere faaliyet
+	alanı bakımından bildirildikleri bloktan sonra erişilememesinin nedeni budur. Parametre değişkenleri metot çağrıldığında
+	yaratılır, metot çağrısı bittiğinde yok edilir. 
+	
+	Anahtar Notlar: Her ne kadar faaliyet alanı (scope) ve ömür (storage duration) farklı zamanlara (compile or run) 
+	ilişkin kavramlar olsa da aralarında mantıksal bir bağ söz konusudur. Yani aralarında dolaylı da olsa da bir ilişkin 
+	bulunur 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		//....
+		//..
+		
+		{
+			int a; //akış buraya geldi stack yaratılır
+			double b = 4.5; // stackte yaratılı initialize edilir
+		}//a ve b yok edilir 
+		
+		
+		Sample.foo(5,  3.4); //metodun parametre değişkenleri yaratılır ve argümanlarına degerleri ilgili parametreler aktarılır 
+		//metot çagrısı bittiginde parametre değişkneleride yok edilir
+		
+		
+		//
+		
+		
+		Sample.foo(12, 2.2);//metodun parametre değişkenleri yaratılır ve argümanlarına degerleri ilgili parametreler aktarılır 
+		//metot çagrısı bittiginde parametre değişkneleride yok edilir
+		
+	}
+}
+
+
+class Sample{
+	public static void foo(int a, double b) 
+	{
+		int x; //Akış buraya geldiğinde x stack'de yaratılır
+		//..
+		
+		//..
+	}//x in hayatı burada sonlanır
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Sınıfın elemanı bir alt programsa buna metot denir.
+	Sınıfın elemanı bir değişken ise veri elemanı (member field/variable ya da yalnızca field) denir. Sınıfın başka 
+	elemanları da olabilir. Bunlar ileride ele alaıncaktır  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın içerisinde tüm metotların dışında herhangi bir yerde bildirilen değişkenlere sınıfın veri elemanları denir.
+	Sınıf veri elemanları da metotlarda olduğu gibi erişim belirleyiciye sahiptir, veri elemanları da static ve non-static
+	olarak bildirilebilirler. Sınıf elemanlarının erişim belirleyiciler konusuna kdar tüm veri elemanlarını da public
+	olarak bildireceğiz  
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+	}
+}
+
+class Sapmle{
+	
+	public int a;
+	private static double b;
+	
+	public static void foo(int x)
+	{
+		//...
+		
+	}
+	
+	protected int c;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir sınıf içerisinde aynı isimde birden fazla veri elemanı bildirimi yapılamaz  
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sapmle{
+	
+	public int a;
+	private static double b; //error duplicate
+	
+	public static void foo(int x)
+	{
+		//...
+		
+	}
+	
+	protected int b;//error duplicate
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Birden fazla veri elemanı aynı türdense, static veya non-static olma durumları aynı ise, ve aynı erişim
+	  belirleyiciye sahipse virgül ile ayrılarak yani listelenerek bildirim yapılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sapmle{
+	
+	public int a, b;
+	private static double d, c, y, t; 
+	
+	public static void foo(int x)
+	{
+		//...
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Sınıf bildirimi aslında bir tür bildirimidir (user defined type)
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+
+package orhn;
+
+class Sensor{
+	//...
+}
+
+class Student{
+	//..
+	int id;
+	String name;
+	
+}
+
+class Person{
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Sınıf bildirimi bir tür bildirimi olduğuna göre sınıf türünden değişkenler bildirilebilir. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a;
+		double b, c;
+		
+		Sensor s;
+		Student stdnt;
+		Person p;
+		
+	}
+}
+
+class Sensor{
+	//...
+}
+
+class Student{
+	//..
+	int id;
+	String name;
+	
+}
+
+class Person{
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Java'da türler kategori olarak iki gruba ayrılır: değer türleri (value types), referans türleri (reference types).
+	 
+	 T bir tür olmak üzere T türden bir değişken içerisinde tutulan değer bir adres iese bu durumda T bir referans türüdür.
+	 Adres değilse T bir değer türüdür. Java'da temel türler değer türleridir. Yani temel türden bir değişken içerisinde
+	 adres tutulmaz. Programcı tarafından bildirilen türler (user defined type) (sınıflar, enum sınıflar, interface'ler vb.)
+	 referans türleridir.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Sınıf türünden bir değişkene (aslında referans türünden bir değişkene) "referans değişken" ya da kısaca "referans"
+	 denir. 
+	 
+	 Anahtar Notlar: Java'da "referans" sözcüğü "adres" anlamında da kullanılır. Örneğin "bir nesnenin adresi" yerine
+	 "bir nesnenin referansı" demek de aynıdır. Ancak buradaki referans terimi bir değişkeni değil adresi temsil eder.
+	 "Referans değişken ya da kısaca referans" içerisinde adres (referans) tutan değişkendir.     
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a; //value type
+		double b, c;
+		
+		Sensor s; // s bir referans 
+		Student st; //st bir referans
+		Person p;//p bir referans
+		
+	}
+}
+
+class Sensor{
+	//...
+}
+
+class Student{
+	//..
+	int id;
+	String name;
+	
+}
+
+class Person{
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  - Sınıf türünden bellekte ayrılan bir alana o sınıf türünden nesne (object) denir
+	 
+	 - Nesneler heap'de yaratılırlar. Java'da stack'te nesne yaratılamaz
+	 
+	 - Java'da nesnenin kendisi değil adresi aynı türden bir referansta tutulabilir
+	 
+	 - Bir nesneyi yaratmak için new operatörü kullanılır. new operatörü kullanımının genel biçimi:
+	 	new <sınıf ismi>([argümanlar]);   
+	 	
+	 new operatörü özel amaçlı, tek operandlı (unary) ve önek (prefix) durumda bir operatördür. new operatörü nesne
+	 yaratılması aaşamaları tamamlandıktan sonra heap'te yaratılmış olan nesnenin adresini (referansını) üretir. Bu durumda
+	 bu operatörün ürettiği değer yani adres aynı türden bir referansa atanabilir
+	 
+	 - Bir nesne ilgili sınıf türünden bir örnektir. Buna "instance" da denir 
+	 
+	 
+	 - Aşağıdaki örnekte, nesne yönelimli programlama anlamında "s" birer nesne DEĞİLDİR. Bunlar ilgili sınıflar
+	 türünden referanslardır.  ** ile belirtilen deyimle birlikte "s referansı yaratılan nesneyi gösteriyor" duruma gelir.
+	 
+	 - Referans ve nesne kavramları birbirinden farklıdır. Referans değişken bir nesneyi gösterebilir	
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sensor s; //s bir referans (değişken)
+		
+		java.util.Scanner kb = new java.util.Scanner(System.in); 
+				
+		s = new Sensor(); //**
+	}
+}
+
+class Sensor{
+	//...
+}
+
+class Student{
+	//..
+	int id;
+	String name;
+	
+}
+
+class Person{
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Sınıfın non-static veri elemanları her nesne için ayrıca yaratılırlar ve nesnenin içerisinde bulunurlar. Sınıfon 
+	non-static veri elemanlarına sınıf dışından (yani başka bir sınıfın içinden) referans ve nokta operatörü ile 
+	erişilir. Nokta operatörü özel amaçlı, iki operandlı ve araek durumundadır. Nokta operatörünün birinci operandı bir
+	referans, ikinci operandı bir veri elemanı ise bu durumda nokta operatörü o veri elemanına ilişkin değişkeni üretir.
+	Aslında referans ve nokta operatörü ile veri elemanı ismi kullanımı o referansın gösterdiği nesnenin ilgili veri elemanına
+	erişmek anlamına gelir. Her new işlemi yeni bir nesne yaratmak demektir
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k; //referans
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.a = 10;
+		s.b = true;
+		
+		k.a = 20;
+		k.b = false;
+		
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte s yerel değişkenine değer atanmadan kullanıldığı için error oluşur
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s; //referans
+
+		s.a = 10; //error
+		s.b = true; //error
+
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+
+		
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Farklı türden referanslar birbirine tür dönüştürme operatörü ile bile atanamazlar 
+	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s; //referans
+		Mample m;
+
+		s = new Sample();
+		
+		m = (Mample)s;
+
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+class Mample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Non-static veri elemanlarına nesnenin yaratılması aşamasında default değerler atanır. Default değer türe özgü
+	mantıksal sıfır değeridir. Örneğin int türü için sıfırken, boolean türü için false değeridir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k; //referans
+
+		s = new Sample();
+		k = new Sample();
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir nesnenin uzunluğu yani bellekte kapladığı alan "en az non-static veri elemanlarının toplam uzunluğu kadardır".
+	Bu durumda aynı türden nesneler için aynı uzunlukta yer ayrılır. Farklı türden nesneler için farklı veri elemanları
+	olabileceğinden aynı uzunlukta yer ayrılması gerekmez
+	
+	Türü ne olursa olsun referansların (referans değişkenlerin) uzunlukları aynıdır. Bu da adreslenebilecek sayıları
+	tutabilecek uzunluktur. Örneğin 64 bit sistemlerde tüm referanslar 64 bit(8 byte) uzunluğundadır. Benzer şekilde 
+	32 bit sistemlerde tüm referanslar 32 bit (4 byte) uzunluğundadır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aynı türden iki referansın biribirine atanması iki referansın da artık aynı nesneyi göstermesi demektir. Bu durumda
+	hangi referans ile nesneye erişildiğinin bir önemi yoktur. Aşağıdaki örnekte **'da s referansı gösterdiği nesneden 
+	kopartılmış ve k'nın içerisindeki adres atandığından artık k ve s aynı nesneyi gösterir duruma gelmiştir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k; //referans
+
+		s = new Sample(); 
+		k = new Sample(); 
+		
+		s.a = 20;
+		s.b = true;
+		
+		k.a = 15;
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("***************************************");
+		
+		s = k; //**
+
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("***************************************");
+		
+		++s.a;
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("***************************************");
+		
+		
+		
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte değer türü kullanıldığından b'nin değeri artırılmış olmaz
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10;
+		int b;
+		
+		b = a;
+		
+		System.out.printf("a = %d%n", a); //10
+		System.out.printf("b = %d%n", b); //10
+		System.out.println("***************************************");
+		
+		++a;
+		
+		System.out.printf("a = %d%n", a); //11
+		System.out.printf("b = %d%n", b); //10
+		System.out.println("***************************************");
+		
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte değer türü kullanıldığından b'nin değeri artırılmış olmaz
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.a = 20;
+		s.b = true;
+		
+		k.a = 55;
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("************************");
+		
+		s = k;
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("************************");
+		
+		++s.a;
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("************************");
+		
+		s = new Sample();
+		
+		--s.a;
+		
+		System.out.printf("s.a = %d%n", s.a);
+		System.out.printf("s.b = %b%n", s.b);
+		System.out.printf("k.a = %d%n", k.a);
+		System.out.printf("k.b = %b%n", k.b);
+		System.out.println("************************");
+		
+	}
+}
+
+class Sample{
+	public int a;
+	public boolean b;
+	
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir metodun geri dönüş değeri referans olabilir. Bu durumda bu metodun geri dönüş değerine ilişkin return deyimine
+	ait ifadenin türünün aynı türden bir referans olması gerekir. Bir metodun parametre değişkeni bir referans olabilir. 
+	Bu durumda metot aynı türden bir referans ile çağrılabilir. Metoda geçilen referans ile metot içerisinde ilgili nesneye
+	erişilmiş olur. Referans parametreli bir metot aldığı referansa ilişkin nesne üzerinde değişiklik yapabilir. Bu durumda
+	bu değişiklik metodu çağıran kodda ki referans üzerinden yine aynı nesneye erişildiği için görülebilir
+	
+	Aşağıdaki örnekte createDate metodu içeride yaratmış olduğu nesnenin referansını geri dönüş değeri olarak vermektedir.
+	printDate metodu parametresi ile aldığı Date türden referansın gösterdiği nesneye erişip bilgilerini ekrana yazdırmaktadır.
+	changeDate metodu aldığı referansa ilişkin nesneye erişerek day, month ve year elemanlarını değiştirmiştir. Örneği 
+	çalıştırarak durumu	gözlemleyiniz
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Date birtDate;
+		
+		birtDate = DateUtil.createDate(11, 9, 1990);
+		
+		DateUtil.printDate(birtDate);
+		DateUtil.changeDate(birtDate, 5, 3, 2021);
+		DateUtil.printDate(birtDate);
+		
+	}
+}
+
+class DateUtil{
+	public static void changeDate(Date d, int day, int month, int year) 
+	{
+		//..
+		d.day = day;
+		d.month = month;
+		d.year = year;
+	}
+	
+	public static Date createDate(int day, int month, int year)
+	{
+		Date d = new Date();
+		d.day = day;
+		d.month = month;
+		d.year = year;
+		
+		return d;
+	}
+	
+	public static void printDate(Date d)
+	{
+		System.out.printf("%02d/%02d/%04d%n", d.day, d.month, d.year);
+		System.out.println("****************************************");
+	}
+
+}
+
+class Date{
+	public int day, month, year;
+	//..
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örneği inceleyiniz
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Date birtDate;
+		
+		birtDate = new Date();
+		birtDate.day = 23;
+		birtDate.month = 06;
+		birtDate.year = 1992;
+		
+		DateUtil.printDate(birtDate);
+		
+		DateUtil.changeDate(birtDate, 24, 10, 1997);
+		
+		DateUtil.printDate(birtDate);
+		
+		
+		Date newDate = DateUtil.createDate(13, 02, 2002);
+		
+		DateUtil.printDate(newDate);
+		
+		DateUtil.changeDate(newDate, 11, 01, 2022);
+		
+		DateUtil.printDate(newDate);
+		
+		newDate = birtDate; //artık iki referans ta aynı adresi temsil eder
+
+		DateUtil.printDate(newDate);
+		DateUtil.printDate(birtDate);
+	}
+}
+
+class DateUtil{
+	public static void changeDate(Date d, int day, int month, int year) 
+	{
+		//..
+		
+		d.day = day;
+		d.month = month;
+		d.year = year;
+	}
+	
+	public static Date createDate(int day, int month, int year)
+	{
+		Date d = new Date();
+		d.day = day;
+		d.month = month;
+		d.year = year;
+		
+		return d;
+	}
+	
+	public static void printDate(Date d)
+	{
+		System.out.printf("%02d/%02d/%04d%n", d.day, d.month, d.year);
+		System.out.println("****************************************");
+	}
+
+}
+
+class Date{
+	public int day, month, year;
+	//..
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte main içerisindeki yerel değişken olan a'nın değeri metot çağrısından sonra değişmez. Çünkü
+	argümanlardan parametrelere aktarım bir atama işlemidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 20;
+		
+		Sample.foo(a);
+		
+		System.out.printf("a = %d%n", a);	
+	}
+}
+
+
+class Sample{
+	public static void foo(int a) 
+	{
+		System.out.printf("foo:a = %d%n", a);
+		++a;
+		System.out.printf("foo:a = %d%n", a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte main içerisindeki yerel değişken olan a'nın değeri metot çağrısından sonra değişmez. Çünkü
+	argümanlardan parametrelere aktarım bir atama işlemidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a;
+		
+		a = 20;
+		
+		Sample.foo(a);
+		
+		System.out.printf("a = %d%n", a);
+		System.out.println("**************************");
+		
+		
+		/*******************************************/
+		
+		Mample m = new Mample();
+		
+		m.a = 14;
+		
+		Sample.foo(m.a);
+		
+		System.out.printf("m.a = %d%n", m.a);
+		System.out.println("**************************");
+		
+		
+		/*******************************************/
+		
+		Sample.changeValueMample(m);
+		System.out.printf("m.a = %d%n", m.a); //15
+	}
+}
+
+
+class Sample{
+	public static void foo(int a) 
+	{
+		System.out.printf("foo:a = %d%n", a);
+		++a;
+		System.out.printf("foo:a = %d%n", a);
+	}
+	
+	public static void changeValueMample(Mample m) 
+	{
+		System.out.printf("m.a = %d%n", m.a); //14
+		++m.a; //15
+		System.out.printf("m.a = %d%n", m.a); //15
+	}
+}
+
+class Mample{
+	int a;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir veri elemanı bir tanedir. Bu elemanın kullanılması için nesne yaratılması gerekmez. Sınıfın
+	static bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. Sınıfın static veri elemanları
+	sınıfın bir elemanı ilk kez kullanıldığında yaratılır ve programın sonuna kadar yaşarlar. Ayrıntılar ileride ele
+	alınacaktır. Sınıfın static veri elemanlarına da yaratıldıklarında default değerler atanır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		System.out.printf("Sample.a = %d%n", Sample.a);
+		System.out.printf("Sample.b = %b%n", Sample.b);
+		
+		Sample.a = 10;
+		Sample.b = true;
+				
+		System.out.printf("Sample.a = %d%n", Sample.a);
+		System.out.printf("Sample.b = %b%n", Sample.b);	
+		
+	}
+}
+
+
+class Sample{
+	public static int a;
+	public static boolean b;
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir veri elemanı bir tanedir. Bu elemanın kullanılması için nesne yaratılması gerekmez. Sınıfın
+	static bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. Sınıfın static veri elemanları
+	sınıfın bir elemanı ilk kez kullanıldığında yaratılır ve programın sonuna kadar yaşarlar. Ayrıntılar ileride ele
+	alınacaktır. Sınıfın static veri elemanlarına da yaratıldıklarında default değerler atanır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		System.out.printf("Sample.a = %d%n", Sample.a);
+		System.out.printf("Sample.b = %b%n", Sample.b);
+		
+		Sample.a = 10;
+		Sample.b = true;
+		
+		Sample s1 = new Sample();
+		s1.c = 12;
+		
+		Sample s2 = new Sample();
+		s2.c = 15;
+				
+		System.out.printf("Sample.a = %d%n", Sample.a);
+		System.out.printf("Sample.b = %b%n", Sample.b);	
+		
+		
+		System.out.printf("s1.a = %d%n", s1.a);
+		System.out.printf("s1.b = %b%n", s1.b);	
+		System.out.printf("s1.c = %d%n", s1.c);	
+		
+		System.out.printf("s1.a = %d%n", s2.a);
+		System.out.printf("s1.b = %b%n", s2.b);	
+		System.out.printf("s2.c = %d%n", s2.c);
+		
+		s1.a = 19;
+		s2.a = 23;
+		System.out.printf("s1.a = %d%n", s1.a);
+		System.out.printf("s2.a = %d%n", s2.a);
+	}
+}
+
+class Sample{
+	public static int a;
+	public static boolean b;
+	public int c;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir veri elamanına sınıf dışından sınıf ismi ile erişilemez. Çünkü non-static veri elemanı
+	nesneye özeldir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample.a = 10; // non static oldugu için gecersiz
+		
+	}
+}
+
+
+class Sample{
+	public int a;
+	public boolean b;
+}
+
+
+
 
 -----------------------------------------------------------
 -----------------------------------------------------------
