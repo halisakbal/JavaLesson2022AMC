@@ -15028,6 +15028,777 @@ class Sample{
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+18.01.2023 Çarşamba - 17.Ders
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir veri elemanına sınıf dışından referans ve nokta operatörü ile de erişilebilir. Sınıf ismi ile
+	erişmekten farkı yoktur. Sınıfın static veri elemanlarına bu şekilde okunabilirlik açısından tercih edilmemelidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+		
+		s.a = 10;
+		s.b = true;
+		
+		System.out.printf("s.a = %d%n", Sample.a);
+		System.out.printf("s.b = %b%n", Sample.b);
+	}
+}
+
+
+class Sample{
+	public static int a;
+	public static boolean b;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte sayaçlar, sınıfları kullanan programcı tarafından oluşturulmuştur. Programcı sayacı artırmayı
+	veya azaltmayı unutabilir. Ayrıca başka sınıflar ve dolayısıyla nesneler için de sayaç tutulması gerektiğinde sayaç
+	için kullanılacak değişkenlere isim bulma zorluğu oluşabilir. Üstelik oyun bir çok başka işlem de içerdiğinden
+	programlaması karmaşıklaşabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		WarGameApp.run();
+	}
+}
+
+class WarGameApp{
+	public static void run() 
+	{
+		int soldierCount = 0, alienCount = 0;
+		
+		for (int i = 0; i < 10; i++) {
+			Alien a = new Alien();
+			
+			//
+			
+			++alienCount;
+		}
+		
+		for (int i = 0; i < 20; i++) {
+			Soldier s = new Soldier();
+			
+			//
+			
+			++soldierCount;
+		}
+		
+		///
+		
+		System.out.printf("Number of Soldiers : %d%n", soldierCount);
+		System.out.printf("Number of Aliens : %d%n", alienCount);
+		
+	}
+}
+
+class Soldier{
+	public int title;
+	public int numberOfGuns;
+}
+
+class Alien{
+	public int numberOfArms;
+	public int color;
+}
+
+class Building{
+	
+}
+
+class Civilian{
+	
+}
+
+class Animal{
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki örnekte anlatılan problemler aşağıdaki gibi static veri elemanları kullanılarak çözülebilir. Böylece kod
+	karmaşıklığı da azaltılmış olur. Şüphesiz örnekte detaylar göz ardı edilmiştir. Burada anlatılmak istenen konulara
+	odaklanmanız önerilir. ** ile belirtilen kod parçaları şu an için önemsizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		WarGameApp.run();
+	}
+}
+
+class WarGameApp{
+	public static void run() 
+	{	
+		for (int i = 0; i < 10; i++) {
+			Alien a = new Alien();
+			
+			//
+			
+		}
+		
+		for (int i = 0; i < 20; i++) {
+			Soldier s = new Soldier();
+			
+			//
+
+		}
+		
+		
+		///
+		
+		System.out.printf("Number of Soldiers : %d%n", Soldier.count);
+		System.out.printf("Number of Aliens : %d%n", Alien.count);
+		
+	}
+}
+
+class Soldier{
+	public static int count;
+	public int title;
+	public int numberOfGuns;
+	
+	public Soldier() //***
+	{
+		++count;
+	}
+}
+
+class Alien{
+	public int numberOfArms;
+	public int color;
+	public static int count;
+	
+	public Alien()//***
+	{
+		++count;
+	}
+}
+
+class Building{
+	public static int count;
+	
+}
+
+class Civilian{
+	public static int count;
+	
+}
+
+class Animal{
+	public static int count;
+	
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu sınıf dışından referans ve nokta operatörü ile çağrılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+		
+		s.foo();
+	}
+}
+
+class Sample{
+	public void foo()
+	{
+		//
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu sınıf dışından sınıf ismi ve nokta operatörü ile çağrılamaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample.foo(); //error
+	}
+}
+
+class Sample{
+	public void foo()
+	{
+		//
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu sınıf dışından sınıf ismi ve nokta operatörü ile çağrılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample.foo(); //error
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		//
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu sınıf dışından referans ve nokta operatörü ile çağrılabilir. Sınıf ismi ile çağırmaktan
+	farkı yoktur. Sınıfın static metotlarının bu şekilde çağrılması okunabilirlik açısından tercih edilmemelidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+		
+		s.foo(); //olur ama kullanmayın 
+		
+		Sample.foo(); //bu daha uygun
+	}
+}
+
+class Sample{
+	public static void foo()
+	{
+		//
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu içerisinde o sınıfın non-static bir veri elemanına doğrudan erişilebilir. Doğrudan 
+	erişilen veri elamanı metot çağrısında kullanılan referansın gösterdiği nesnenin veri elemanı olur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		k.foo(20);
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("k.x = %d%n", k.x);
+		
+	}
+}
+
+class Sample{
+	public int x;
+	
+	public void foo(int a)
+	{
+		x = a;
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu içerisinde o sınıfın non-static bir metodu doğrudan çağrılabilir. Doğrudan çağrılan
+	metot, çağıran metodu çağıran referans ile çağrılmış olur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		k.foo(20);
+		
+		System.out.printf("s.x = %d%n", s.x);
+		System.out.printf("k.x = %d%n", k.x);
+		
+	}
+}
+
+class Sample{
+	public int x;
+	
+	public void foo(int a)
+	{
+		bar(a);
+	}
+	
+	public void bar(int a)
+	{
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın 
+    non-static elemanlarına (member) doğrudan erişilebilir
+
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu içerisinde o sınıfın static bir veri elemanına doğrudan erişilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		System.out.printf("s.x = %d%n", Sample.x);
+		k.foo(20);
+		System.out.printf("k.x = %d%n", Sample.x);
+		
+	}
+}
+
+class Sample{
+	public static int x;
+	
+	public void foo(int a)
+	{
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir metodu içerisinde o sınıfın static bir metodu doğrudan çağrılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		System.out.printf("s.x = %d%n", Sample.x);
+		k.foo(20);
+		System.out.printf("k.x = %d%n", Sample.x);
+		
+	}
+}
+
+class Sample{
+	public static int x;
+	
+	public void foo(int a)
+	{
+		x = a;
+		bar(a);
+	}
+	
+	public static void bar(int a)
+	{
+		System.out.println("bar");
+	}
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın 
+    static elemanlarına doğrudan erişilebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın 
+   	tüm elemanlarına doğrudan erişilebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu içerisinde o sınıfın non-static bir veri elemanına doğrudan erişim yoktur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		System.out.printf("s.x = %d%n", Sample.x);
+		k.foo(20);
+		System.out.printf("k.x = %d%n", Sample.x);
+		
+	}
+}
+
+class Sample{
+	public int x;
+	
+	public static void foo(int a)
+	{
+		x = a; //error
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu içerisinde o sınıfın non-static bir metodu doğrudan çağrılamaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s, k;
+		
+		s = new Sample();
+		k = new Sample();
+		
+		s.foo(10);
+		System.out.printf("s.x = %d%n", Sample.x);
+		k.foo(20);
+		System.out.printf("k.x = %d%n", Sample.x);
+		
+	}
+}
+
+class Sample{
+	public int x;
+	
+	public static void foo(int a)
+	{
+		bar(a);
+	}
+	
+	public void bar(int a) 
+	{
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın 
+    non-static elemanlarına doğrudan erişilemez
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu içerisinde o sınıfın static bir veri elemanına doğrudan erişilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+
+		Sample.foo(10);
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+class Sample{
+	public static int x;
+	
+	public static void foo(int a)
+	{
+		x = a;
+	}
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın static bir metodu içerisinde o sınıfın non-static bir metodu doğrudan çağrılamaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+
+		Sample.foo(10);
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+class Sample{
+	public static int x;
+	
+	public static void foo(int a)
+	{
+		bar(a);
+	}
+
+	public static void bar(int a)
+	{
+		x = a;
+	}
+
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın 
+    static elemanlarına doğrudan erişilebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın 
+    yalnızca static elemanlarına doğrudan erişilebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Yukarıdaki sekiz maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın tüm
+    elemanlarına doğrudan erişilebilirken, static bir metodu içerisinde aynı sınıfın yalnızca static elemanlarına 
+    doğrudan erişilebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte bar metodunun doğrudan çağrılmadığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+	}
+}
+
+class Sample{
+	public int x;
+	
+	public static void foo(int a)
+	{
+		Sample s = new Sample();
+		s.bar(a);
+	}
+
+	public void bar(int a)
+	{
+		x = a;
+	}
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Soru: Bir sınıfın metodunun non-static mi, static mi olduğuna nasıl karar vereceğiz?
+	
+	Cevap: Bu soru için basit bir kural şu şekilde benimsenebilir: "Bir metot non-static elemanlara doğrudan erişmeyecekse 
+	static yapılmalıdır". Bu durumda "non-static bir metot için kesinlikle non-static bir elemana doğrudan erişiyordur" 
+	anlamı çıkar. Bu da okunabilirliği artırır. Yani aslında "bir metodu yapmak non-static metotların okunabilirliğini
+	artırır". Ayrıca non-static metotların sınıf dışında referans ve nokta operatörü ile çağrılması gerektiğinden static
+	yapılabilecek olan ancak non-static bir metot boşu boşuna referans ile çağrılmış olur. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Katsayıları klavyeden girilen ikinci dereceden bir denklemin köklerini bulup ekrana yazdıran
+	programı yazınız. 
+	
+	
+	Sınıfın aşağdaki kullanım şekli sınıfların yararı 100 birim düşünülürse %1 civarındadır. Şüphesiz örnek farklı 
+	yaklaşımlarla da yazılabilir. Sınıfın kullanımını göstermek için yazılmıştır. İleride daha iyisi yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		EquationSolverApp.run();
+	}
+}
+
+class EquationSolverApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("ikinci dereceden denklemin katsayılarını giriniz : ");
+		System.out.print("a : ");
+		double a = Double.parseDouble(kb.nextLine());
+		System.out.print("b : ");
+		double b = Double.parseDouble(kb.nextLine());
+		System.out.print("c : ");
+		double c = Double.parseDouble(kb.nextLine());
+		
+		QuadraticEquationRootInfo ri = EquationSolverUtil.findQuadraticEquationRoots(a, b, c);
+		
+		if(ri.exists)
+			System.out.printf("x1 = %f, x2 = %f%n", ri.x1, ri.x2);
+		else
+			System.out.println("Gerçek kök yok.....");
+	}
+}
+
+class QuadraticEquationRootInfo{
+	public double x1, x2;
+	public boolean exists;
+}
+
+class EquationSolverUtil{
+	public static double getDelta(double a, double b, double c) 
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public static QuadraticEquationRootInfo findQuadraticEquationRoots(double a, double b, double c) 
+	{
+		double delta = getDelta(a, b, c);
+		QuadraticEquationRootInfo ri = new QuadraticEquationRootInfo();
+		
+		if(delta >= 0) {
+			double sqrtDelta = Math.sqrt(delta);
+			ri.x1 = (-b + sqrtDelta) / (2 * a);
+			ri.x2 = (-b - sqrtDelta) / (2 * a);
+			ri.exists = true;
+		}
+		
+		return ri;
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Point p1, p2;
+		
+		p1 = new Point();
+		p2 = new Point();
+		
+		p1.x = 10;
+		p1.y = 20;
+		p2.x = 15;
+		p2.y = 25;
+		
+		p1.print();
+		p2.print();
+		
+		int x = 13, y = 16;
+		
+		double d;
+		
+		d = p1.distance(x, y);
+		
+		System.out.printf("Distance : %f%n", d);
+		
+		d = p1.distance(p2);
+		
+		System.out.printf("Distance : %f%n", d);
+		
+		d = p1.distance();
+		
+		System.out.printf("Distance : %f%n", d);
+	}
+}
+
+
+class Point{
+	public int x;
+	public int y;
+	
+	public double distance() 
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other) 
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(int a, int b) 
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public void offset(int dx, int dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%d, %d)%n", x, y);
+	}
+}
+
+
+
 -----------------------------------------------------------
 -----------------------------------------------------------
 
