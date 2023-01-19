@@ -1,73 +1,79 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	
+	Complex sınıfı
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
 
 class App {	
 	public static void main(String [] args)
-	{
-		Point p1, p2;
+	{		
+		Complex z1 = new Complex(2, 5);
+		Complex z2 = new Complex(-3, 4.56);
+		Complex z;
 		
-		p1 = new Point();
-		p2 = new Point();
+
+		z = z1.add(z2);
+		z.print();
 		
-		p1.x = 10;
-		p1.y = 20;
-		p2.x = 15;
-		p2.y = 25;
+		z = z1.add(3.4);
+		z.print();
 		
-		p1.print();
-		p2.print();
+		z = Complex.add(3.5, z1);
+		z.print();
 		
-		int x = 13, y = 16;
-		
-		double d;
-		
-		d = p1.distance(x, y);
-		
-		System.out.printf("Distance : %f%n", d);
-		
-		d = p1.distance(p2);
-		
-		System.out.printf("Distance : %f%n", d);
-		
-		d = p1.distance();
-		
-		System.out.printf("Distance : %f%n", d);
 	}
 }
 
 
-class Point{
-	public int x;
-	public int y;
+class Complex{
+	public double real;
+	public double imag;
 	
-	public double distance() 
+	public static Complex add(double a1, double b1, double a2, double b2)
 	{
-		return distance(0, 0);
+		return new Complex(a1 + a2, b1 + b2);
+	}
+
+	
+	public Complex()
+	{
 	}
 	
-	public double distance(Point other) 
+	public Complex(double re)
 	{
-		return distance(other.x, other.y);
+		real = re;
 	}
 	
-	public double distance(int a, int b) 
+	public Complex(double re, double im)
 	{
-		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+		real = re;
+		imag = im;
 	}
 	
-	public void offset(int dx, int dy)
+	public double getNorm()
 	{
-		x += dx;
-		y += dy;
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	
+	public static Complex add(double value, Complex z) 
+	{
+		return add(value, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double value)
+	{
+		return add(real, imag, value, 0);
 	}
 	
 	public void print()
 	{
-		System.out.printf("(%d, %d)%n", x, y);
+		System.out.printf("|%.2f, %.2f| = %f%n", real, imag, getNorm());
 	}
+	
 }
-
-

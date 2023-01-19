@@ -15801,6 +15801,1176 @@ class Point{
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+19.01.2023 Perşembe - 18.Ders
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Random sınıfının parametresiz nextInt metodu int türü sınırları içerisinde rasgele üretilmiş bir sayıya geri döner
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.println(r.nextInt());
+		}
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Random sınıfının int parametreli nextInt metodyu [0, bound) aralığında rasgele üretilmiş int türden bir sayıya 
+	geri döner
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d ", r.nextInt(100)); //[0, 100]
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Random sınıfında Java 17 ile birlikte dolaylı olarak iki tane int türden parametreli bir nextInt metodu da vardır.
+	Anahtar Notlar: Java 17 ile birlikte RandomGenerator denilen bir arayüz (interface) eklenmiştir. Random sınıfı da 
+	bu arayüzü desteklemektedir (implements). Bu arayüzle birlikte bir çok yeni meotot da Random sınıfına eklenmiştir.
+	Arayüz kavramı ve anlatılan kısımların detayları ileride ele alınacaktır. Şu an için bu metotların Random sınıfına
+	ait olduğunun bilinmesi yeterlidir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d ", r.nextInt(20, 100)); //[20, 100]
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Java 17 öncesinde [a, b) aralığında rasgele sayı üretimi
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayiyi giriniz: ");
+		int a = Integer.parseInt(kb.nextLine());
+
+		System.out.print("İkinci sayiyi giriniz: ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d ", r.nextInt(b -a) + a); //[a, b)
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Java 17 öncesinde [a, b] aralığında rasgele sayı üretimi
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayiyi giriniz: ");
+		int a = Integer.parseInt(kb.nextLine());
+
+		System.out.print("İkinci sayiyi giriniz: ");
+		int b = Integer.parseInt(kb.nextLine());
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d ", r.nextInt(b -a + 1) + a); //[a, b]
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Random sınıfının nextLong metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d%n", r.nextLong());
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Random sınıfı Java 17 ile dolaylı olarak eklenen  nextLong metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d%n", r.nextLong(10_000_000_000L));
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Random sınıfı Java 17 ile dolaylı olarak eklenen  nextLong metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%d%n", r.nextLong(1L, 10_000_000_000L));
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Random sınıfının nextDouble metodu [0, 1) aralığında rasgele üretilmiş double türden bir sayıya geri döner
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%f%n", r.nextDouble()); [0,1)
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Random sınıfının Java 17 ile dolaylı olarak eklenen nextDouble metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%f%n", r.nextDouble(5));
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Random sınıfının Java 17 ile dolaylı olarak eklenen nextDouble metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%f%n", r.nextDouble(3.14, 6.18));
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Random sınıfının nextBoolean metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("%b%n", r.nextBoolean());
+		}
+		
+		System.out.println();
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Sınıf Çalışması: Hilesiz bir paranın yazı gelme olasılığının yaklaşık olarak 0.5 olduğunu bulan basit bir 
+	simülasyon programı yazınız
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		CoinSimulationApp.run();
+	}
+}
+
+class CoinSimulationApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		CoinSumilation cs = new CoinSumilation();
+		
+		for(;;) {
+			System.out.print("Parayi kac kez atmak istiyorsunuz?");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0)
+				break;
+			
+			cs.run(n);
+			
+			System.out.printf("Yazı gelme olasiliği: %f%n", cs.p);
+		}
+	}
+}
+
+
+class CoinSumilation{
+	public double p;
+	
+	public static int getTailCount(int n) 
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; i++) {
+			count += r.nextInt(2);
+		}
+		
+		return count;
+	}
+	
+	public void run(int n) 
+	{
+		p = getTailCount(n) / (double)n;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Sınıf Çalışması: Hilesiz bir paranın yazı gelme olasılığının yaklaşık olarak 0.5 olduğunu bulan basit bir 
+	simülasyon programı yazınız
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		CoinSimulationApp.run();
+	}
+}
+
+class CoinSimulationApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		CoinSumilation cs = new CoinSumilation();
+		
+		for(;;) {
+			System.out.print("Parayi kac kez atmak istiyorsunuz?");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0)
+				break;
+			
+			cs.run(n);
+			
+			System.out.printf("Yazı gelme olasiliği: %f%n", cs.p);
+		}
+	}
+}
+
+
+class CoinSumilation{
+	public double p;
+	
+	public static int getTailCount(int n) 
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; i++) {
+			if(r.nextBoolean())
+				++count;
+		}
+		
+		return count;
+	}
+	
+	public void run(int n) 
+	{
+		p = getTailCount(n) / (double)n;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Sınıf Çalışması: İki zar atıldığında zarların (ikisinin de aynı) olasılığının yaklaşık olarak 
+	hesaplayan simülasyon programını yazınız
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		CoinSimulationApp.run();
+	}
+}
+
+class CoinSimulationApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		SameDiceSumilation ds = new SameDiceSumilation();
+		
+		for(;;) {
+			System.out.print("Kaç kez zar atmak istiyorsunuz?");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0)
+				break;
+			
+			ds.run(n);
+			
+			System.out.printf("Çift gelme olasiliği: %f%n", ds.p);
+		}
+	}
+}
+
+
+class SameDiceSumilation{
+	public double p;
+	
+	public static boolean areSame(java.util.Random r)
+	{
+		return r.nextInt(1, 7) == r.nextInt(1, 7); //java 17
+	}
+	
+	public static int getSameCount(int n) 
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; i++) {
+			if(areSame(r))
+				++count;
+		}
+		
+		return count;
+	}
+	
+	public void run(int n) 
+	{
+		p = getSameCount(n) / (double)n;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	  Sınıf Çalışması: İki zar atıldığında zarların (ikisinin de aynı) olasılığının yaklaşık olarak 
+	hesaplayan simülasyon programını yazınız
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		CoinSimulationApp.run();
+	}
+}
+
+class CoinSimulationApp{
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		SameDiceSumilation ds = new SameDiceSumilation();
+		
+		for(;;) {
+			System.out.print("Kaç kez zar atmak istiyorsunuz?");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if(n <= 0)
+				break;
+			
+			ds.run(n);
+			
+			System.out.printf("Çift gelme olasiliği: %f%n", ds.p);
+		}
+	}
+}
+
+
+class SameDiceSumilation{
+	public double p;
+	
+	public static boolean areSame(java.util.Random r)
+	{
+		return r.nextInt(6) + 1 == r.nextInt(6) + 1;
+	}
+	
+	public static int getSameCount(int n) 
+	{
+		java.util.Random r = new java.util.Random();
+		int count = 0;
+		
+		for (int i = 0; i < n; i++) {
+			if(areSame(r))
+				++count;
+		}
+		
+		return count;
+	}
+	
+	public void run(int n) 
+	{
+		p = getSameCount(n) / (double)n;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Tohum değeri setSeed metodu ile değiştirilebilir. Aşağıdaki örnek her çalıştırıldığında aynı dizilim elde edilir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		java.util.Random r = new java.util.Random();
+		
+		r.setSeed(1500);
+		
+		for (int i = 0; i < 10; i++) 
+			System.out.printf("%d ", r.nextInt(0, 100));
+		
+		
+		System.out.println();
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Aşağıdaki örnekte rasgele üretilen ilk 10 sayının dizilimi her çalıştırmada farklı olur. İlk 10 sayının diziliminin
+	 aynı gelme olasılığı çok düşüktür. İkinci üretilen 10 sayı klavyeden alınan tohum değerine göre üretilir. Bu durumda
+	 örneğin her çalıştırmada tohum değeri 100 olarak girilirse ikinci 10 sayının dizilimi hep aynı olacaktır. Kodu 
+	 çalıştırıp sonucu gözlemleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz :");
+		long seed = Long.parseLong(kb.nextLine());
+				
+		for (int i = 0; i < 10; i++) 
+			System.out.printf("%d ", r.nextInt(0, 100));
+		
+		System.out.println();
+		
+		r.setSeed(seed);
+		
+		for (int i = 0; i < 10; i++) 
+			System.out.printf("%d ", r.nextInt(0, 100));
+		
+		System.out.println();
+		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	 Aşağıdaki örnekte rasgele üretilen ilk 10 sayının dizilimi her çalıştırmada farklı olur. İlk 10 sayının diziliminin
+	 aynı gelme olasılığı çok düşüktür. İkinci üretilen 10 sayı klavyeden alınan tohum değerine göre üretilir. Bu durumda
+	 örneğin her çalıştırmada tohum değeri 100 olarak girilirse ikinci 10 sayının dizilimi hep aynı olacaktır. Kodu 
+	 çalıştırıp sonucu gözlemleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		
+		java.util.Random r = new java.util.Random();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+
+		for(;;){
+			
+			System.out.print("Kaç tane nokta üretilsin:");
+			int count = Integer.parseInt(kb.nextLine());
+			
+			if(count <= 0)
+				break;
+			
+			System.out.print("Minimum deger giriniz: ");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Maksimum deger giriniz: ");
+			int b = Integer.parseInt(kb.nextLine());
+			
+			
+			System.out.println("------------------------------------");
+			for (int i = 0; i < count; i++) {
+				Point p = RandomPointGenerator.randomPoint(r, a, b);
+				
+				p.print();
+			}
+			System.out.println("------------------------------------");
+		}
+		
+	}
+}
+
+class RandomPointGenerator{
+	public static Point randomPoint(java.util.Random r, int a, int b) 
+	{
+		Point p = new Point();
+		
+		p.x = r.nextInt(a, b + 1);
+		p.y = r.nextInt(a, b + 1);
+		
+		return p;
+	}
+}
+
+class Point{
+	public int x;
+	public int y;
+	
+	public double distance() 
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other) 
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(int a, int b) 
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public void offset(int dx, int dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%d, %d)%n", x, y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Math sınıfının random metodu [0, 1) aralığında rasgele üretilmiş double türden bir değere geri döner. Bu metot 
+	içsel olarak her çağıramda aynı Random nesnesini kullanır. Bu metot ilk kez çağrıldığında kullandığı Random
+	nesnesi yaratılır ve her çağrıda bu nesne kullanılır. Aşağıdaki örneğin yaklaşık eşdeğeri:
+	 
+	 
+	 java.util.Random r = new java.util.Random();
+	
+	 for (int i = 0; i < 10; ++i)
+		System.out.println(r.nextDouble());
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random();
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.println(Math.random());
+		}
+		
+	}
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Nesne yaratılma adımları:
+	1. Bellekten yer ayrılır
+	2. non-static olan (ancak final olmayan) veri elemanlarına default degerler atanır
+	3. Constructor (ctor) çağrılır
+	
+	Bu üç adımın sonunda new operatörünün ürettiği deger yani nesnenin adresi(referans) elde edilir.
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	ctor aşağıdaki özelliklere sahip bir metottur:
+	- Sınıfı yazan programcı sınıfa hiçbir ctor yazmazsa parametresiz ctor'u (default ctor) derleyici tarafından içi
+	boş ve public olarak yazılır.
+	
+	- Sınıfı yazan programcı en az bir tane ctor yazarsa default ctor derleyici tarafından yazılmaz. Artık default
+	ctor'un yazılıp yazılmayacağına programcı karar verecektir
+	
+	- ctor overload edilebilir (constructor overloading)
+	
+	- Sınıfın ctor'u sınıf ismi ile aynı olan ve geri dönüş değeri kavramı olmayan bir metottur. Geri dönüş değeri bilgisi
+	yazılmaz. void da yazılmaz. Sınıf ismi ile aynı isimde bir metot yazılıp geri dönüş değeri bilgisi yazılırsa artık 
+	bu metot ctor olmaz. Şüphesiz bu şekilde bir metot yazılmamalıdır
+	
+	- ctor non-static bir metottur
+	
+	- ctor new operatörü ile nesne yaratılması sırasında çağrılır. Hangi ctor'un çağrılacağı derleme zamanında new operatörü
+	ile kullanımda geçilen argümanlara göre "method overload resolution" kurallarına göre belirlenir.
+	
+	- Programcı ctor'u çağıramaz. Programcı new operatörü ile ilgili ctor'un ÇAĞRILACAĞI kodun derleyici tarafından
+	üretilmesini sağlar.
+	
+	- ctor'dan önce non-static ve final olmayan veri elemanlarına default değerler atanmış olur 
+	
+	- ctor içerisinde return tek başına ctor'u sonlandırmak amaçlı kullanılabilir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s1, s2, s3, s4, s5;
+		
+		s1 = new Sample();
+		s2 = new Sample(10);
+		s3 = new Sample(3.4);
+		s4 = new Sample(3.4f);
+		s5 = new Sample(10, 1000000L);
+		
+	}
+}
+
+class Sample{
+	public Sample() //default ctor
+	{
+		System.out.println("default ctor");
+	}
+	
+	public Sample(int a) 
+	{
+		System.out.println("ctor has a int parameter");
+	}
+	
+	public Sample(float a)
+	{
+		System.out.println("ctor has a float parameter");
+	}
+	
+	public Sample(double a)
+	{
+		System.out.println("ctor has a double parameter");
+	}
+	
+	public Sample(int a, long b)
+	{
+		System.out.println("ctor has int and long parameter");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte Sample sınıfını yazan programcı int parametreli bir ctor yazdığı için derleyici artık default 
+	ctor'u yazmaz. Default ctor'un olması artık sınıfı yazan programcının karar vermesi gereken bir durumdur
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s1,s2;
+		
+		s1 = new Sample(); //error
+		s2 = new Sample(10);
+
+		
+	}
+}
+
+class Sample{
+	public Sample(int a) 
+	{
+		System.out.println("ctor has a int parameter");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	ctor'dan önce non-static ve final olmayan veri elemanlarına default değerler atanmış olur
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s1, s2, s3;
+		
+		s1 = new Sample();
+		System.out.println("-------------------------------");
+		s2 = new Sample(10, true);
+		System.out.println("-------------------------------");
+		s3 = new Sample(20);
+
+		
+	}
+}
+
+class Sample{
+	public int x;
+	public boolean y;
+	
+	public Sample() 
+	{
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+	
+	public Sample(int a, boolean b) 
+	{
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+	
+	public Sample(int a) 
+	{
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	ctor içerisinde birçok işlem yapılabilir. ctor'un temel işlevi nesne yaratıldığı noktada bir takım ilk işlemlerin
+	o nesne için yapılmasını sağlamaktır. Bun ilk işlemlerdeen en çok karşılaşılanı ctor içerisinde non-static veri
+	elemanlarına değer verilmesidir. Bu durumda nesne yaratıldığı zaman non-static veri elemanları istenen değerde
+	gelmiş olur 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s1, s2, s3;
+		
+		s1 = new Sample();
+		s2 = new Sample(10, true);
+		s3 = new Sample(20);
+		
+		System.out.printf("s1.x = %d, s1.y = %b%n", s1.x, s1.y);
+		System.out.printf("s2.x = %d, s2.y = %b%n", s2.x, s2.y);
+		System.out.printf("s3.x = %d, s3.y = %b%n", s3.x, s3.y);
+	}
+}
+
+class Sample{
+	public int x;
+	public boolean y;
+	
+	public Sample() 
+	{
+	}
+	
+	public Sample(int a, boolean b) 
+	{
+		x = a;
+		y = b;
+	}
+	
+	public Sample(int a) 
+	{
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	ctor içerisinde istenirse return tek başşına ctor'u sonlandırmak için kullanılabilir. Örnekte konuyu anlatmak için
+	kod bu şekilde yazılmıştır 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Sample s1, s2;
+		
+		s1 = new Sample(10);
+		s2 = new Sample(-20);
+		
+		System.out.printf("s1.x = %d, s1.y = %b%n", s1.x, s1.y);
+		System.out.printf("s2.x = %d, s2.y = %b%n", s2.x, s2.y);
+	}
+}
+
+class Sample{
+	public int x;
+	public boolean y;
+	
+	public Sample(int a) 
+	{
+		if(a >= 0)
+			return;
+		
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Random sınıfının tohum değeri parametreli ctor'u. Tohum değeri parametreli ctor ile aşağıdaki şu işlem bir hamlede
+	yapılmış olur:
+	
+	java.util.Random r = new java.util.Random();
+	
+	r.setSeed(100);
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Random r = new java.util.Random(100);
+		
+		for (int i = 0; i < 10; i++) 
+			System.out.printf("%d ", r.nextInt(100));
+		
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Anahtar Notlar: Sınıfı yazan programcı default dışında bir ctor yazdığında default ctor'u yazıp yazmayacağına nasıl 
+	karar verecektir? Aslında bu, yazılan sınıfa bağlıdır. Bunun için başlangıç düzeyinde şu soru sorulabilir:
+	"Bu sınıf türünden nesnenin default durumu var mı?" Örneğin Random sınıfının default ctor'u bu nesnenin default
+	durumudur. Yani tohum değerini her default ctor çağrısında mümkün olduğunca farklı verecek şekilde bir nesnenin
+	yaratılmasını sağlamaktır. Ancak bazı özel durumlarda sınıfı kullanan başka sınıflar ya da ortamlar (framework) 
+	default ctor olmasını isteyebilirler. Bu durumda programcı default ctor'u yazar
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Point sınıfı inceleme
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Point p1, p2, p3;
+		
+		p1 = new Point();
+		p2 = new Point(100);
+		p3 = new Point(100, 200);
+		
+		p1.print();
+		p2.print();
+		p3.print();
+	}
+}
+
+class Point{
+	public int x;
+	public int y;
+	
+	public Point()
+	{
+	}
+	
+	public Point(int a)
+	{
+		x = a;
+	}
+	
+	public Point(int a, int b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance() 
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other) 
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(int a, int b) 
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public void offset(int dx, int dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%d, %d)%n", x, y);
+	}
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Complex sınıfı
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Complex z1 = new Complex();
+		Complex z2 = new Complex(-3, 4.56);
+		Complex z3 = new Complex(4.3);
+		
+		z1.print();
+		z2.print();
+		z3.print();
+	}
+}
+
+
+class Complex{
+	public double real;
+	public double imag;
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public void print()
+	{
+		System.out.printf("|%.2f, %.2f| = %f%n", real, imag, getNorm());
+	}
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Complex sınıfı
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Complex z1 = new Complex(2, 5);
+		Complex z2 = new Complex(-3, 4.56);
+		Complex z;
+		
+
+		z = z1.add(z2);
+		z.print();
+		
+		z = z1.add(3.4);
+		z.print();
+		
+		z = Complex.add(3.5, z1);
+		z.print();
+		
+	}
+}
+
+
+class Complex{
+	public double real;
+	public double imag;
+	
+	public static Complex add(double a1, double b1, double a2, double b2)
+	{
+		return new Complex(a1 + a2, b1 + b2);
+	}
+
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	
+	public static Complex add(double value, Complex z) 
+	{
+		return add(value, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double value)
+	{
+		return add(real, imag, value, 0);
+	}
+	
+	public void print()
+	{
+		System.out.printf("|%.2f, %.2f| = %f%n", real, imag, getNorm());
+	}
+	
+}
 
 -----------------------------------------------------------
 -----------------------------------------------------------
