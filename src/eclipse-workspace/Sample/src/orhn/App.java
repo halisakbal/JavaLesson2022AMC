@@ -1,79 +1,97 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	Complex sınıfı
+	Sınıf Çalışması: Klavyeden kullanıcı adı ve şifre isteyen basit bir ATM uygulamasının bir parçasını aşağıdaki
+	açıklmalara göre yazınız.
+	Açıklamalar:
+	- Kullanıcı ad ve şifresi en fazla 3(üç) kez denenebilecektir.
+	
+	- Denemeler sırasında doğru giriş yapılırsa "Giriş başarılı", başarısız denemeler "Giriş başarız" yazısı basılacaktır
+	
+	- En fazla 3 deneme sonucunde başarısız olunmuşsa "Giriş başarısız. Artık deneme hakkınız biti!..." yazısı basılacaktır
+	
+	- Uygulama adı ve şifrenin doğruluğu program içerisinde belirlene bir kullanıcı adı ve şifre ile yapılacaktır.
+	
+	- Uygulama genel düşünerek yazılmalıdır
+	
+	- ATM uygulamasının sürekli çalıştığı varsayımıyla yazılması önerilir
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
 
 class App {	
 	public static void main(String [] args)
-	{		
-		Complex z1 = new Complex(2, 5);
-		Complex z2 = new Complex(-3, 4.56);
-		Complex z;
-		
+	{	
+		AtmApp.run(3);
+	}
+}
 
-		z = z1.add(z2);
-		z.print();
+class AtmApp{
+	
+	public static void doSucces(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-----------------------------------");
+		System.out.println("Giriş başarılı");
+		System.out.println("-----------------------------------");
+	}
+	
+	public static void doFail(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-----------------------------------");
+		System.out.println("Giriş başarısız. Artık deneme hakkınız bitti!....");
+		System.out.println("-----------------------------------");
+	}
+	
+	public static void doWorkForCard(AtmCard atmCard, int tryNum, java.util.Scanner kb)
+	{
+		int i = 0;
 		
-		z = z1.add(3.4);
-		z.print();
+		for (;  i < tryNum; ++i) {
+			System.out.print("Kullanıcı adını giriniz : ");
+			String username = kb.nextLine();
+			System.out.print("Şifrenizi giriniz : ");
+			String password = kb.nextLine();
+			
+			if(atmCard.isvalid(username, password))
+				break;
+			
+			if(i != tryNum - 1)
+				System.out.printf("Giriş başarısız. %d giriş hakkınız kaldı!...%n", tryNum -1 - i);
+			
+		}
 		
-		z = Complex.add(3.5, z1);
-		z.print();
+		if(i != tryNum)
+			doSucces(atmCard, kb);
+		else
+			doFail(atmCard, kb);
 		
+	}
+	
+	public static void run(int tryNum)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			System.out.println("Hoş geldiniz!...");
+			AtmCard atmCard = new AtmCard();
+			
+			doWorkForCard(atmCard, tryNum, kb);
+		}
 	}
 }
 
 
-class Complex{
-	public double real;
-	public double imag;
+class AtmCard{
+	public String username;
+	public String password;
 	
-	public static Complex add(double a1, double b1, double a2, double b2)
+	public AtmCard()
 	{
-		return new Complex(a1 + a2, b1 + b2);
-	}
-
-	
-	public Complex()
-	{
+		username = "orhan";
+		password = "2023";
 	}
 	
-	public Complex(double re)
+	public boolean isvalid(String uname, String passwd)
 	{
-		real = re;
+		return uname.equals(username) && passwd.equals(password);
 	}
-	
-	public Complex(double re, double im)
-	{
-		real = re;
-		imag = im;
-	}
-	
-	public double getNorm()
-	{
-		return Math.sqrt(real * real + imag * imag);
-	}
-	
-	
-	public static Complex add(double value, Complex z) 
-	{
-		return add(value, 0, z.real, z.imag);
-	}
-	
-	public Complex add(Complex other)
-	{
-		return add(real, imag, other.real, other.imag);
-	}
-	
-	public Complex add(double value)
-	{
-		return add(real, imag, value, 0);
-	}
-	
-	public void print()
-	{
-		System.out.printf("|%.2f, %.2f| = %f%n", real, imag, getNorm());
-	}
-	
 }
+
