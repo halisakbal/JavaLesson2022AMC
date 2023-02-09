@@ -18523,6 +18523,764 @@ class AtmCard{
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+09.02.2023 Perşembe - 20.Ders
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Yukarıdaki uygulamanın kullanıcı adını karttan okuyan sadece şifre isteyen versiyonu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		AtmApp.run(3);
+	}
+}
+
+class AtmApp{
+	
+	public static void doSucces(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-----------------------------------");
+		System.out.println("Giriş başarılı");
+		System.out.println("-----------------------------------");
+	}
+	
+	public static void doFail(AtmCard atmCard, java.util.Scanner kb)
+	{
+		System.out.println("-----------------------------------");
+		System.out.println("Giriş başarısız. Artık deneme hakkınız bitti!....");
+		System.out.println("-----------------------------------");
+	}
+	
+	public static void doWorkForCard(AtmCard atmCard, int tryNum, java.util.Scanner kb)
+	{
+		int i = 0;
+		
+		for (;  i < tryNum; ++i) {
+			System.out.print("Şifrenizi giriniz : ");
+			String password = kb.nextLine();
+			
+			if(atmCard.isvalid(password))
+				break;
+			
+			if(i != tryNum - 1)
+				System.out.printf("Giriş başarısız. %d giriş hakkınız kaldı!...%n", tryNum -1 - i);
+			
+		}
+		
+		if(i != tryNum)
+			doSucces(atmCard, kb);
+		else
+			doFail(atmCard, kb);
+		
+	}
+	
+	public static void run(int tryNum)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for(;;) {
+			System.out.println("Hoş geldiniz!...");
+			AtmCard atmCard = new AtmCard();
+			
+			doWorkForCard(atmCard, tryNum, kb);
+		}
+	}
+}
+
+
+class AtmCard{
+	public String username;
+	public String password;
+	
+	public AtmCard()
+	{
+		username = "orhan";
+		password = "2023";
+	}
+	
+	public boolean isvalid(String passwd)
+	{
+		return passwd.equals(password);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının concat metodu ile yazı birleştirmesi (concatenation) yapılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String firstName = "Orhan";
+		String lastName = "ÖZTÜRK";
+		
+		String fullName;
+		
+		fullName = firstName.concat(" ").concat(lastName);
+		
+		System.out.println(fullName);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının concat metodu ile yazı birleştirmesi (concatenation) yapılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String firstName = "Orhan";
+		String lastName = "Öztürk";
+		
+		String fullName;
+		
+		fullName = firstName.concat(" ").concat(lastName.toUpperCase());
+		
+		System.out.println(fullName);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	+ operatörünün iki operandı da String türündense, bu durumda bu operatör operandlara ilişkin yazıların birleştirilmiş
+	olduğu yeni bir String referansını üretir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String firstName = "Orhan";
+		String lastName = "Öztürk";
+		
+		String fullName;
+		
+		fullName = firstName +  " " + lastName;
+		
+		System.out.println(fullName);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	+ operatörünün iki operandı da String türündense, bu durumda bu operatör operandlara ilişkin yazıların birleştirilmiş
+	olduğu yeni bir String referansını üretir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String s1 = "ankara";
+		String s2 = "istanbul";
+		
+
+		s1 += "-"; //s1 = (String)(s1 + "-");
+		s1 += s2;
+		
+		System.out.println(s1);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	+ operatörünün operandlarından biri String türündense diğer operandın String karşılığı elde edilerek birleştirme
+	yapılır. Bu durumda derleyici bir kod üretir. Dönüşümün detayları ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bugün hava kac derece?");
+		int degree = Integer.parseInt(kb.nextLine());
+		
+		String prefix = "Bugün hava ";
+		String suffix = " derece";
+		
+		String message = prefix + degree + suffix;
+		
+		System.out.println(message);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte println metodu birleştirilmiş yazıyı argüman olarak alır ve ekrana basar. Şüphesiz birleştirme
+	işlemini println yapmaz. Çünkü metot çağrılmadan önce argüman ilişkin ifade hesaplanıri elde edilen değer ile
+	metot çağrılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bugün hava kac derece?");
+		int degree = Integer.parseInt(kb.nextLine());
+				
+		System.out.println("Bugün hava " + degree + " derece");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının tersini döndüren reverse isimli metodu StringUtil sınıfı
+	içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		ReverseTest.run();
+	}
+}
+
+class ReverseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String str = kb.nextLine();
+			
+			if ("elma".equals(str))
+				break;
+			
+			System.out.printf("Yazının tersi:%s%n", StringUtil.reverse(str));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String reverse(String str)
+	{
+		String s = "";
+		
+		for (int i = str.length() - 1; i >= 0; --i)
+			s += str.charAt(i);
+		
+		return s;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının substring metotları
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String s = "ankara";
+		System.out.println(s.substring(2));
+		System.out.println(s.substring(2, 5));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının substring metoduna beginIndex olarak yazının uzunluğu verilirse boş string referansına geri döner.
+	Yazının uzunluğundan büyük indeks numarası verildiğinde exception oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String s = "ankara";
+		System.out.println( s.substring(s.length()).isEmpty() ? "Boş string" : "Boş string değil");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının substring metoduna beginIndex ve endIndex değerleri sınırlar içerisinde olması koşuluyla (length dahil)
+	aynı değer verilirse boş string referansına geri döner
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		String s = "ankara";
+		System.out.println( s.substring(3, 3).isEmpty() ? "Boş string" : "Boş string değil");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		System.out.println("Java" + 10 + 20);
+		System.out.println("Java" + (10 + 20));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıların arasında - karakteri olacak birleştirilmiş bir
+	String oluşturan programı yazınız.
+	Örneğin ankara istanbul izmir girilirse -> ankara-istanbul-izmir
+	Örneğin: ankara girilirse -> ankara
+	Açıklamalar:
+	- Tamamı whitespace karakterlerden oluşan ve boş string yazıya eklenmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		ConcatWithHyphenApp.run();
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Yazıları girmeye baslayınız:");
+		String str = "";
+		String s;
+		
+		while (!(s = kb.nextLine()).equals("elma")) {
+			if(s.trim().isEmpty())
+				continue;
+			
+			str += s + "-";
+		}
+		
+		if(!str.isEmpty())
+			str = str.substring(0, str.length() - 1);
+		
+		System.out.println(str);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıların arasında - karakteri olacak birleştirilmiş bir
+	String oluşturan programı yazınız.
+	Örneğin ankara istanbul izmir girilirse -> ankara-istanbul-izmir
+	Örneğin: ankara girilirse -> ankara
+	Açıklamalar:
+	- Tamamı whitespace karakterlerden oluşan ve boş string yazıya eklenmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		ConcatWithHyphenApp.run();
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Yazıları girmeye baslayınız:");
+		String str = "";
+		
+		for (;;) {
+			String s = kb.nextLine();
+			
+			if(s.trim().isEmpty())
+				continue;
+			
+			if("elma".equals(s))
+				break;
+			
+			if(!str.isEmpty())
+				str += "-";
+			
+			str += s;
+		}
+		
+		System.out.println(str);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıların arasında - karakteri olacak birleştirilmiş bir
+	String oluşturan programı yazınız.
+	Örneğin ankara istanbul izmir girilirse -> ankara-istanbul-izmir
+	Örneğin: ankara girilirse -> ankara
+	Açıklamalar:
+	- Tamamı whitespace karakterlerden oluşan ve boş string yazıya eklenmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		ConcatWithHyphenApp.run();
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Yazıları girmeye baslayınız:");
+		String str = "";
+		
+		for (;;) {
+			String s = kb.nextLine();
+			
+			if(s.trim().isEmpty())
+				continue;
+			
+			if("elma".equals(s))
+				break;
+			
+			str += s + "-";
+		}
+		
+		if(!str.isEmpty())
+			str = str.substring(0, str.length() - 1);
+			
+		System.out.println(str);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının startsWith metodu 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Web adresini giriniz : ");
+		String url = kb.nextLine();
+		
+		if(!url.startsWith("http://"))
+			url = "http://" + url;
+		
+		System.out.println(url);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının endsWith metodu 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Web adresini giriniz : ");
+		String url = kb.nextLine();
+		
+		if(!url.startsWith(".com"))
+			url = url + ".com";
+		
+		System.out.println(url);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Email adresini giriniz : ");
+		String email = kb.nextLine();
+		
+		int atIdx = email.indexOf('@');
+		
+		if(atIdx != -1 && atIdx != email.length() - 1) {
+			if(email.substring(atIdx + 1).lastIndexOf('.') == -1)
+				email += ".com";
+			System.out.println(email);
+		} 
+		else
+			System.out.println("Geçersiz email");
+	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Character sınıfının isXXX metotları
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("Bir yazı giriniz : ");
+		String s = kb.nextLine();
+		
+		int whitespaceCount = 0, letterCount = 0, digitCount = 0;
+		
+		int len = s.length();
+		
+		for (int i = 0; i < len; i++) {
+			char c = s.charAt(i);
+			
+			if(Character.isWhitespace(c))
+				++whitespaceCount;
+			else if(Character.isLetter(c))
+				++letterCount;
+			else if(Character.isDigit(c))
+				++digitCount;
+			else
+				System.out.printf("%c", c);
+		}
+		
+		System.out.println();
+		System.out.printf("Bosluk sayisi: %d%n", whitespaceCount);
+		System.out.printf("Harf sayisi: %d%n", letterCount);
+		System.out.printf("Rakam sayisi: %d%n", digitCount);
+	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Character sınıfının toXXX metotları
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.println("Bir yazı giriniz : ");
+		String s = kb.nextLine();
+		
+		int len = s.length();
+		
+		for (int i = 0; i < len; i++) {
+			char c = s.charAt(i);
+			
+			if(!Character.isLetter(c))
+				continue;
+			
+			c = Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c);
+			
+			System.out.printf("%c", c);
+			
+		}
+		
+		System.out.println();
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının ilk harfi büyük geri kalan harfleri küçük olacak şekilde ve
+ 	harf dışı karakterler de aynı kalacak şekilde bir yazı döndüren capitalize isimli metodu StringUtil sınıfı 
+ 	içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+ 	Örnek: jAVA Programcısı ÇOK çalışmalıdır -> Java programcısı çok çalışmalıdır 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		CapitalizeTest.run();
+	}
+}
+
+class CapitalizeTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			
+			System.out.printf("(%s)%n", StringUtil.capitalize(s));
+			
+			if ("elma".equals(s))
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String capitalize(String str)
+	{
+		return str.isEmpty() ? "": Character.toUpperCase(str.charAt(0)) + str.substring(1).toLowerCase();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının ilk harfi büyük geri kalan harfleri küçük olacak şekilde ve
+ 	harf dışı karakterler de aynı kalacak şekilde bir yazı döndüren capitalizeWS isimli metodu StringUtil sınıfı 
+ 	içerisinde yazınız ve aşağıdaki kod ile test ediniz. Metot yazının başında boşluk karakterleri olsa bile ilk 
+ 	boşluk olmayan harfi büyütecek şekilde yazılacaktır
+ 	Örnek:   jAVA Programcısı ÇOK çalışmalıdır ->   Java programcısı çok çalışmalıdır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		CapitalizeTest.run();
+	}
+}
+
+class CapitalizeTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			
+			System.out.printf("(%s)%n", StringUtil.capitalizeWS(s));
+			
+			if ("elma".equals(s))
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String capitalizeWS(String str)
+	{
+		int i;
+		int len = str.length();
+		
+		for (i = 0; i < len && Character.isWhitespace(str.charAt(i)); i++) 
+			;
+		
+		return i == len ? str : str.substring(0, i) + Character.toUpperCase(str.charAt(i)) + str.substring(i + 1).toLowerCase();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının sadece başındaki boşluk karakterlerini atan trimLeading ve
+ 	sadece sonundaki boşluk karakterlerini atan trimTrailing isimli metotları StringUtil sınıfı içerisinde yazınız ve 
+ 	aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		TrimLeadingTrailingTest.run();
+	}
+}
+
+class TrimLeadingTrailingTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.printf("(%s)%n", StringUtil.trimLeading(s));			
+			System.out.printf("(%s)%n", StringUtil.trimTrailing(s));			
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String trimLeading(String str)
+	{
+		int i;
+		int len = str.length();
+		
+		for (i = 0; i < len && Character.isWhitespace(str.charAt(i)); i++) 
+			;
+
+		return str.substring(i);
+	}
+	
+	public static String trimTrailing(String str)
+	{
+		int i;
+		
+		for (i = str.length() - 1; i >= 0 && Character.isWhitespace(str.charAt(i)); --i) 
+			;
+
+		return str.substring(0, i + 1);
+	}
+}
+
+
+
 -----------------------------------------------------------
 -----------------------------------------------------------
 
