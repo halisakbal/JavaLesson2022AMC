@@ -1,61 +1,74 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	Sınıf Çalışması: Parametresi ile aldığı bir yazının sadece başındaki boşluk karakterlerini atan trimLeading ve
- 	sadece sonundaki boşluk karakterlerini atan trimTrailing isimli metotları StringUtil sınıfı içerisinde yazınız ve 
- 	aşağıdaki kod ile test ediniz
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n tane rasgele üretilmiş Türkçe alfabedeki
+	karakterlerden oluşan bir yazı döndüren getRandomTextTR ile n tane rasgele üretilmiş İngilizce alfabedeki
+	karakterlerden oluşan bir yazı döndüren getRandomTextEN metotlarını StringUtil sınıfı içerisinde yazınız ve 
+	aşağıdaki kod ile test ediniz  		
 ----------------------------------------------------------------------------------------------------------------------*/
 
 package orhn;
 
-import java.util.Iterator;
-
 class App {	
 	public static void main(String [] args)
-	{		
-		TrimLeadingTrailingTest.run();
+	{
+		GetRandomTextTRENTest.run();
 	}
 }
 
-class TrimLeadingTrailingTest {
+class GetRandomTextTRENTest {
 	public static void run()
-	{
+	{		
 		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
 		
 		for (;;) {
-			System.out.print("Bir yazı giriniz:");
-			String s = kb.nextLine();		
+			System.out.print("Bir sayı giriniz:");
+			int n = kb.nextInt();
 			
-			if ("elma".equals(s))
+			if (n <= 0)
 				break;
 			
-			System.out.printf("(%s)%n", StringUtil.trimLeading(s));			
-			System.out.printf("(%s)%n", StringUtil.trimTrailing(s));			
-		}
+			System.out.printf("Şifre:%s%n", StringUtil.getRandomTextTR(r, n));
+			System.out.printf("Password:%s%n", StringUtil.getRandomTextEN(r, n));
+			
+			
+			System.out.printf("Şifre:%s%n", StringUtil.getRandomTextTR(n));
+			System.out.printf("Password:%s%n", StringUtil.getRandomTextEN(n));
+		}				
 		
 		System.out.println("Tekrar yapıyor musunuz?");
 	}
 }
 
 class StringUtil{
-	public static String trimLeading(String str)
+	public static String getRandomTextTR(java.util.Random r, int n)
 	{
-		int i;
-		int len = str.length();
-		
-		for (i = 0; i < len && Character.isWhitespace(str.charAt(i)); i++) 
-			;
-
-		return str.substring(i);
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");	
 	}
 	
-	public static String trimTrailing(String str)
+	public static String getRandomTextTR(int n)
 	{
-		int i;
+		return getRandomTextTR(new java.util.Random(), n);
+	}
+	
+	public static String getRandomTextEN(java.util.Random r, int n)
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXVYZ");
+	}
+	
+	public static String getRandomTextEN(int n)
+	{
+		return getRandomTextEN(new java.util.Random(), n);
+	}
+	
+	public static String getRandomText(java.util.Random r, int n, String sourceText)
+	{
+		String str = "";
+		int len = sourceText.length();
 		
-		for (i = str.length() - 1; i >= 0 && Character.isWhitespace(str.charAt(i)); --i) 
-			;
-
-		return str.substring(0, i + 1);
+		for(int i = 0; i < n; ++i)
+			str += sourceText.charAt(r.nextInt(len));
+		
+		return str;
 	}
 }
-
 

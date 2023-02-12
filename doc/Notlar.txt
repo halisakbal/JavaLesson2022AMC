@@ -19284,6 +19284,828 @@ class StringUtil{
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+12.02.2023 Pazar - 21.Ders
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Java 11 ile birlikte String sınıfına strip, stripLeading ve stripTrailing metotları eklenmiştir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		StripMethodsTest.run();
+	}
+}
+
+class StripMethodsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.printf("(%s)%n", s.strip());			
+			System.out.printf("(%s)%n", s.stripLeading());
+			System.out.printf("(%s)%n", s.stripTrailing());
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Java 11 ile birlikte String sınıfına isBlank metodu eklenmiştir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		IsBlankTest.run();
+	}
+}
+
+class IsBlankTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(s.isBlank() ? "Yazı boş geçilemez" : "Yazı : (" + s +")");			
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Java 11 ile birlikte String sınıfına repeat metodu eklenmiştir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		RepeatTest.run();
+	}
+}
+
+class RepeatTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.print("Bir sayı giriniz:");
+			int count = Integer.parseInt(kb.nextLine());	
+			
+			System.out.println(s.repeat(count));			
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının repeat metodu ile bir karakterin çoklanması
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		char ch = '*';
+		
+		System.out.println((ch + "").repeat(5));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Aşağıda açıklanan metotları StringUtil yazınız ve aşağıdaki kod ile test ediniz
+ 	
+ 	public static String padLeading(String s, int len, char ch);
+ 	public static String padLeading(String s, int len);
+ 	public static String padTrailing(String s, int len, char ch);
+ 	public static String padTrailing(String s, int len);
+ 	
+ 	Açıklamalar:
+ 	- padLeading metodunun 3 parametreli overload'u ikinci parametresi ile aldığı len, birinci parametresi ile
+ 	aldığı yazının uzunluğundan büyükse yazıyı soldan (baştan) üçüncü parametresi ile aldığı karakter ile doldurulmuş
+ 	yeni bir String referansına geri dönecektir. Örneğin:
+ 		padLeading("ankara", 11, 'x'); çağrısı
+ 		
+ 		xxxxxankara
+ 	yazısını döndürecektir
+ 	
+ 	- len uzunluğu yazının uzunluğundan küçük veye eişitse aynı referansa geri dönecektir
+ 	
+ 	- padLeading metodunun 2 parametreli overload'u yazıyı soldan (baştan) space karakteri ile doduracaktır  
+ 	 
+ 	- padTrailing metotları benzer şekilde sağdan (sondan) dolduracak şekilde yazılacaktır
+ 	
+ 	- Örneği Java 11+ için yazınız
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		PadLeadingTrailingTest.run();				
+	}
+}
+
+class PadLeadingTrailingTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.print("Bir sayı giriniz:");
+			int newLen = Integer.parseInt(kb.nextLine());
+			
+			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+		
+		return len <= length ? s : (ch + "").repeat(len - length) + s;
+	}
+	
+ 	public static String padLeading(String s, int len)
+ 	{
+ 		return padLeading(s, len, ' ');
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len, char ch)
+ 	{
+ 		int length = s.length();
+		
+		return len <= length ? s : s + (ch + "").repeat(len - length);
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len)
+ 	{
+ 		return padTrailing(s, len, ' ');
+ 	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Aşağıda açıklanan metotları StringUtil yazınız ve aşağıdaki kod ile test ediniz
+ 	
+ 	public static String padLeading(String s, int len, char ch);
+ 	public static String padLeading(String s, int len);
+ 	public static String padTrailing(String s, int len, char ch);
+ 	public static String padTrailing(String s, int len);
+ 	
+ 	Açıklamalar:
+ 	- padLeading metodunun 3 parametreli overload'u ikinci parametresi ile aldığı len, birinci parametresi ile
+ 	aldığı yazının uzunluğundan büyükse yazıyı soldan (baştan) üçüncü parametresi ile aldığı karakter ile doldurulmuş
+ 	yeni bir String referansına geri dönecektir. Örneğin:
+ 		padLeading("ankara", 11, 'x'); çağrısı
+ 		
+ 		xxxxxankara
+ 	yazısını döndürecektir
+ 	
+ 	- len uzunluğu yazının uzunluğundan küçük veye eişitse aynı referansa geri dönecektir
+ 	
+ 	- padLeading metodunun 2 parametreli overload'u yazıyı soldan (baştan) space karakteri ile doduracaktır  
+ 	 
+ 	- padTrailing metotları benzer şekilde sağdan (sondan) dolduracak şekilde yazılacaktır
+ 	
+ 	- repeat metodu ileride daha iyisi yazılacak
+ 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		PadLeadingTrailingTest.run();				
+	}
+}
+
+class PadLeadingTrailingTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.print("Bir sayı giriniz:");
+			int newLen = Integer.parseInt(kb.nextLine());
+			
+			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+		
+		return len <= length ? s : repeat(len - length, ch) + s;
+	}
+	
+ 	public static String padLeading(String s, int len)
+ 	{
+ 		return padLeading(s, len, ' ');
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len, char ch)
+ 	{
+ 		int length = s.length();
+		
+		return len <= length ? s : s + repeat(len - length, ch);
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len)
+ 	{
+ 		return padTrailing(s, len, ' ');
+ 	}
+ 	
+ 	public static String repeat(int count, String s)
+ 	{
+ 		String str = "";
+ 		
+ 		for(int i = 0; i < count; ++i)
+ 			str += s;
+ 		
+ 		return str;
+ 	}
+ 	
+ 	public static String repeat(int count, char ch)
+ 	{
+ 		return repeat(count, ch + "");
+ 	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının compareTo metodu 
+		s1.compareTo(s2); 
+	çağrısı için 
+	1. Geri dönüş değeri negatif ise s1 yazısı, s2 yazısından önce gelir
+	2. Geri dönüş değeri pozitif ise s2 yazısı, s1 yazısından önce gelir
+	3. Geri dönüş değeri sıfır ise s1 ve s2 aynı yazılardır
+	
+	Karşılaştırma default olarak karakter tablosunda sıra numaraları kullanılarak, "lexicographically" olarak yapılır
+ 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s1 = kb.nextLine();		
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int result = s1.compareTo(s2);
+			
+			System.out.printf("Result: %d%n", result);
+			
+			if(result < 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s1, s2);
+			else if (result > 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s2, s1);
+			else
+				System.out.printf("'%s', '%s' aynı yazıdır%n", s1, s2);
+		}
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının compareTo metodu 
+		s1.compareTo(s2); 
+	çağrısı için 
+	1. Geri dönüş değeri negatif ise s1 yazısı, s2 yazısından önce gelir
+	2. Geri dönüş değeri pozitif ise s2 yazısı, s1 yazısından önce gelir
+	3. Geri dönüş değeri sıfır ise s1 ve s2 aynı yazılardır
+	
+	Karşılaştırma default olarak karakter tablosunda sıra numaraları kullanılarak, "lexicographically" olarak yapılır
+ 	compareTo metodu "case sensitive" olarak karşılaştırma yapar
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s1 = kb.nextLine();		
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int result = s1.compareTo(s2);
+			
+			System.out.printf("Result: %d%n", result);
+			
+			if(result < 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s1, s2);
+			else if (result > 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s2, s1);
+			else
+				System.out.printf("'%s', '%s' aynı yazıdır%n", s1, s2);
+		}
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının compareTo metodu 
+		s1.compareTo(s2); 
+	çağrısı için 
+	1. Geri dönüş değeri negatif ise s1 yazısı, s2 yazısından önce gelir
+	2. Geri dönüş değeri pozitif ise s2 yazısı, s1 yazısından önce gelir
+	3. Geri dönüş değeri sıfır ise s1 ve s2 aynı yazılardır
+	
+	Karşılaştırma default olarak karakter tablosunda sıra numaraları kullanılarak, "lexicographically" olarak yapılır
+ 	compareTo metodu "case sensitive" olarak karşılaştırma yapar
+ 	Eğer "case sensitive" özelliğini devre dışı bırakacak isek compareToIgnoreCase metodunu kullanırız
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s1 = kb.nextLine();		
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazı giriniz:");
+			String s2 = kb.nextLine();
+			
+			int result = s1.compareToIgnoreCase(s2);
+			
+			System.out.printf("Result: %d%n", result);
+			
+			if(result < 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s1, s2);
+			else if (result > 0)
+				System.out.printf("'%s', '%s' yazısından önce gelir%n", s2, s1);
+			else
+				System.out.printf("'%s', '%s' aynı yazıdır%n", s1, s2);
+		}
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının contains metodu. Bu metot case sensitive olarak çalışır. Aşağıdaki örnekte case insensitive olarak
+	kontrol için yazının tamamı küçük harfe çevrilmiştir	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s1 = kb.nextLine();		
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazı giriniz:");
+			String s2 = kb.nextLine();
+						
+			if(s1.toLowerCase().contains(s2.toLowerCase()))
+				System.out.println("Yazı bulundu");
+			else
+				System.out.println("Yazı bulunamadı");
+		}
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Genel olarak söylemek gerekirse Scanner'ın çalışma sistematiği dolayısıyla nextInt, nextLong ve nextDouble gibi
+	metotlar aynı Scanner nesnesine ilişkin nextLine metodu aynı akışta çağrılmamalıdır. Bu yüzden klavye işlemlerinde 
+	nextLine metodu dışındakileri gerekmedikçe kullanmıyor. Aşağıdaki programı çalıştırarak sonucu gözlemleyiniz. Daha 
+	sonra no değerinin Integer sınıfının parseInt metodu çağrısı ile nextLine kullarak alıp yine sonucu gözlemleyiniz		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+import java.util.Iterator;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Cihaz numarası giriniz");
+			int no = kb.nextInt(); //Integer.parseInt(kb.nextLine());		
+			
+			if (no == 0)
+				break;
+			
+			System.out.print("Cihaz adını giriniz");
+			String name = kb.nextLine();
+			
+			System.out.printf("%d, %s%n", no, name);
+		}
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının Türkçe pangram olup olmadığını test eden isPangramTR ve İngilizce
+	pangram olup olmadığını test eden isPangramEN metotlarını StringUtil sınıfı içerisinde yazınız ve aşağıdaki kod
+	ile test ediniz.
+	
+	Pangram: İçerisinde özel isim olmayan ve ilgili dilin alfabesinin tüm karakterlerini içeren cümlelere denir
+	
+	Programda özel isim ve anlamlı olması durumu dikkate alınmayacaktır
+	
+	İngilizce: The quick brown fox jumps over the lazy dog.
+	Türkçe: Pijamalı hasta yağız şoföre çabucak güvendi.		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsPangramTest.run();
+	}
+}
+
+class IsPangramTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		IsPangramTestTR.run(kb);
+		IsPangramTestEN.run(kb);		
+	}
+}
+
+class IsPangramTestEN {
+	public static void run(java.util.Scanner kb)
+	{		
+		for (;;) {
+			System.out.print("Input a text:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "is pangram" : "is not a pangram");						
+		}				
+	}
+}
+
+class IsPangramTestTR {
+	public static void run(java.util.Scanner kb)
+	{		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramTR(s) ? "Pangram" : "Pangram değil");						
+		}				
+	}
+}
+
+class StringUtil{
+	public static boolean isPangramTR(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+	
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+	
+	public static boolean isPangram(String s, String alphabet)
+	{
+		int len = alphabet.length();
+		
+		for (int i = 0; i < len; i++)
+			if(s.indexOf(alphabet.charAt(i)) == -1)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının Türkçe pangram olup olmadığını test eden isPangramTR ve İngilizce
+	pangram olup olmadığını test eden isPangramEN metotlarını StringUtil sınıfı içerisinde yazınız ve aşağıdaki kod
+	ile test ediniz.
+	
+	Pangram: İçerisinde özel isim olmayan ve ilgili dilin alfabesinin tüm karakterlerini içeren cümlelere denir
+	
+	Programda özel isim ve anlamlı olması durumu dikkate alınmayacaktır
+	
+	İngilizce: The quick brown fox jumps over the lazy dog.
+	Türkçe: Pijamalı hasta yağız şoföre çabucak güvendi.	
+	
+	contains cözüm	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsPangramTest.run();
+	}
+}
+
+class IsPangramTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		IsPangramTestTR.run(kb);
+		IsPangramTestEN.run(kb);		
+	}
+}
+
+class IsPangramTestEN {
+	public static void run(java.util.Scanner kb)
+	{		
+		for (;;) {
+			System.out.print("Input a text:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "is pangram" : "is not a pangram");						
+		}				
+	}
+}
+
+class IsPangramTestTR {
+	public static void run(java.util.Scanner kb)
+	{		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramTR(s) ? "Pangram" : "Pangram değil");						
+		}				
+	}
+}
+
+class StringUtil{
+	public static boolean isPangramTR(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+	
+	public static boolean isPangramEN(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuwxvyz");
+	}
+	
+	public static boolean isPangram(String s, String alphabet)
+	{
+		int len = alphabet.length();
+		
+		for (int i = 0; i < len; i++)
+			if(!s.contains(alphabet.charAt(i) + ""))
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki örnek için İngilizce alfabedeki karakterler karakter tablosunda sıralı olduğundan isPangramEN metodu
+	aşağıdaki gibi de yazılabilir. Şüphesiz yukarıdaki yaklaşım daha geneldir 			
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsPangramTestEN.run();
+	}
+}
+
+class IsPangramTestEN {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		for (;;) {
+			System.out.print("Input a text:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "is pangram" : "is not a pangram");						
+		}				
+	}
+}
+
+class StringUtil{
+	public static boolean isPangramEN(String s)
+	{
+		s = s.toLowerCase();
+		
+		for (char c = 'a'; c < 'z'; ++c) 
+			if(!s.contains(c + ""))
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir n değeri için n tane rasgele üretilmiş Türkçe alfabedeki
+	karakterlerden oluşan bir yazı döndüren getRandomTextTR ile n tane rasgele üretilmiş İngilizce alfabedeki
+	karakterlerden oluşan bir yazı döndüren getRandomTextEN metotlarını StringUtil sınıfı içerisinde yazınız ve 
+	aşağıdaki kod ile test ediniz  		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		GetRandomTextTRENTest.run();
+	}
+}
+
+class GetRandomTextTRENTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		java.util.Random r = new java.util.Random();
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int n = kb.nextInt();
+			
+			if (n <= 0)
+				break;
+			
+			System.out.printf("Şifre:%s%n", StringUtil.getRandomTextTR(r, n));
+			System.out.printf("Password:%s%n", StringUtil.getRandomTextEN(r, n));
+			
+			
+			System.out.printf("Şifre:%s%n", StringUtil.getRandomTextTR(n));
+			System.out.printf("Password:%s%n", StringUtil.getRandomTextEN(n));
+		}				
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String getRandomTextTR(java.util.Random r, int n)
+	{
+		return getRandomText(r, n, "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ");	
+	}
+	
+	public static String getRandomTextTR(int n)
+	{
+		return getRandomTextTR(new java.util.Random(), n);
+	}
+	
+	public static String getRandomTextEN(java.util.Random r, int n)
+	{
+		return getRandomText(r, n, "abcdefghijklmnopqrstuwxvyzABCDEFGHIJKLMNOPQRSTUWXVYZ");
+	}
+	
+	public static String getRandomTextEN(int n)
+	{
+		return getRandomTextEN(new java.util.Random(), n);
+	}
+	
+	public static String getRandomText(java.util.Random r, int n, String sourceText)
+	{
+		String str = "";
+		int len = sourceText.length();
+		
+		for(int i = 0; i < n; ++i)
+			str += sourceText.charAt(r.nextInt(len));
+		
+		return str;
+	}
+}
+
+
 -----------------------------------------------------------
 -----------------------------------------------------------
 
