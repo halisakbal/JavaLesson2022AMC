@@ -19536,8 +19536,6 @@ class StringUtil {
 
 package orhn;
 
-import java.util.Iterator;
-
 class App {	
 	public static void main(String [] args)
 	{		
@@ -20108,6 +20106,770 @@ class StringUtil{
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+
+14.02.2023 - Salı  22.Ders
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının palindrom olup olmadığını test eden isPalindrome metodunu
+	yazınız ve aşağıdaki kod ile test ediniz.
+	Palindrom: Yalnızca alfabetik karakterleri tersten okunduğunda aynı olan yazılara palindrom denir. Detayların gözardı
+	edilmesi koşuluyla bu tanım yazılabilir.
+	
+	Örnek:
+	Ey Edip Adana'da pide ye!	-> eyedipadanadapideye
+	Anastas mum satsana			-> anastasmumsatsana
+	Ali Papila 					-> alipapila	   		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsPalindromeTest.run();
+	}
+}
+
+class IsPalindromeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPalindrome(s) ? "Palindrom" : "Palindrom değil");
+		}				
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static boolean isPalindrome(String s)
+	{
+		int left = 0;
+		int right = s.length() - 1;
+		
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+			
+			if(!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+			
+			char cRight = Character.toLowerCase(s.charAt(right));
+			
+			if(!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+			
+			if(cLeft != cRight)
+				return false;
+			
+			++left;
+			--right;
+		}
+		
+		return true;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının palindrom olup olmadığını test eden isPalindrome metodunu
+	yazınız ve aşağıdaki kod ile test ediniz.
+	Palindrom: Yalnızca alfabetik karakterleri tersten okunduğunda aynı olan yazılara palindrom denir. Detayların gözardı
+	edilmesi koşuluyla bu tanım yazılabilir.
+	
+	Örnek:
+	Ey Edip Adana'da pide ye!	-> eyedipadanadapideye
+	Anastas mum satsana			-> anastasmumsatsana
+	Ali Papila 					-> alipapila	   		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		IsPalindromeTest.run();
+	}
+}
+
+class IsPalindromeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPalindrome(s) ? "Palindrom" : "Palindrom değil");
+		}				
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static boolean isPalindrome(String s)
+	{
+		int left = 0;
+		int right = s.length() - 1;
+		boolean cLeftSelected = false, cRightSelected = false;
+		char cLeft = '\0', cRight = '\0';
+		
+		while (left < right) {
+			
+			if(!cLeftSelected) {
+				cLeft = Character.toLowerCase(s.charAt(left));
+				
+				if(!Character.isLetter(cLeft)) {
+					++left;
+					continue;
+				}
+				
+				cLeftSelected = true;
+			}
+			
+			if(!cRightSelected) {
+				cRight = Character.toLowerCase(s.charAt(right));
+				
+				if(!Character.isLetter(cRight)) {
+					--right;
+					continue;
+				}
+				
+				if(cLeft != cRight)
+					return false;
+				
+				cRightSelected = true;
+			
+			}
+			
+			++left;
+			--right;
+			cRightSelected = cLeftSelected = false;
+		}
+		
+		return true;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının içerisindeki sondan ilk en uzun palindromu döndüren getLastLongestPalindrome
+	isimli metodu yazınız ve aşağıdaki kod ile test ediniz. Yazı palindrom içermiyorsa metot boş String'e geri dönecektir.
+	Örnek: adaeyedipadanadapideyeecealipapilaanastasmumsatsana
+	Örnek: abcadaeyedipadanadapideyeecealipapilaanastasmumsatsanaaxyztuabc   		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		GetLongestPalindromeTest.run();
+	}
+}
+
+class GetLongestPalindromeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			String str = StringUtil.getLastLongestPalindrome(s);
+			
+			if (!str.isEmpty()) {
+				System.out.println("En uzun palindrom:");
+				System.out.println(StringUtil.getLastLongestPalindrome(s));
+			}
+			else 
+				System.out.println("Palindrom yok");
+		}				
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil{
+	public static String getLastLongestPalindrome(String s)
+	{
+		String result = "";
+		
+		int end = s.length();
+		
+		while (end != 0) {
+			int begin = 0;
+			
+			while (begin != end) {
+				String str = s.substring(begin++, end);
+				
+				if(str.length() > 1 && isPalindrome(str) && result.length() < str.length())
+					result = str;
+			}
+			
+			--end;
+		}
+		
+		return result;
+		
+	}
+	
+	public static boolean isPalindrome(String s)
+	{
+		int left = 0;
+		int right = s.length() - 1;
+		
+		while (left < right) {
+			char cLeft = Character.toLowerCase(s.charAt(left));
+			
+			if(!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+			
+			char cRight = Character.toLowerCase(s.charAt(right));
+			
+			if(!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+			
+			if(cLeft != cRight)
+				return false;
+			
+			++left;
+			--right;
+		}
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Anahtar Notlar: Java'da her temel türe karşılık gelen bir sınıf vardır. Bu sınıflara "sarmalayan sınıflar (wrapper classes)"
+	denir. Sarmalayan sınıflar ileride detaylı olarak incelenecektir. Buna göre her temel tür için sarmalayan sınıflar
+	şunlardır:	
+	Tür				Sarmalayan Sınıf
+	short				Short
+	int					Integer
+	long				Long
+	byte				Byte	
+	float				Float
+	double				Double
+	boolean 			Boolean
+	char				Character
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Character sınıfı hariç sarmalayan sınıfların parseXXX static metotları ile yazılar ilgikli türden değerlere çevrilebilir.
+	Bu metotlar genel olarak yazı sayıya çevrilemeyorsa exception fırlatırlar
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		String str = kb.nextLine();
+		int a = Integer.parseInt(str);
+		
+		System.out.printf("%d * %d = %d%n", a, a, a * a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Integer sınıfının sayı sistemi (radix) parametreli parseInt metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		for (;;) {
+			System.out.print("Sayi sistemini giriniz:");
+			int radix = Integer.parseInt(kb.nextLine());
+			
+			if(radix <= 0)
+				break;
+			
+			System.out.print("Bir sayi giriniz:");
+			String str = kb.nextLine();
+			
+			int a = Integer.parseInt(str, radix);
+			
+			System.out.printf("%d * %d = %d%n", a, a, a * a);	
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının format metodu ile formatlanmış bir yazı elde edilebilir. Bu metodun kullanımı printf ile aynıdır.
+	Yalnızca printf gibi ekrana basmak yerine formatlanmış yazıya ilişkin String referansına ger döner
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir tamsayı giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		
+		System.out.print("Bir gerçek sayı giriniz:");
+		double b = Double.parseDouble(kb.nextLine());
+		
+		String str = String.format("a = %02d, b = %.20f", a, b);
+		
+		System.out.println(str);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Point sınıfının toString metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Point p1, p2, p3;
+		
+		p1 = new Point(100, 100);
+		p2 = new Point();
+		p3 = new Point(400);
+		
+		System.out.println(p1.toString());
+		System.out.println(p2.toString());
+		System.out.println(p3.toString());
+		
+	}
+}
+
+class Point{
+	public int x;
+	public int y;
+	
+	public Point()
+	{
+	}
+	
+	public Point(int a)
+	{
+		x = a;
+	}
+	
+	public Point(int a, int b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance() 
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other) 
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(int a, int b) 
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+	
+	public void offset(int dx, int dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void print()
+	{
+		System.out.printf("(%d, %d)%n", x, y);
+	}
+	
+	public String toString()
+	{
+		return String.format("(%d, %d)", x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Complex sınıfının toString metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		Complex z = new Complex(3, 4);
+		
+		System.out.println(z.toString());
+		
+	}
+}
+
+class Complex{
+	public double real;
+	public double imag;
+	
+	public static Complex add(double a1, double b1, double a2, double b2) //ileride bu metot gizlenecek
+	{
+		return new Complex(a1 + a2, b1 + b2);
+	}
+
+	public static Complex subtract(double a1, double b1, double a2, double b2)  //ileride bu metot gizlenecek
+	{
+		return add(a1, b1, -a2, -b2);
+	}
+	
+	public static Complex multiply(double a1, double b1, double a2, double b2)  //ileride bu metot gizlenecek
+	{
+		return new Complex(a1 * a2 - b1 * b2, a1 * b2 + a2 * b1);
+	}
+	
+	public Complex()
+	{
+	}
+	
+	public Complex(double re)
+	{
+		real = re;
+	}
+	
+	public Complex(double re, double im)
+	{
+		real = re;
+		imag = im;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}
+	
+	public Complex getComjugate()
+	{
+		return  new Complex(real, -imag);
+	}
+	
+	public static Complex add(double value, Complex z) 
+	{
+		return add(value, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double value)
+	{
+		return add(real, imag, value, 0);
+	}
+	
+	public static Complex subtract(double value, Complex z)
+	{
+		return subtract(value, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double value)
+	{
+		return subtract(real, imag, value, 0);
+	}
+	
+	public static Complex multiply(double value, Complex z)
+	{
+		return multiply(value, 0, z.real, z.imag);
+	}
+	
+	public Complex multiply(Complex other)
+	{
+		return multiply(real, imag, other.real, other.imag);
+	}
+	
+	public Complex multiply(double value)
+	{
+		return multiply(real, imag, value, 0);
+	}
+	
+	public void inc(double value)
+	{
+		real += value;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double value)
+	{
+		inc(-value);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public void print()
+	{
+		System.out.printf("|%.2f, %.2f| = %f%n", real, imag, getNorm());
+	}
+	
+	public String toString()
+	{
+		return String.format("|%.2f, %.2f| = %f", real, imag, getNorm());
+	}
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının valueOf metotları ile temel türlerin yazı karşılığı elde edilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		int a = 10;
+		String s = String.valueOf(a); 
+		
+		System.out.println(s);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının replace metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		String str = "Bugün hava çok güzel. Bu çok güzel havada dolaşabilirler";
+		
+		str = str.replace("güzel", "kötü");
+		
+		System.out.println(str);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının replace metodu
+----------------------------------------------------------------------------------------------------------------------*/
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{
+		String str = "Java";
+		
+		str = str.replace('a', 'b');
+		
+		System.out.println(str);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ Sınıf Çalışması: Aşağıda açıklanan metotları StringUtil yazınız ve aşağıdaki kod ile test ediniz
+ 	
+ 	public static String padLeading(String s, int len, char ch);
+ 	public static String padLeading(String s, int len);
+ 	public static String padTrailing(String s, int len, char ch);
+ 	public static String padTrailing(String s, int len);
+ 	
+ 	Açıklamalar:
+ 	- padLeading metodunun 3 parametreli overload'u ikinci parametresi ile aldığı len, birinci parametresi ile
+ 	aldığı yazının uzunluğundan büyükse yazıyı soldan (baştan) üçüncü parametresi ile aldığı karakter ile doldurulmuş
+ 	yeni bir String referansına geri dönecektir. Örneğin:
+ 		padLeading("ankara", 11, 'x'); çağrısı
+ 		
+ 		xxxxxankara
+ 	yazısını döndürecektir
+ 	
+ 	- len uzunluğu yazının uzunluğundan küçük veye eişitse aynı referansa geri dönecektir
+ 	
+ 	- padLeading metodunun 2 parametreli overload'u yazıyı soldan (baştan) space karakteri ile doduracaktır  
+ 	 
+ 	- padTrailing metotları benzer şekilde sağdan (sondan) dolduracak şekilde yazılacaktır
+ 	
+ 	- Örneği Java 11 öncesi için yazınız
+ 	
+ 	- repeat metodunu döngü kullanmadan, String sınıfının Java 11 ile eklenen repeat metodunu da kullanmadan yazınız
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		PadLeadingTrailingTest.run();				
+	}
+}
+
+class PadLeadingTrailingTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();		
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.print("Bir sayı giriniz:");
+			int newLen = Integer.parseInt(kb.nextLine());
+			
+			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padLeading(s, newLen));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen, 'x'));			
+			System.out.printf("(%s)%n", StringUtil.padTrailing(s, newLen));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class StringUtil {
+	public static String padLeading(String s, int len, char ch)
+	{
+		int length = s.length();
+		
+		return len <= length ? s : repeat(len - length, ch) + s;
+	}
+	
+ 	public static String padLeading(String s, int len)
+ 	{
+ 		return padLeading(s, len, ' ');
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len, char ch)
+ 	{
+ 		int length = s.length();
+		
+		return len <= length ? s : s + repeat(len - length, ch);
+ 	}
+ 	
+ 	public static String padTrailing(String s, int len)
+ 	{
+ 		return padTrailing(s, len, ' ');
+ 	}
+ 	 	
+ 	public static String repeat(int count, char ch)
+ 	{
+ 		return String.format("%" + count + "c", ' ').replace(' ', ch);
+ 	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ Java7 ile birlikte switch deyiminde String de kullanılabilmektedir. Bu durumda case bölümlerinin "String literal" 
+ 	olması gerekir. String sınıfı switch deyimi ile kullanıldığında karşılaştırma equals metodu ile yapılır
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Şehir ismini giriniz:");
+		String name = kb.nextLine();
+		
+		switch (name.toLowerCase()) {
+		case "istanbul":
+		case "edirne":
+		case "kocaeli":
+			System.out.println("Marmara Bölgesi");
+			break;
+		case "kastamonu":
+		case "bartın":
+		case "zonguldak:":
+				System.out.println("Batı karadeniz bölgesi");
+				break;
+		default:
+			System.out.println("Geçersiz isim");
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+  	Benzer şekilde String "switch expression statement" ile de kullanılabilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+package orhn;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Şehir ismini giriniz:");
+		String name = kb.nextLine();
+		
+		switch (name.toLowerCase()) {
+		case "istanbul", "edirne", "kocaeli" ->	System.out.println("Marmara Bölgesi");
+		case "kastamonu", "bartın", "zonguldak:" -> System.out.println("Batı karadeniz bölgesi");
+		default ->	System.out.println("Geçersiz isim");
+		}
+	}
+}
+
 
 -----------------------------------------------------------
 -----------------------------------------------------------

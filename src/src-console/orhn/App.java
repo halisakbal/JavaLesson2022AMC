@@ -24,10 +24,9 @@ class Sample{
     }
 }
 
-
-class Mample {
+class Mample2 {
     public static void tar()
     {
-        System.out.println("Mample.tar");
+        System.out.println("Mample2.tar");
     }
 }
