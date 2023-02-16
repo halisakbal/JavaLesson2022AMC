@@ -1,6 +1,6 @@
-package orhn;
+package oztrk;
 
-class Mample {
+public class Mample {
     public static void tar()
     {
         System.out.println("Mample.tar");

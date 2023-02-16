@@ -5,7 +5,7 @@ class App{
         System.out.println("Hello, World");    
         Sample.foo();
         Sample.bar();
-        Mample.tar();
+        oztrk.Mample.tar();
         System.out.println("Goodbye, World");
     }
 }
@@ -14,7 +14,7 @@ class Sample{
     public static void foo()
     {
         System.out.println("Sample.foo");
-        Mample.tar();
+        oztrk.Mample.tar();
     }
 
     public static void bar()
