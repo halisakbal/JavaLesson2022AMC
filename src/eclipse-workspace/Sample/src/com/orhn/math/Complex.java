@@ -12,6 +12,8 @@
 
 package com.orhn.math;
 
+import static java.lang.Math.sqrt;
+
 public class Complex{
 	public double real;
 	public double imag;
@@ -48,7 +50,7 @@ public class Complex{
 	
 	public double getNorm()
 	{
-		return Math.sqrt(real * real + imag * imag);
+		return sqrt(real * real + imag * imag);
 	}
 	
 	public double getLength()

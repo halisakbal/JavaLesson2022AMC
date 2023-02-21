@@ -20981,6 +20981,687 @@ class App {
 -----------------------------------------------------------
 -----------------------------------------------------------
 
+21.02.2023 Salı - 24.Ders
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	İsim arama (name lookup): Derleyici kullanılan bir ismi önce arar. Eğer bulursa erişim kontrolünü yapar yani doğru bir 
+	biçimde kullanılıp kullanılmadığına bakar. Derleyici isim aramayı belirli kurallara göre yapar. Burada anlatılacak
+	genel kurallar dışında başka detaylar da vardır. Bu detaylar da isim aramanın bir parçasıdır. Özel durumlar olarak
+	düşünülebilir. Yani önce genel kurallar sonra da özel durumlar için kurallar anlatılacaktır  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Derleyici bildirimi yapılan isimleri bildirim noktasında aramaz
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		int a = 50; //a aranmaz
+		
+		
+	}
+}
+
+class Sample { //Sample aranamaz
+	public static void foo() //foo aranmaz
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir isim kod içerisinde iki şekilde kullanılabilir: nitelikli (qualified), niteliksiz (unqualified)
+	Bir isim nokta operatörünün sağında kalıyorsa nitelikli, kalmıyorsa niteliksiz kullanılmış olur	
+	
+	Niteliksiz kullanılan isimler "niteliksiz isim arama (unqualified name lookup)" kurallarına göre, nitelikli
+	kullanılan isimler de "nitelikli isim arama (qualified name lookup)" kurallarına göre aranır 
+	
+	Anahtar Notlar: Yukarıdaki tanımlarda nitelikli ve niteliksiz olmak olumlu veya olumsuz bir etki anlamında 
+	düşünülmemelidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		
+		Sample s; //Sample niteliksiz aranır
+		
+		s = new Sample(); //s niteliksiz aranır, Sample niteliksiz aranır
+		s.foo(12); //s niteliksiz aranır, foo nitelikli aranır 
+		
+		System.out.printf("s.x = %d%n", s.x); //s niteliksiz aranır, x nitelikli aranır
+		
+	}
+}
+
+class Sample { 
+	public int x;
+	
+	public void foo(int a) 
+	{
+		x = a; //x ve a niteliksiz aranır
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Derleyici bir ismi bulduktan sonra erişim kontrolünü yapar.
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		int a;
+		
+		a = 4.2; //error
+		
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. Bir isim metot içerisinde kullanılmışsa, kullanıldığı yerden yukarıya doğru metot içerisinde aranır. Burada 
+	kullanılan isimden önce bildirilen yerel değişkenler ile parametre değişken isimlerine bakılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		int a;
+		
+		a = 4;
+	}
+}
+
+class Sample {
+	public void foo(int x)
+	{
+		int a;
+		
+		a = x;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. İsim metodun ait olduğu sınıfın tamamında ancak tüm metotların dışında aranır. Burada sınıf içerisinde 
+	bulunamazsa sırasıyla "doğrudan taban sınıfa (direct super class) ve dolaylı taban sınıflara (indirect super class)"
+	da bakılır. Taban sınıf kavramı ileride detaylı bir biçimde ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample();
+		
+		s.foo(22);
+		
+		System.out.printf("s.a = %d%n", s.a);
+	}
+}
+
+class Sample {
+	public void foo(int x)
+	{
+		a = x;
+	}
+	
+	public int a;
+	
+	public void bar(int a)
+	{
+		//....
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki iki kurala göre bir sınıfın veri elemanı ile aynı isimde metot parametre değişkeni veya yerel değişken
+	bildirimi yapılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample();
+		
+		s.foo(22);
+		
+		System.out.printf("s.a = %d%n", s.a);
+	}
+}
+
+class Sample {
+	public void foo(int x)
+	{
+		int a; //shadowing, masking, hiding
+				
+		a = x;
+		
+		System.out.printf("a = %d%n", a);
+	}
+	
+	public int a;
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim sınıfın ait olduğu paket içerisinde aranır. Burada alt ya da üst paketlere bakılmaz. Sadece ait olduğu 
+	pakete bakılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample();
+		
+		s.foo(22);
+		
+		System.out.printf("s.a = %d%n", s.a);
+	}
+}
+
+class Sample {
+	public int a;
+	
+	public void foo(int x)
+	{
+		a = x;
+	}
+	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim sınıfın ait olduğu paket içerisinde aranır. Burada alt ya da üst paketlere bakılmaz. Sadece ait olduğu 
+	pakete bakılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample(); //error
+		
+		s.foo(22);
+		
+		System.out.printf("s.a = %d%n", s.a);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	4. "import on demand declaration" varsa o paketlere de bakar. Bu konu ileride ele alınacaktır
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yukarıdaki kurallara göre isimsiz paket altında bulunan bir sınıfa başka bir paket içerisinden erişilemez. Nitelikli
+	olarak da erişilemez. Yalnızca bu sebepten bile bir projede isimsiz paket altında sınıf bildirilmemelidir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample(); //error
+		
+		s.foo(22);
+		
+		System.out.printf("s.a = %d%n", s.a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. Aranacak ismin solunda sınıf ismi varsa isim ilgili sınıf içerisinde aranır. Bulunamazsa taban sınıflara da
+	bakılır 	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample.x = 23;
+		Sample.foo();
+		
+		System.out.println(Sample.x);
+	}
+}
+
+class Sample {
+	public static int x;
+	
+	public static void foo()
+	{
+		System.out.println("foo");
+	}
+	
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. Aranacak ismin solunda referans ismi varsa, isim referansa ilişkin sınıf içerisinde aranır. Bulunamazsa taban
+	sınıflara da bakılır	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s = new Sample();
+		
+		s.x = 23;
+		s.foo();
+		
+		System.out.println(s.x);
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public void foo()
+	{
+		System.out.println("foo");
+	}
+	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. Aranacak ismin solunda paket ismi varsa, isim o paket içerisinde aranır. Alt ya da üst paketlere bakılmaz
+		
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		test.mest.Sample s;
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Alt paket isimleri niteliksiz isim aramaya dahil değildir. Yani aşağıdaki örnekte test ismi aranırken com.orhn.app
+	içerisinde test paket ismi dikkate alınmaz. Niteliksiz kullanılan bir ismin paket ismi olarak bulunabilmesi için
+	"source folder" içerisinde bir paket olarak bulunması gerekir. Ya da diğer bir deyişle üst paketinin olmaması gerekir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		test.Sample s;
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	import bildirimi genel olarak niteliklendirmeyi azaltmak için, dolayısıyla daha yalın ve açık (clean) kod yazımı 
+	kullanılır. 
+	
+	Anahtar Notlar: import bildirimi bir kütüphaneyi "import etmek" anlamına GELMEZ.
+	
+	import bildirimleri iki şekilde kullanılabilir:
+	1. Yıldızlı import bildirimi (import on demand declaration)
+	2. Yıldızsız import bildirimi (import single type declaration)
+	
+	import bildirimleri ".java" dosyasında (compilation unit) paket bildiriminden sonra diğer bildirimlerden önce 
+	yazılmalıdır. import bildirimleri birden fazla olabilir ve yazılış sırasının önemi yoktur. import bildirimi
+	bildirildiği ".java" dosyasına özgüdür. Diğer derleme birimlerini etkilemez. import bildirimleri niteliksiz
+	isim arama kurallarına ilişkindir. Nitelikli isim arama kurallarına dahil değildir
+	
+	
+	Anahtar Notlar: "Yıldızlı ve Yıldızsız import bildirimi" tercümeleri kolay anlatmak için Oğuz Karan tarafından 
+	uydurulmuştur. Teknik olarak "import with asterisk" ve "import without asterisk" DENİLMEMELİDİR.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yıldızlı import bildiriminin (import on demand declaration) genel biçimi:
+	import <paket ismi>[.alt paketler].*;
+	
+	Bu bildirim niteliksiz isim arama genel kurallarına göre aranan ismin içerisinde de bulunamaması durumunda arama için
+	bakılacak paketi temsil eder. Yani adeta bir paketin başka bir paket içerisine isim arama anlamında enjekte edilmesidir.
+	
+	Daha açık olarak yıldızlı import bildirimleri derleyiciye "eğer niteliksiz bir ismi pakette bulamazsan yıldızlı
+	import bildirimlerine ilişkin paketlere de bak" demektir	
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+import java.util.*;
+import com.orhn.math.*;
+import com.orhn.math.geometry.*;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+		
+		Complex z = new Complex(2, 1);
+		Point p = new Point(100, 100);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yıldızlı import bildirimlerine ilişkin paketlerin hepsine bakılır. Birden fazla paket içerisinde isim bulunursa
+	error oluşur (ambiguity)	
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+import java.util.*;
+import com.orhn.math.*;
+import com.orhn.math.geometry.*;
+import com.orhn.util.*;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+		
+		Complex z = new Complex(2, 1);
+		Point p = new Point(100, 100);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yıldızlı import bildiriminin kullanımı. Örnekte isimler için niteliklendirmenin azaltıldığına dikkat ediniz	
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+package com.orhn.app;
+
+import java.util.*;
+import com.orhn.math.geometry.*;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		
+		System.out.print("Bir sayi giriniz : ");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; i++) {
+			Point p = new Point(r.nextInt(-100, 100), r.nextInt(-100, 100));
+			
+			System.out.println(p.toString());
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yıldızsız import bildiriminin (import single type declaration) genel biçimi:
+	import <paket ismi>[.alt paketler].<sınıf ismi>;
+	Burada sınıf ismi bir "user defined type" ismidir.
+	
+	Bu bildirim sınıf isminin doğrudan kullanılabileceğini belirtir. Bu bildirimin yazılabildiği durumda bu sınıf ismi
+	için niteliksiz arama genel kuralları uygulanmaz. Programcı mümkün olduğunca bu import bildirimini tercih etmelidir.
+	Zaten bir çok IDE program da programcıyı mümkün olduğunca bu bildirime yönlendirir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte 
+		import java.util.Random;
+	bildirimi "bu derleme biriminde Random ismi doğrudan kullanılabilir ve bu isim java.util.Random sınıfıdır"
+	anlamına gelir	
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import com.orhn.math.geometry.Point;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		
+		System.out.print("Bir sayi giriniz : ");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; i++) {
+			Point p = new Point(r.nextInt(-100, 100), r.nextInt(-100, 100));
+			
+			System.out.println(p.toString());
+		}
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte Sample sınıfının niteliksiz kullanımına ilişkin birden fazla yıldızsız import bildirimi yapılamaya
+	çalışıldığından error oluşur. Örneke Sample ismi kullanılmasa bile import bildirimlerinde error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import test.Sample;
+import mest.Sample; //error
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample s;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte Sample ismi niteliksiz isim arama genel kuralları dolayısıyla com.orhn.app paketindekini bulur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import test.*;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample.foo();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte Sample ismi yıldızsız import bildirimi ile yazıldığından test.Sample.foo metodu çağrılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import test.Sample;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample.foo();
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte import bildirimine ilişkin java dosyasında Sample isminde bir sınıf bildirimi olduğundan 
+	yıldızsız import bildirimi geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import test.Sample; //error
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Sample.foo();
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("com.orhn.app.Sample.foo");
+	}
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Java 5 ile birlikte import static bildirimleri eklenmiştir. import static bildirimlerinin de iki biçimi vardır:
+	
+	1. Yıldızlı import static bildirimi (import static on demand declaration)
+	2. Yıldızsız import static bildirimi (import static single type declaration)
+	
+	import static bildirimleri okunabilirliği etkilemedikten sonra kodu yalınlaştırır. Okunabilirliği etkilememesine
+	dikkat edilmelidir. import static bildirimleri de diğer import bildirimleriyle aynı yere yazılı ve yine sıranın
+	önemi yoktur
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Yıldızlı import static bildiriminin (import static on demand declaration) genel biçimi
+	import static <paket ismi>.[alt paketler].<tür ismi>.*;
+	
+	Bu bildirim ile bildirimin yapıldığı derleme biriminde bildirime ilişkin türün tüm static elemanları doğrudan
+	kullanılabilir duruma gelir.  Yani niteliksiz isim arama genel kurallarına göre eğer pakette bulunamazsa bu bildirime
+	ilişkin tür içerisinde de aranır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+import static java.lang.Math.*;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayi giriniz : ");
+		double a = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", a, sqrt(a));
+		System.out.printf("log10(%f) = %f%n", a, log10(a));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Yıldızsız import static bildiriminin (import static single type declaration) genel biçimi
+	import static <paket ismi>.[alt paketler].<tür ismi>.<static eleman ismi>;
+	
+	Bu bildirim ile belirtilen static eleman ilgili derleme biriminde doğrudan kullanılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.log10;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayi giriniz : ");
+		double a = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", a, sqrt(a));
+		System.out.printf("log10(%f) = %f%n", a, log10(a));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte doğrudan sqrt çağrısı için sınıfın int parametreli sqrt metodunun ismi bulunur. Bu durumda uygun
+	metot bulunamayacağı için error oluşur. Anımsanacağı gibi isim bulunduktan sonra erişim kontrolü yapılır 
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.log10;
+
+class App {	
+	public static void main(String [] args)
+	{		
+		Scanner kb = new Scanner(System.in);
+		
+		System.out.print("Bir sayi giriniz : ");
+		double a = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", a, sqrt(a));
+		System.out.printf("log10(%f) = %f%n", a, log10(a));
+	}
+	
+	public static double sqrt(int a)
+	{
+		return Math.sqrt(a);
+	}
+	
+}
+
+
+
 -----------------------------------------------------------
 -----------------------------------------------------------
 

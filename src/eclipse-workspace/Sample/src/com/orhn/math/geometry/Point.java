@@ -12,6 +12,9 @@
 
 package com.orhn.math.geometry;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class Point{
 	public int x;
 	public int y;
@@ -49,7 +52,7 @@ public class Point{
 	
 	public double distance(int a, int b) 
 	{
-		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+		return sqrt(pow(x - a, 2) + pow(y - b, 2));
 	}
 	
 	public void offset(int dx, int dy)
