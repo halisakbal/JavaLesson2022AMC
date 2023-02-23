@@ -21664,6 +21664,704 @@ class App {
 
 -----------------------------------------------------------
 -----------------------------------------------------------
+23.02.2023 Perşembe - 25.Ders
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziler (Arrays): Elemanları aynı türden olan ve elemanların bellekte peşpeşe olacak şekilde tutulduğu veri yapılarıdır.
+	Java'da diziler sınıfsal olarak temsil edilir. Diziler bir referans türüdür. Öyleyse dizi türünden bir değişken bir
+	referans değişkendir. Diziler heap'de yaratılırlar. Şüphesiz dizi referansı da stack'te olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	T bir tür ismi olmak üzere T türden bir dizi referansı bildirimi Java'da iki şekilde yapılabilir:
+
+	1. T [] a;
+	2. T a[];
+
+	Biz birinci biçimi tercih edeceğiz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {
+	public static void main(String[] args) {
+		int [] a; //Dizi referansı bildirimi
+		double b[]; //Dizi referansı bildirimi
+		boolean [] c; //Dizi referansı bildirimi
+	}
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	[]'in referans bildiriminde bulunduğu yere göre farkı
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {
+	public static void main(String[] args) {
+		int [] a, b, c;
+		int d[], e, f;
+
+		a = 10; //error
+		b = 12; //error
+		c = 15; //error
+
+		d = 12; //error
+		e = 11;
+		f = 56;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi yaratmak için new operatörü kullanılır. Dizi yaratmanın genel biçimi:
+	new <tür>[<negatif olmayan int türüne dönüşebilen türden eleman sayısı>];
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {
+	public static void main(String[] args) {
+		int [] a;
+
+		a = new int[10];
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin eleman sayısı sabit ifadesi olmak zorunda değildir. Dizinin eleman sayısı negatif değer olarak verildiğinde
+	exception oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+
+		int [] a;
+
+		a = new int[n];
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin eleman sayısı length isimli veri elemanı ile elde edilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+
+		int [] a;
+
+		a = new int[n];
+
+		System.out.printf("Dizinin eleman sayisi: %d%n", a.length);
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin length veri elemanı değiştitilemez. Aslında yaratılmış bir dizinin eleman sayısı değiştirilemediğinden
+	length veri elemanı da değiştirilemez
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+
+		int [] a;
+
+		a = new int[n];
+
+		System.out.printf("Dizinin eleman sayisi: %d%n", a.length);
+
+		a.length = 40; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin elemanlarına [] operatörü ile erişilir. Bu operatör özel amaçlı, iki operandlı (binary) ve araek (infix)
+	durumunda bir operatördür. Operatör birinci parametresi ile aldığı dizi referansın gösterdiği dizi nesnesinin, ikinci
+	operandına ilişkin indeks numarasında bulunan elemana ilişkin değişkeni üretir. Index numarası int türüne dönüşebilen
+	türden olmalıdır ve sıfırdan başlar
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+		int [] a = new int[n];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = i + 10;
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizinin elemanlarına erişim
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+		int [] a = new int[n];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = r.nextInt(100);
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	[] operatörüne pozitif ya da negatif bakımdan sınırlar dışında bir indeks numarası verildiğinde exception oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+		int [] a = new int[n];
+
+		for (int i = 0; i < a.length; ++i)
+			a[i] = r.nextInt(100);
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+
+		System.out.printf("a[15] = %d%n", a[-2]);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir dizi yaratığında tüm elemanlarına default değerler atanır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayi giriniz:");
+		int n = kb.nextInt();
+		int [] a = new int[n];
+		boolean [] b = new boolean[n];
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+
+		for (int i = 0; i < b.length; ++i)
+			System.out.printf("%b ", b[i]);
+
+		System.out.println();
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizilere ilkdeğer verilmesi (initialization) küme parantezi ile yapılır. Burada [] içerisindein boş bırakılması
+	zorunludur. Dikkat edilirse aşağıdaki örnekte diziye ilkdeğer verilmiştir ancak diziyi gösteren referansa ilkdeğer
+	verilmemiştir. Atama yapılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		int [] a = new int[]{1, 2, 3, 4, 5, 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziye ilkdeğer verilirken adresini tutan referansa da ilkdeğer veriliyorsa new operatörü kullanılması gerekmez
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte diziye ilkdeğer verilirken referansa ilkdeğer verilmediği için new operatörü zorunludur
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		int [] a;
+		//a = new int[]{1, 2, 3, 4, 5, 6}; //geçerli
+		a = {1, 2, 3, 4, 5, 6}; //error
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziye ilkdeğerler olarak verilen elemanlar sabit ifadesi olmak zorunda değildir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Bir sayi giriniz:");
+		int val = kb.nextInt();
+
+		int [] a = {val, val + 1, val + 3, 4, 5, 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametresi bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import com.orhn.util.array.ArrayUtil;
+
+class App {
+	public static void main(String[] args) {
+		int [] a = {1, 2, 3, 4, 5, 6};
+		int [] b = {10, 20, 30, 40, 50};
+
+		ArrayUtil.print(a);
+		ArrayUtil.print(b);
+
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametresi bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import com.orhn.util.array.ArrayUtil;
+
+class App {
+	public static void main(String[] args) {
+		int [] a = {1, 2, 3, 4, 5, 6};
+		int [] b = {10, 20, 30, 40, 50};
+
+		ArrayUtil.print(a);
+		ArrayUtil.swap(a, 2, 5);
+		ArrayUtil.print(a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametresi bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		System.out.print("Bir sayi giriniz : ");
+		int [] a = new int[kb.nextInt()];
+
+		fillRandomArray(r, a, 0, 99);
+		print(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+		System.out.print("Bir sayi giriniz : ");
+
+		int [] a = getRandomArray(r, kb.nextInt(), 0, 99);
+
+		print(a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanlarının toplamına geri dönen sum isimli metodu
+	ArrayUtil sınıfı içersinde yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		SumIntArrayTest.run();
+	}
+}
+
+class SumIntArrayTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Birinci sayıyı giriniz:");
+		int a = kb.nextInt();
+
+		System.out.print("İkinci sayıyı giriniz:");
+		int b = kb.nextInt();
+
+		for (;;) {
+			System.out.print("Dizinin eleman sayısını giriniz:");
+			int count = kb.nextInt();
+
+			if (count <= 0)
+				break;
+
+			int [] numbers = getRandomArray(r, count, a, b);
+
+			print(numbers);
+			System.out.printf("Toplam:%d%n", sum(numbers));
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanları ters yüz eden reverse isimli metodu
+	başka bir dizi kullanmadan yazınız ve aşağıdaki kod ile tes ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		ReverseArrayTest.run();
+	}
+}
+
+class ReverseArrayTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		for (;;) {
+			System.out.print("Dizinin eleman sayısını giriniz:");
+			int count = kb.nextInt();
+
+			if (count <= 0)
+				break;
+
+			int [] a = getRandomArray(r, count, 0, 99);
+
+			print(2, a);
+			reverse(a);
+			print(2, a);
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanları ters yüz eden reverse isimli metodu
+	başka bir dizi kullanmadan yazınız ve aşağıdaki kod ile tes ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		ReverseArrayTest.run();
+	}
+}
+
+class ReverseArrayTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		for (;;) {
+			System.out.print("Dizinin eleman sayısını giriniz:");
+			int count = kb.nextInt();
+
+			if (count <= 0)
+				break;
+
+			int [] a = getRandomArray(r, count, 0, 99);
+
+			print(2, a);
+			Util.reverse(a);
+			print(2, a);
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Util {
+	public static void reverse(int [] a)
+	{
+		int left = 0;
+		int right = a.length - 1;
+
+		while (left < right)
+			swap(a, left++, right--);
+	}
+
+	public static void swap(int [] a, int i, int k)
+	{
+		int temp = a[i];
+		a[i] = a[k];
+		a[k] = temp;
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java length bilgisi sıfır olan bir dizi yaratılablir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+class App {
+	public static void main(String[] args) {
+		int [] a = new int[0];
+		int [] b = {};
+		int [] c;
+
+		c = new int[]{};
+
+		System.out.printf("Length: %d%n", a.length);
+		System.out.printf("Length: %d%n", b.length);
+		System.out.printf("Length: %d%n", c.length);
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının basamaklarından oluşan diziyi döndüren getDigits isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+import static com.orhn.util.NumberUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		GetDigitsTest.run();
+	}
+}
+
+class GetDigitsTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();5
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+		while (count-- > 0) {
+			long a = r.nextLong();
+			System.out.printf("a = %d%n", a);
+			print(getDigits(a));
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı iki tane int türden dizinin birleşiminden oluşan yeni bir dizi referansına
+	geri dönen join isimli metodu yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+
+package com.orhn.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import static com.orhn.util.array.ArrayUtil.*;
+import static com.orhn.util.NumberUtil.*;
+
+class App {
+	public static void main(String[] args) {
+		JoinArraysTest.run();
+	}
+}
+
+class JoinArraysTest {
+	public static void run()
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		for (;;) {
+			System.out.print("Dizilerin eleman sayısını giriniz:");
+			int count1 = kb.nextInt();
+			int count2 = kb.nextInt();
+
+			if (count1 <= 0 && count2 <= 0)
+				break;
+
+			int [] a = getRandomArray(r, count1, 0, 99);
+			int [] b = getRandomArray(r, count2, 0, 99);
+
+			print(2, a);
+			print(2, b);
+			int[] c = join(a, b);
+			print(2, c);
+		}
+
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
 
 
 -----------------------------------------------------------
